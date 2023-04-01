@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titulo%}Transferência de ITBI{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Transferência de ITBI e valor pago</h4>
+<h6>É necessário gerar índice após o procedimento</h6>
+<br>
+
+<form method="post" action="#">
+    {% include 'parciais/_messages.html' %}
+    {% csrf_token %}
+    <div class="form-group">
+        <label>NAMESPACE </label>
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ request.POST.namespace }}">
+    </div>
+    <div class="form-group">
+        <label>Sequencial 'DE' </label>
+        <input type="number" required class="form-control" name="sequencial_de"
+               value="{{ request.POST.sequencial_de }}">
+    </div>
+
+    <div class="form-group">
+        <label>Processo de ITBI </label>
+        <input type="number" required class="form-control" name="processo_itbi"
+               value="{{ request.POST.processo_itbi }}">
+    </div>
+    <div class="form-group">
+        <label>Sequencial 'PARA' </label>
+        <input type="number" required class="form-control" name="sequencial_para"
+               value="{{ request.POST.sequencial_para }}">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+{%endblock%}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load meus_filtros %}
+
+{%block titulo%}Escolher parcelas{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Selecione as parcelas a compensar</h4>
+<br>
+
+
+<form method="post" action="{% url 'escolher_parcelas' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <h4>NAMESPACE</h4>
+        <label>{{ namespace }}</label><br>
+        <h4>Sequencial</h4>
+        <label>{{ sequencial }}</label>
+        <h5>Parâmetros de acréscimos</h5>
+        <label>Multa: {{ multa }}% | Limite de Multa: {{ limite_multa }}% | Juros: {{ juros }}%</label>
+    </div>
+
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ request.POST.namespace }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="number" required class="form-control" name="sequencial"
+               value="{{ request.POST.sequencial }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="extrato"
+               value="{{ extrato }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="multa"
+               value="{{ multa }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="limite_multa"
+               value="{{ limite_multa }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="juros"
+               value="{{ juros }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="uf"
+               value="{{ uf }}" hidden="True">
+    </div>
+
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Exercício/Parcelamento</th>
+        <th>Parcela</th>
+        <th>Vencimento</th>
+        <th>Saldo (UF)</th>
+        <th>Situação</th>
+        <th>Compensar?</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for exercicio, parcelas in extrato.items %}
+        <tr>
+        {% for parcela in parcelas %}
+            <td>{{exercicio}}</td>
+            <td>{{ parcela|lista_indice:0 }}</td>
+            <td>{{ parcela|lista_indice:1|data }}</td>
+            <td>{{ parcela|lista_indice:4 }}</td>
+            <td>{{ parcela|lista_indice:5|situacao }}</td>
+
+            <td>
+                <input type="checkbox" id="compensar" name="compensar" value="{{ exercicio }} {{ parcela|lista_indice:0 }}">
+            </td>
+        </tr>
+        {% endfor %}
+
+    {% endfor %}
+
+
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Definir Parcelas a Compensar</button>
+</form>
+
+
+{%endblock%}

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titulo%}Página Inicial{%endblock%}
+{%block conteudo%}
+{% include 'parciais/_messages.html' %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th colspan="4" style="text-align:center;"><br>
+            A pasta 'c:/temp' deve estar criada no Windows
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'are' %}">Arez</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'ban' %}">Bananeiras (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'bod' %}">Bodó</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'goi' %}">Goiana (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'goh' %}">Goianinha (gmail)</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'lda' %}">Lagoa D'Anta (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'luc' %}">Lucena (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'mta' %}">Messias Targino (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'nis' %}">Nísia Floresta</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'pef' %}">Passa e Fica (gmail)</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'pat' %}">Patu (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'pau' %}">Paulista (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'scc' %}">Santa Cruz do Capibaribe (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'sbn' %}">São Bento do Norte (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'smg' %}">São Miguel do Gostoso (gmail)</a>-->
+<!--        </td>-->
+
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas (gmail)</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a href="{% url 'renomear' 'gav' %}">Georgino Avelino</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+    <tr>
+        <td colspan="2" style="text-align:center;">
+            <a href="{% url 'baixar_retorno2' %}">
+                <img src="{% static 'img/logingmail.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Baixar retorno do email
+            </a>
+        </td>
+<!--        <td colspan="2" style="text-align:center;">-->
+<!--            <a href="#">-->
+<!--                <img src="{% static 'img/upload.png' %}"-->
+<!--                     style="width:50px; height: 50px; margin-right: 10px;">-->
+<!--                Enviar retorno pra o servidor-->
+<!--            </a>-->
+<!--        </td>-->
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th colspan="3" style="text-align:center;">Outras funções (automatização no Chrome)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a href="{% url 'iss_nisia' %}">
+                <img src="{% static 'img/moeda.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Arrecadação de Nísia (+ISS)
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'listar_pagamentos' %}">
+                <img src="{% static 'img/transf_pagamento.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Transferência de Pagamento: MDININ
+            </a>
+
+        </td>
+        <td>
+            <a href="{% url 'transferencia_itbi' %}">
+                <img src="{% static 'img/transf_itbi.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Transferência ITBI
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url 'listar_global' %}">
+                <img src="{% static 'img/salvar.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Salvar Globais
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'de_para_pagamento' %}">
+                <img src="{% static 'img/de_para_pagamento.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Compensação de IPTU - Progressivo (TESTE)
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'irrf_bananeiras' %}">
+                <img src="{% static 'img/moeda.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Arrecadação de Bananeiras (+IRRF)
+            </a>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>
+            <a href="{% url 'juncao_agz' %}">
+                <img src="{% static 'img/juncao.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                     <br>Junção AGZ (localizados em C:\temp)<br>
+                    Dias diferentes ficam no mesmo arquivo<br>
+                    Um relatório em CSV mostrará o total por dia.
+            </a>
+        </td>
+
+    </tr>
+
+
+
+    </tbody>
+
+</table>
+
+
+{%endblock%}

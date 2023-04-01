@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load meus_filtros %}
+
+{%block titulo%}De Para Pagamento{%endblock%}
+{%block conteudo%}
+<br>
+
+<h6>
+    Essa opção fará a compensação progressiva de valores diversos e todas as parcelas pré-definidas, considerando
+    principal corrigido e acréscimos. Será quitado do exercício/parcela mais antigo pra o mais recente, restando saldo
+    devedor, se for o caso.
+</h6>
+<br>
+
+<form method="post" action="#">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>NAMESPACE </label>
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ request.POST.namespace }}">
+    </div>
+    <div class="form-group">
+        <label>Sequencial</label>
+        <input type="number" required class="form-control" name="sequencial"
+               value="{{ request.POST.sequencial }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Executar</button>
+</form>
+
+
+{%endblock%}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titulo%}Transferir Pagamento{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Transferência de pagamento em MDININ transferencia_pagamento.html)</h4>
+<br>
+
+<form method="post" action="#">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>NAMESPACE </label>
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ request.POST.namespace }}">
+    </div>
+    <div class="form-group">
+        <label>Sequencial 'DE' </label>
+        <input type="number" required class="form-control" name="sequencial_de"
+               value="{{ request.POST.sequencial_de }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Listar Pagamentos</button>
+</form>
+
+<br>Movimento de Arrecadação:<br>
+
+    {{ pagamentos }}
+<br>
+
+<form method="post" action="#">
+    {% include 'parciais/_messages.html' %}
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>
+        Informe o número do registro do pagamento pra transferir<br>
+        Digite 'todos' para transferir todos.<br>
+        Para mais de um pagamento, separar por ';' sem espaço: 1;3;5;6 ...")
+        </label>
+        <input type="text" required class="form-control" name="registro"
+               value="{{ request.POST.registro }}">
+
+        <label>Sequencial 'PARA' </label>
+        <input type="number" required class="form-control" name="sequencial_para"
+               value="{{ request.POST.sequencial_para }}">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Transferir</button>
+</form>
+
+
+{%endblock%}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titulo%}IRRF Bananeiras{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Adicionar IRRF pago através de transferência bancária/depósito</h4>
+<br>
+
+<form method="post" action="{% url 'irrf_bananeiras' %}">
+    {% include 'parciais/_messages.html' %}
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Data da arrecadação (ddmmaa) </label>
+        <input type="date" required class="form-control" name="data"
+               value="{{ request.POST.data }}" pattern= "dd/mm/aa">
+    </div>
+    <div class="form-group">
+        <label>Valor do IRRF (sem vírgula e sem pontos)</label>
+        <input type="number" required class="form-control" name="valor"
+               value="{{ request.POST.valor }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Transferir</button>
+</form>
+<h6>
+    <br>
+    NAMESPACE UTILIZADO:
+    <br>
+    <br>
+    {{ namespace }}
+
+
+
+</h6>
+
+{%endblock%}

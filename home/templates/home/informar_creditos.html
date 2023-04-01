@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load meus_filtros %}
+
+{%block titulo%}Definir valores e datas de crédito{%endblock%}
+{%block conteudo%}
+
+<br>
+<h4>Informe o valor (sem vírgula), data e órgão que foi pago</h4>
+<br>
+
+<form method="post" action="{% url 'informar_creditos' %}">
+    {% csrf_token %}
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data do Pagamento</th>
+                <th>Valor pago</th>
+                <th>Órgão</th>
+                <th>-</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for item in credito %}
+            <tr>
+                <td>{{item|lista_indice:0|data}}</td>
+                <td>{{item|lista_indice:1}}</td>
+                <td>{{item|lista_indice:2}}</td>
+                <td>remover</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ namespace }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="number" required class="form-control" name="sequencial"
+               value="{{ sequencial }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="extrato"
+               value="{{ extrato }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="multa"
+               value="{{ multa }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="limite_multa"
+               value="{{ limite_multa }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="juros"
+               value="{{ juros }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="uf"
+               value="{{ uf }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="compensar"
+               value="{{ compensar }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="credito"
+               value="{{ credito }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <label>Data </label>
+        <input type="text" required class="form-control" name="data"
+               value="{{ request.POST.data }}">
+        <label>Valor (sem ponto e sem vírgula) </label>
+        <input type="text" required class="form-control" name="valor"
+               value="{{ request.POST.valor }}">
+        <label>Órgão </label>
+        <input type="text" required class="form-control" name="orgao"
+               value="{{ request.POST.orgao }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar Créditos</button>
+    <br>
+    <br>
+
+</form>
+
+
+
+<form method="post" action="{% url 'resumo_compensacao' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" required class="form-control" name="namespace"
+               value="{{ namespace }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="number" required class="form-control" name="sequencial"
+               value="{{ sequencial }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="extrato"
+               value="{{ extrato }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="multa"
+               value="{{ multa }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="limite_multa"
+               value="{{ limite_multa }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="juros"
+               value="{{ juros }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="uf"
+               value="{{ uf }}" hidden="True">
+    </div>
+
+    <div class="form-group">
+        <input type="text" required class="form-control" name="compensar"
+               value="{{ compensar }}" hidden="True">
+    </div>
+    <div class="form-group">
+        <input type="text" required class="form-control" name="credito"
+               value="{{ credito }}" hidden="True">
+    </div>
+
+    {% if credito%}
+        <button type="submit" class="btn btn-primary">Resumo do Procedimento</button>
+    {% endif %}
+
+    <br><br>
+
+
+</form>
+{%endblock%}
