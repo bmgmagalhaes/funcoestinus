@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 executar_messias_targino(pasta_municipio)
                 continue
 
-            if 'retorno' in assunto and 'tributos.smg@gmail.com' in remetente:
+            if ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
                 pasta_municipio = DIRETORIO + rf"\Sao Miguel do Gostoso"
                 baixar_arquivos(pasta_municipio)
                 executar_sao_miguel_do_gostoso(pasta_municipio)

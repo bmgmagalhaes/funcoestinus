@@ -1,3 +1,4 @@
+from .dados_acesso import login_cache, senha_cache
 from datetime import datetime
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
