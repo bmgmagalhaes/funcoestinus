@@ -28,7 +28,7 @@ def executar_patu(pasta_municipio):
         #     executar_simples(diretorio)
 
         try:
-            if 'MUNICIPIO DE PATU   001BANCO DO BRASIL' in linha1:
+            if 'MUNICIPIO DE PATU TR001BANCO DO BRASIL' in linha1:
                 os.rename(caminho_completo, rf'{pasta_municipio}\MR{data}.001')
         except:
             os.remove(caminho_completo)

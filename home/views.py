@@ -143,7 +143,9 @@ def baixar_retorno(request):
                     tem_retorno = True
                     continue
 
-                if 'retorno' in assunto and 'tributos.smg@gmail.com' in remetente:
+                if ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
+                    print('assunto',assunto)
+                    print('remetente',remetente)
                     pasta_municipio = DIRETORIO + rf"\Sao Miguel do Gostoso"
                     baixar_arquivos(pasta_municipio)
                     executar_sao_miguel_do_gostoso(pasta_municipio)
