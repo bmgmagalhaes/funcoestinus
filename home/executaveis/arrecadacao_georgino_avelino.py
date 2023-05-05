@@ -36,7 +36,7 @@ def executar_georgino_avelino(pasta_municipio):
         try:
             if 'PREF MUN S GEORGINO 001BANCO DO BRASIL' in header:
                 os.rename(caminho_completo, rf'{nome_arquivo}.001')
-            if 'PMSGA               104CAIXA ECON. FEDERAL' in header:
+            if 'PMSGA               104CAIXA ECON. FEDERAL' in header and header[81] != "1" :
                 os.rename(caminho_completo, rf'{nome_arquivo}.104')
         except:
             # REMOVE ARQUIVOS DUPLICADOS
