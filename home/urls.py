@@ -8,6 +8,7 @@ urlpatterns = [
     path('iss_nisia/', views.iss_nisia, name='iss_nisia'),
     path('irrf_bananeiras/', views.irrf_bananeiras, name='irrf_bananeiras'),
     path('juncao_agz/', views.juncao_agz, name='juncao_agz'),
+    path('alterar_iptu_nova_cruz/', views.iptu_nova_cruz, name='alterar_iptu_nova_cruz'),
     
     path('transferencia_pagamentos/', views.transferencia_pagamento, name='transferencia_pagamento'),
     path('lista_pagamentos/', views.exibir_pagamentos, name='listar_pagamentos'),
@@ -19,7 +20,6 @@ urlpatterns = [
     path('de_para_pagamento/', views.de_para_pagamentos, name='de_para_pagamento'),
     path('escolher_parcelas/', views.escolher_parcelas, name='escolher_parcelas'),
     path('informar_creditos/', views.informar_creditos, name='informar_creditos'),
-    # path('<int:posicao>/', views.remover_creditos, name='remover_creditos'),
     path('resumo_compensacao/', views.resumo_compensacao, name='resumo_compensacao'),
     path('gerar_globais_pagamentos/', views.gerar_globais_pagamentos, name='gerar_globais_pagamentos'),
     path('gravar_globais_pagamentos/', views.gravar_globais_pagamentos, name='gravar_globais_pagamentos'),

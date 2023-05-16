@@ -23,9 +23,11 @@ from .executaveis.arrecadacao_lucena import executar_lucena
 from .executaveis.arrecadacao_nisia import executar_nisia
 from .executaveis.arrecadacao_georgino_avelino import executar_georgino_avelino
 from .executaveis.adicionar_iss_nisia import adicionar_iss
-from .executaveis.adicionar_irrf_bananeiras import adicionar_irrf
 from .executaveis import adicionar_iss_nisia
+from .executaveis.adicionar_irrf_bananeiras import adicionar_irrf
 from .executaveis import adicionar_irrf_bananeiras
+from .executaveis.alterar_iptu_nova_cruz import alterar_iptu
+from .executaveis import alterar_iptu_nova_cruz
 from .executaveis.transferencia_itbi import transferir_itbi
 from .executaveis.transferencia_mdinin import transferir_pagamento, listar_pagamentos
 from .executaveis.salvar_valores_de_globais import listar_regitros, executar_salvar_global
@@ -222,7 +224,7 @@ def iss_nisia(request):
                               f"{data.strftime('%d/%m/%y')}")
 
     adicionar_iss(data, valor)
-    return render(request, 'home/adicionar_iss_nisiafloresta.html', {"namespace": juncao_agz.url})
+    return render(request, 'home/adicionar_iss_nisiafloresta.html', {"namespace": adicionar_iss_nisia.url})
 
 def juncao_agz(request):
     unir_agz(DIRETORIO)
@@ -501,3 +503,19 @@ def gravar_globais_pagamentos(request):
     gravar_globais_com_pagamentos(namespace, globais)
 
     return render(request, 'home/gerar_globais_pagamentos.html')
+
+
+
+def iptu_nova_cruz(request):
+    if request.method != 'POST':
+        return render(request, 'home/alterar_iptu_nova_cruz.html', {"namespace": alterar_iptu_nova_cruz.url})
+
+    sequencial = request.POST.get('sequencial')
+    exercicios = request.POST.get('exercicios').replace(" ","").split(";")
+    valor = utilitarios.converter_string_float_valor(request.POST.get('valor'))
+
+    alterar_iptu(sequencial, exercicios, valor)
+ 
+    messages.success(request, f"IPTU do sequencial {sequencial} alterado pra {valor} nos exercícios {exercicios}")
+    return render(request, 'home/alterar_iptu_nova_cruz.html', {"namespace": alterar_iptu_nova_cruz.url})
+

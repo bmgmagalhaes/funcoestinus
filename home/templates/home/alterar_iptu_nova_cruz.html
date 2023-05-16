@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block titulo%}IPTU - Nova Cruz{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Altera o valor do IPTU para os exercícios indicados (valor altulizado pra o Exercício Atual)</h4>
+<br>
+
+<form method="post" action="{% url 'alterar_iptu_nova_cruz' %}">
+    {% include 'parciais/_messages.html' %}
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Sequencial </label>
+        <input type="text" required class="form-control" name="sequencial"
+               value="{{ request.POST.sequencial }}">
+    </div>
+    
+    <div class="form-group">
+        <label>Exercícios para serem alterados: (separados por ';' no formado AA) </label>
+        <input type="text" required class="form-control" name="exercicios"
+               value="{{ request.POST.exercicios }}">
+    </div>
+
+    <div class="form-group">
+        <label>Valor do IPTU atualizado</label>
+        <input type="text" required class="form-control" name="valor"
+               value="{{ request.POST.valor }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Alterar Valor</button>
+</form>
+<h6>
+    <br>
+    NAMESPACE UTILIZADO:
+    <br>
+    <br>
+    {{ namespace }}
+
+
+
+</h6>
+
+{%endblock%}
