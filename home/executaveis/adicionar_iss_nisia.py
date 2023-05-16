@@ -41,12 +41,12 @@ class ChromeAuto:
 
     def fazer_login(self):
         try:
-            # enviar_login = self.chrome.find_element_by_name('CacheUserName')
+            
             enviar_login = self.chrome.find_element(By.NAME,'CacheUserName')
-            enviar_login.send_keys('aldyr')
-            # enviar_senha = self.chrome.find_element_by_name('CachePassword')
+            enviar_login.send_keys(login_cache)
+            
             enviar_senha = self.chrome.find_element(By.NAME,'CachePassword')
-            enviar_senha.send_keys('al110665')
+            enviar_senha.send_keys(senha_cache)
         except Exception as e:
             print('Erro em fazer_login')
             print('Página não carregada ou usuário já logado')
