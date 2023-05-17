@@ -1,4 +1,4 @@
-from .dados_acesso import login_cache, senha_cache
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -126,14 +126,16 @@ class ChromeAuto:
 def transferir_itbi(sequencial_de, itbi_de, sequencial_para, namespace):
     chrome = ChromeAuto()
 
-    # AMBIENTE DE TESTE
-    # url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+    # AMBIENTE DE TESTES
+    # url = url_ambiente_de_teste+namespace
+
     # AMBIENTE DE PRODUÇÃO
-    url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+    url = url_ambiente_de_producao+namespace
+    
     chrome.acessa(url)
     chrome.fazer_login()
     chrome.clica_entrar()
-    # chrome.transferir_pagamento_mdinin(sequencial_de, sequencial_para)
+    
     chrome.transferir_itbi(sequencial_de, itbi_de, sequencial_para, "SITCD(", ')')
     chrome.transferir_itbi(sequencial_de, itbi_de, sequencial_para, "SITDB(", ')')
     chrome.transferir_itbi(sequencial_de, itbi_de, sequencial_para, "SITDB(", ',')

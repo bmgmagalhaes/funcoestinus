@@ -1,4 +1,4 @@
-from .dados_acesso import login_cache, senha_cache
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -130,8 +130,11 @@ def listar_pagamentos(namespace, sequencial_de):
     if len(sequencial_de) != 8 and len(sequencial_de) != 7:
         print("Sequencial 'De' ínvalido")
 
-    url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?%24NAMESPACE=' + namespace
-    # url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+    # AMBIENTE DE TESTES
+    # url = url_ambiente_de_teste+namespace
+
+    # AMBIENTE DE PRODUÇÃO
+    url = url_ambiente_de_producao+namespace
 
     chrome.acessa(url)
     chrome.fazer_login()

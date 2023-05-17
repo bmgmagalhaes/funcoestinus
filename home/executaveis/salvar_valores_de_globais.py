@@ -1,12 +1,15 @@
-from .dados_acesso import login_cache, senha_cache
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 # from time import sleep
 
 
-URL = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?%24NAMESPACE='
-# URL = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE='
+# AMBIENTE DE TESTES
+# url = url_ambiente_de_teste+''
+
+# AMBIENTE DE PRODUÇÃO
+url = url_ambiente_de_producao+''
 
 class ChromeAuto:
 
@@ -120,7 +123,7 @@ class ChromeAuto:
 def listar_regitros(namespace, mascara):
 
     chrome = ChromeAuto()
-    chrome.acessa(URL+namespace)
+    chrome.acessa(url+namespace)
     chrome.fazer_login()
     chrome.clica_entrar()
     registros = chrome.exibir_valores(mascara)
@@ -129,7 +132,7 @@ def listar_regitros(namespace, mascara):
 
 def executar_salvar_global (namespace, mascara, linha, excluir):
     chrome = ChromeAuto()
-    chrome.acessa(URL + namespace)
+    chrome.acessa(url + namespace)
     chrome.fazer_login()
     chrome.clica_entrar()
     chrome.manutencao_de_global(mascara, linha, excluir)

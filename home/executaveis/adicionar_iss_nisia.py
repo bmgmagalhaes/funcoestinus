@@ -1,4 +1,4 @@
-from .dados_acesso import login_cache, senha_cache
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from datetime import datetime
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -8,7 +8,15 @@ from selenium import webdriver
 # url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SCICD&$NAMESPACE=TESTENIS'
 
 # AMBIENTE DE PRODUÇÃO
-url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SIATRR&$NAMESPACE=NISIAFLORESTA'
+# url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SIATRR&$NAMESPACE=NISIAFLORESTA'
+
+
+# AMBIENTE DE TESTES
+url = url_ambiente_de_teste+'TESTENIS'
+
+# AMBIENTE DE PRODUÇÃO
+url = url_ambiente_de_producao+'NISIAFLORESTA'
+
 class ChromeAuto:
 
     def __init__(self):

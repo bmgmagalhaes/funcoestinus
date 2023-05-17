@@ -1,4 +1,4 @@
-from .dados_acesso import login_cache, senha_cache
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -244,10 +244,10 @@ def gravar_globais_com_pagamentos(namespace, globais):
 
     #SE FOR AMBIENTE DE TESTE
     if 'TESTE' in namespace:
-        url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+        url = url_ambiente_de_teste + namespace
     else:
         # AMBIENTE DE PRODUÇÃO
-        url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+        url = url_ambiente_de_producao + namespace
 
     chrome.acessa(url)
     chrome.fazer_login()
