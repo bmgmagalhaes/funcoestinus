@@ -22,14 +22,12 @@ if __name__ == '__main__':
     def baixar_arquivos(pasta):
 
         try:
-            print("Entrei no Try do Baixar Arquivos")
             os.mkdir(pasta)
         except:
             print("Pasta existente")
         
         
         for anexo in msg.attachments:
-            print("anexo", anexo)
             caminho_completo = os.path.join(pasta, anexo.filename)
         
             with open(caminho_completo, 'wb') as download:
@@ -122,4 +120,3 @@ if __name__ == '__main__':
                 executar_galinhos(pasta_municipio)
                 continue
 
-    # os.system('explorer c:\Temp')
