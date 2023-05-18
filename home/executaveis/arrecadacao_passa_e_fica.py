@@ -1,6 +1,6 @@
 import os
-from arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
-from utilitarios import pegar_data_pagamento_arquivo_retorno
+from .arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
+from .utilitarios import pegar_data_pagamento_arquivo_retorno
 # from juncao_simples import executar_simples
 
 def executar_passa_e_fica(pasta_municipio):
