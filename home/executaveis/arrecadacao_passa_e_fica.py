@@ -1,6 +1,6 @@
 import os
-from datetime import datetime
-from .arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
+from arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
+from utilitarios import pegar_data_pagamento_arquivo_retorno
 # from juncao_simples import executar_simples
 
 def executar_passa_e_fica(pasta_municipio):
@@ -22,10 +22,12 @@ def executar_passa_e_fica(pasta_municipio):
         try:
             caminho_completo = os.path.join(pasta_municipio, arquivo)
             with open(caminho_completo, 'r+') as retorno:
+                
                 header = retorno.readline()
                 detalhe = retorno.readlines()
-                data_ficha = datetime.strptime(header[143:151], '%d%m%Y')
-                data_ficha = datetime.strftime(data_ficha, '%y%m%d')
+
+                if not'DAF607' in arquivo:
+                    data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
 
         except Exception as e:
             # Quando arquivo do tesouro for alterado, esse teste ignora parte da lista inconsistente
@@ -35,6 +37,7 @@ def executar_passa_e_fica(pasta_municipio):
         # if 'DAF607' in arquivo:
         #     executar_simples(pasta_municipio)
 
+        nome_arquivo = rf'{pasta_municipio}\MR{data}'
 
         try:
             if 'PASSA E FICA PREFEITURA       C ECON FEDERAL' in header:
@@ -44,14 +47,19 @@ def executar_passa_e_fica(pasta_municipio):
                         registro_de_pagamento = True
                         break
                 if registro_de_pagamento:
-                    os.rename(caminho_completo, rf'{pasta_municipio}\MR{data_ficha}.904')
+                    os.rename(caminho_completo, f'{nome_arquivo}.904')
                 else:
                     # REMOVE SE NÃO HOUVER PAGAMENTO
                     os.remove(caminho_completo)
                 registro_de_pagamento = False
+
+            elif 'PM PASSA E FICA RN  104CAIXA ECON. FEDERAL' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.104')
+
             else:
                 # REMOVE SE NÃO FOR ARQUIVO RETORNO DE PRODUÇÃO
                 os.remove(caminho_completo)
+
         except Exception as e:
             # REMOVE SE FOR ARQUIVO DUPLICADO
             os.remove(caminho_completo)
