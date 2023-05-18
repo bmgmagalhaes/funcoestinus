@@ -1,6 +1,7 @@
 import os
 from .arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
 from .juncao_simples import executar_simples
+from .utilitarios import pegar_data_pagamento_arquivo_retorno
 
 
 def executar_goiana(pasta_municipio):
@@ -20,7 +21,11 @@ def executar_goiana(pasta_municipio):
             caminho_completo = os.path.join(pasta_municipio, arquivo)
             with open(caminho_completo, 'r+') as retorno:
                 header = retorno.readline()
-                data = retorno.readlines()[0][23:29]
+                detalhe = retorno.readlines()
+
+                if not'DAF607' in arquivo:
+                    data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
+                    
         except:
             # Quando arquivo do tesouro for alterado, esse teste ignora parte da lista inconsistente
             continue
@@ -28,11 +33,13 @@ def executar_goiana(pasta_municipio):
         if 'DAF607' in arquivo:
             executar_simples(pasta_municipio)
 
+        nome_arquivo = rf'{pasta_municipio}\MR{data}'
+
         try:
             if 'PREFEITURA MUN GOIAN001BANCO DO BRASIL' in header:
-                os.rename(caminho_completo, rf'{pasta_municipio}\MR{data}.001')
+                os.rename(caminho_completo, f'{nome_arquivo}.001')
             if 'PREF MUN DE GOIANA  104CAIXA ECON. FEDERAL' in header:
-                os.rename(caminho_completo, rf'{pasta_municipio}\MR{data}.104')
+                os.rename(caminho_completo, f'{nome_arquivo}.104')
         except:
             # REMOVE ARQUIVOS DUPLICADOS
             os.remove(rf'{pasta_municipio}\{arquivo}')
