@@ -26,6 +26,10 @@ def verificar_dia_util(data):
 
 
 def executar_simples(diretorio):
+    """
+    Verifica se tem DAF607 e executa Junção do Simples e Tesouro Nacional
+    Retorna lista de arquivos atualizadas após remoção dos DAFs
+    """
     lista_arquivos = os.listdir(diretorio)
     novo_arquivo = []
     lista_remessa_serpro = []
@@ -100,3 +104,5 @@ def executar_simples(diretorio):
             total_pago = str(linha_detalhe[-1]).zfill(17)
             trailer_final = '999999999' + registros + total_pago
             criar_arquivo_simples.write(trailer_final)
+    lista_arquivos = os.listdir(diretorio)
+    return lista_arquivos

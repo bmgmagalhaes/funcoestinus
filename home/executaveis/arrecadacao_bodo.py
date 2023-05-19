@@ -1,5 +1,5 @@
 import os
-from .arrecadacao_descompactar import verificar_arquivo_zip, descompactar_arquivo
+from .utilitarios import verificar_arquivo_zip, descompactar_arquivo
 # from juncao_simples import executar_simples
 
 def executar_bodo(pasta_municipio):

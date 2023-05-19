@@ -1,4 +1,7 @@
+import os
 from datetime import datetime
+from zipfile import ZipFile, is_zipfile
+
 def converter_string_lista_credito(credito_string):
 
     credito_temp = []
@@ -25,6 +28,7 @@ def converter_string_lista_credito(credito_string):
 
     return credito
 
+
 def converter_string_dicionario_compensar(texto):
     texto = texto.replace("{", '').replace("}", '').replace("],", ':')
     texto = texto.replace(" ", '').replace("'", '').replace("[", '').replace("]", '')
@@ -38,6 +42,7 @@ def converter_string_dicionario_compensar(texto):
 
     return dicionario
 
+
 def converter_string_dicionario_uf(texto):
     texto = texto.replace("{", '').replace("}", '')
     texto = texto.replace(" ", '').replace("'", '')
@@ -50,6 +55,7 @@ def converter_string_dicionario_uf(texto):
         dicionario[uf[0:2]] = float(uf[3:])
 
     return dicionario
+
 
 def converter_string_dicionario_extrato(texto):
     texto = texto.replace("{", '').replace("}", '').replace(" ", '')
@@ -75,6 +81,7 @@ def converter_string_dicionario_extrato(texto):
 
     return dicionario
 
+
 def converter_string_float_valor(texto):
     if not "." in texto and "," in texto:
         texto = texto.replace(",", ".")
@@ -88,6 +95,7 @@ def converter_string_float_valor(texto):
             texto = texto.replace(",", "")
 
     return float(texto)
+
 
 def converter_string_dicionario_globais(texto):
 
@@ -104,10 +112,12 @@ def converter_string_dicionario_globais(texto):
 
     return dicionario
 
+
 def pegar_data_pagamento_arquivo_retorno(header, detalhe):
     
     tamanho = len(header)
-    
+    data = ''
+
     if tamanho == 241:
         data = datetime.strptime(header[143:151], '%d%m%Y')
         data = datetime.strftime(data, '%y%m%d')
@@ -118,3 +128,58 @@ def pegar_data_pagamento_arquivo_retorno(header, detalhe):
         data = detalhe[0][23:29]
     
     return data
+
+# Verificando se há .zip nos arquivos retornos baixados do e-mail
+def verificar_arquivo_zip(diretorio, lista_arquivos):
+
+    for arquivo in lista_arquivos:
+        caminho_completo = os.path.join(diretorio, arquivo)
+        if is_zipfile(caminho_completo):
+            return True
+    return False
+
+# Descompactando os arquivos .zip
+def descompactar_arquivo(diretorio, lista_arquivos):
+    """
+    Verifica se tem arquivo ZIP e descompacta tudo
+    """
+    tem_zip = verificar_arquivo_zip(diretorio, lista_arquivos)
+    while tem_zip:
+
+        for arquivo in lista_arquivos:
+
+            caminho_completo = os.path.join(diretorio, arquivo)
+
+            if is_zipfile(caminho_completo):
+
+                with ZipFile(caminho_completo, 'r') as retornos:
+                    retornos.extractall(diretorio)
+
+                os.remove(caminho_completo)
+
+        lista_arquivos = os.listdir(diretorio)
+        tem_zip = verificar_arquivo_zip(diretorio, lista_arquivos)
+
+# Gera o nome do correto pra cada arquivo retorno recebido
+def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
+    """
+    A partir do arquivo informado, determina o nome com base na data.
+    Retorna o caminho completo, o nome (sem extensão) e o header, para definir a extensão no executável do município
+    """
+
+    nome_arquivo = ''
+    try:
+        caminho_completo = os.path.join(pasta_municipio, arquivo)
+
+        with open(caminho_completo, 'r+') as retorno:
+            header = retorno.readline()
+            detalhe = retorno.readlines()
+            # if not'DAF607' in arquivo:
+            data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
+            nome_arquivo = rf'{pasta_municipio}\MR{data}'
+                
+    except Exception as e:
+        print(f"Erro ao tratar o arquivo retorno {arquivo}")
+        print(e)
+
+    return caminho_completo, nome_arquivo, header
