@@ -21,4 +21,4 @@ def executar_patu(pasta_municipio):
             print(e)
 
 if __name__ == '__main__':
-    executar_patu(rf'c:\Temp')
+    executar_patu(rf'c:\temp')

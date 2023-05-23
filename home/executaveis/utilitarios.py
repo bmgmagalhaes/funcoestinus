@@ -168,6 +168,7 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
     """
 
     nome_arquivo = ''
+    header = ''
     try:
         caminho_completo = os.path.join(pasta_municipio, arquivo)
 

@@ -4,24 +4,8 @@ from imap_tools import MailBox, AND, MailMessageFlags
 import os
 from datetime import datetime
 from .executaveis.dados_acesso import usuario, senha, servidor, DIRETORIO
+from .executaveis.retorno_config import lista_municipios_renomear_off_line
 from .executaveis import utilitarios
-from .executaveis.arrecadacao_arez import executar_arez
-from .executaveis.arrecadacao_bananeiras import executar_bananeiras
-from .executaveis.arrecadacao_bodo import executar_bodo
-from .executaveis.arrecadacao_paulista import executar_paulista
-from .executaveis.arrecadacao_goiana import executar_goiana
-from .executaveis.arrecadacao_messias_targino import executar_messias_targino
-from .executaveis.arrecadacao_passa_e_fica import executar_passa_e_fica
-from .executaveis.arrecadacao_sao_bento_do_norte import executar_sao_bento_do_norte
-from .executaveis.arrecadacao_patu import executar_patu
-from .executaveis.arrecadacao_sao_miguel_do_gostoso import executar_sao_miguel_do_gostoso
-from .executaveis.arrecadacao_timbauba import executar_timbauba
-from .executaveis.arrecadacao_goianinha import executar_goianinha
-from .executaveis.arrecadacao_lagoa_danta import executar_lagoa_danta
-from .executaveis.arrecadacao_santa_cruz import executar_santa_cruz_do_capibaribe
-from .executaveis.arrecadacao_lucena import executar_lucena
-from .executaveis.arrecadacao_nisia import executar_nisia
-from .executaveis.arrecadacao_georgino_avelino import executar_georgino_avelino
 from .executaveis.adicionar_iss_nisia import adicionar_iss
 from .executaveis import adicionar_iss_nisia
 from .executaveis.adicionar_irrf_bananeiras import adicionar_irrf
@@ -34,45 +18,16 @@ from .executaveis.salvar_valores_de_globais import listar_regitros, executar_sal
 from .executaveis.de_para_pagamento import carregar_situacao_atual_do_imovel_para, gravar_globais_com_pagamentos
 from .executaveis.funcoes_compensacao_de_pagamento import unidades_fiscais, configurando_extrato, configurando_pagamentos
 from .executaveis.funcoes_compensacao_de_pagamento import multa_juros, cruzando_dados_extrato_pagamento
-from .executaveis.funcoes_compensacao_de_pagamento import extrato_com_valores_em_aberto, executar_compensacao#, salvar_compensacao
+from .executaveis.funcoes_compensacao_de_pagamento import extrato_com_valores_em_aberto, executar_compensacao
 from .executaveis.juncao_agz import unir_agz
+from .executaveis.renomear_arquivo_retorno import renomear_retorno
 
 def renomear(request, municipio):
-    if municipio in 'pau':
-        executar_paulista(DIRETORIO)
-    elif municipio in 'scc':
-        executar_santa_cruz_do_capibaribe(DIRETORIO)
-    elif municipio in 'are':
-        executar_arez(DIRETORIO)
-    elif municipio in 'ban':
-        executar_bananeiras(DIRETORIO)
-    elif municipio in 'bod':
-        executar_bodo(DIRETORIO)
-    elif municipio in 'goi':
-        executar_goiana(DIRETORIO)
-    elif municipio in 'goh':
-        executar_goianinha(DIRETORIO)
-    elif municipio in 'lda':
-        executar_lagoa_danta(DIRETORIO)
-    elif municipio in 'luc':
-        executar_lucena(DIRETORIO)
-    elif municipio in 'mta':
-        executar_messias_targino(DIRETORIO)
-    elif municipio in 'nis':
-        executar_nisia(DIRETORIO)
-    elif municipio in 'pef':
-        executar_passa_e_fica(DIRETORIO)
-    elif municipio in 'pat':
-        executar_patu(DIRETORIO)
-    elif municipio in 'sbn':
-        executar_sao_bento_do_norte(DIRETORIO)
-    elif municipio in 'smg':
-        executar_sao_miguel_do_gostoso(DIRETORIO)
-    elif municipio in 'tdb':
-        executar_timbauba(DIRETORIO)
-    elif municipio in 'gav':
-        executar_georgino_avelino(DIRETORIO)
-
+    
+    municipio = lista_municipios_renomear_off_line.get(municipio)
+    
+    if municipio:
+        renomear_retorno(DIRETORIO, municipio)
     else:
         messages.error(request, f'Função pra o município "{municipio}" não implementada')
     return redirect('index')
@@ -84,132 +39,89 @@ def index(request):
 
 def baixar_retorno(request):
     def baixar_arquivos(pasta):
+        
         try:
             os.mkdir(pasta)
         except Exception as e:
             print("Pasta existente", e)
+        
         for anexo in msg.attachments:
             caminho_completo = os.path.join(pasta, anexo.filename)
+        
             with open(caminho_completo, 'wb') as download:
                 download.write(anexo.payload)
+        
         # CONFIRMAR E-MAIL COMO LIDO APÓS BAIXAR RETORNO
         meu_email.flag(msg.uid, MailMessageFlags.SEEN, True)
 
     tem_retorno = False
-
+    
     try:
+
         with MailBox(servidor).login(usuario, senha) as meu_email:
+            municipio = ''
+            pasta_municipio = ''
             for msg in meu_email.fetch(AND(seen=False), mark_seen=False):
                 assunto = msg.subject.lower()
                 remetente = msg.from_.lower()
+                
+                if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
+                    municipio = 'Paulista'
 
-                if 'retorno' in assunto and 'paulista' in assunto:
-                    pasta_municipio = DIRETORIO + rf"\Paulista"
+                elif 'goiana' in assunto and 'suporte@tinus.com.br' in remetente:
+                    municipio = 'Goiana'
+
+                elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
+                    municipio = 'Passa e Fica'
+                    
+                elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
+                    municipio = 'Sao Bento do Norte'
+                    
+                elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
+                    municipio = 'Patu'
+                    
+                elif 'messias' in assunto and 'retorno' in assunto:
+                    municipio = 'Messias Targino'
+                    
+                elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
+                    municipio = 'Sao Miguel do Gostoso'
+                    
+                elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
+                    municipio = 'Timbauba dos Batistas'
+                    
+                elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
+                    municipio = 'Lagoa Danta'
+
+                elif 'scc' in assunto and 'ret' in assunto and 'suporte@tinus.com.br' in remetente:
+                    municipio = 'Santa Cruz do Capibaribe'
+
+                elif 'goiani' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
+                                      'carolinesemtri1@gmail.com' in remetente or
+                                      'suporte@tinus.com.br' in remetente):
+                    municipio = 'Goianinha'
+                
+                elif ('arrecada' in assunto or 'baixa' in assunto or 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
+                    municipio = 'Lucena'
+                
+                elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
+                    municipio = 'Galinhos'
+
+                elif ('retorno' in assunto or 'baixa de arq' in assunto) and ('datbananeiras@gmail.com' in remetente):
+                    municipio = 'Bananeiras'
+                
+                if municipio:            
+                    pasta_municipio = DIRETORIO + rf"\{municipio}"
                     baixar_arquivos(pasta_municipio)
-                    executar_paulista(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'goiana' in assunto:
-                    pasta_municipio = DIRETORIO + rf"\Goiana"
-                    baixar_arquivos(pasta_municipio)
-                    executar_goiana(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Passa e Fica"
-                    baixar_arquivos(pasta_municipio)
-                    executar_passa_e_fica(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Sao Bento do Norte"
-                    baixar_arquivos(pasta_municipio)
-                    executar_sao_bento_do_norte(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Patu"
-                    baixar_arquivos(pasta_municipio)
-                    executar_patu(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'messias' in assunto and 'retorno' in assunto:
-                    pasta_municipio = DIRETORIO + rf"\Messias Targino"
-                    baixar_arquivos(pasta_municipio)
-                    executar_messias_targino(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
-                    print('assunto',assunto)
-                    print('remetente',remetente)
-                    pasta_municipio = DIRETORIO + rf"\Sao Miguel do Gostoso"
-                    baixar_arquivos(pasta_municipio)
-                    executar_sao_miguel_do_gostoso(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Timbauba dos Batistas"
-                    baixar_arquivos(pasta_municipio)
-                    executar_timbauba(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Lagoa Danta"
-                    baixar_arquivos(pasta_municipio)
-                    executar_lagoa_danta(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'scc' in assunto and 'suporte@tinus.com.br' in remetente:
-                    pasta_municipio = DIRETORIO + rf"\Santa Cruz do Capibaribe"
-                    baixar_arquivos(pasta_municipio)
-                    executar_santa_cruz_do_capibaribe(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if 'arre' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
-                                          'carolinesemtri1@gmail.com' in remetente):
-                    pasta_municipio = DIRETORIO + rf"\Goianinha"
-                    baixar_arquivos(pasta_municipio)
-                    executar_goianinha(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('arrecada' in assunto or 'baixa' in assunto or 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
-                    pasta_municipio = DIRETORIO + rf"\Lucena"
-                    baixar_arquivos(pasta_municipio)
-                    executar_lucena(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-                if ('retorno' in assunto or 'baixa de arq' in assunto) and ('datbananeiras@gmail.com' in remetente):
-                    pasta_municipio = DIRETORIO + rf"\Bananeiras"
-                    baixar_arquivos(pasta_municipio)
-                    executar_bananeiras(pasta_municipio)
-                    tem_retorno = True
-                    continue
-
-        # os.system('explorer c:\Temp')
-
-
+                    renomear_retorno(pasta_municipio, municipio)
+                    tem_retorno, municipio = True, ''
+                    messages.success(request, f'Arquivos baixados com sucesso em "{pasta_municipio}"')
+                    os.system(f'explorer {pasta_municipio}')
+                    
     except Exception as e:
         print(e)
 
     if not tem_retorno:
-        messages.error(request, 'Nenhum e-mail com retorno encontrado')
-        return redirect('index')
-    else:
-        messages.success(request, 'Arquivos baixados com sucesso em "c:/temp"')
-    # os.system('explorer c:\Temp')
-    os.system(f'explorer {pasta_municipio}')
+        messages.error(request, 'Nenhum e-mail com retorno bancário encontrado')
 
     return redirect('index')
 

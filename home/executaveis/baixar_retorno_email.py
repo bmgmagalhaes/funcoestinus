@@ -17,7 +17,6 @@ from .arrecadacao_lucena import executar_lucena
 from .arrecadacao_galinhos import executar_galinhos
 
 
-
 if __name__ == '__main__':
     def baixar_arquivos(pasta):
 
@@ -40,23 +39,26 @@ if __name__ == '__main__':
         for msg in meu_email.fetch(AND(seen=False), mark_seen=False):
             assunto = msg.subject.lower()
             remetente = msg.from_.lower()
-
+            
+            
             if 'paulista' in assunto:
                 pasta_municipio = DIRETORIO + rf"\Paulista"
                 baixar_arquivos(pasta_municipio)
                 executar_paulista(pasta_municipio)
                 continue
 
-            if 'arquivo' in assunto:
+            if 'arquivo' in assunto and 'goiana' in assunto:
                 pasta_municipio = DIRETORIO + rf"\Goiana"
                 baixar_arquivos(pasta_municipio)
                 executar_goiana(pasta_municipio)
                 continue
 
             if 'retorn' in assunto and 'willian' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Passa e Fica"
+                municipio = 'Passa e Fica'
+                pasta_municipio = DIRETORIO + rf"\{municipio}"
                 baixar_arquivos(pasta_municipio)
                 executar_passa_e_fica(pasta_municipio)
+                # renomear_retorno(pasta_municipio, municipio)
                 continue
 
             if ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
@@ -102,13 +104,14 @@ if __name__ == '__main__':
                 continue
 
             if 'arre' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
-                                      'carolinesemtri1@gmail.com' in remetente):
+                                      'carolinesemtri1@gmail.com' in remetente or
+                                      'suporte@tinus.com.br' in remetente):
                 pasta_municipio = DIRETORIO + rf"\Goianinha"
                 baixar_arquivos(pasta_municipio)
                 executar_goianinha(pasta_municipio)
                 continue
 
-            if ('arrecada' in assunto or 'baixa de arq' in assunto ) and ('suporte@tinus.com.br' in remetente):
+            if ('lucena' in assunto or 'baixa de arq' in assunto ) and ('suporte@tinus.com.br' in remetente):
                 pasta_municipio = DIRETORIO + rf"\Lucena"
                 baixar_arquivos(pasta_municipio)
                 executar_lucena(pasta_municipio)
@@ -119,4 +122,5 @@ if __name__ == '__main__':
                 baixar_arquivos(pasta_municipio)
                 executar_galinhos(pasta_municipio)
                 continue
+            
 
