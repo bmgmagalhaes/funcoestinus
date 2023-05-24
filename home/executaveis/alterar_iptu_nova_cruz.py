@@ -134,7 +134,6 @@ class ChromeAuto:
                 qtd_parcelas = int(lancamento_atual[-8])
                 a_vista_sem_desconto = float(lancamento_atual[0])
                 a_vista_com_desconto = float(lancamento_atual[3])
-                # parcela = float(lancamento_atual[-7])
                 desconto = round(a_vista_com_desconto*100/a_vista_sem_desconto,1)
 
                 novo_a_vista_sem_desconto = round(valor/uf,7)
