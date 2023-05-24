@@ -20,6 +20,7 @@ lista_municipios_renomear_off_line = {
     'pat':'Patu',
     'sbn':'São Bento do Norte',
     'smg':'São Miguel do Gostoso',
+    'snn':'Serra Negra do Norte',
     'tdb':'Timbauba dos Batistas',
 }
 
@@ -46,6 +47,13 @@ lista_municipios_retorno = {
         'Sao Miguel do Gostoso': {
             'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',
             'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A':'.001',
+        },
+        'Serra Negra do Norte': {
+            'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL':'.001',
+            '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL':'.002',
+            'PM S NEGRA DO NORTE 104CAIXA':'.104',
+            '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL':'.004',
+            'SERRA NEGRA NORTE TR001BANCO DO BRASIL  S/A':'.005',
         },
         'Sao Bento do Norte': {
             'SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL':'.104',
