@@ -4,11 +4,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
-# AMBIENTE DE TESTES
-# url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?%24NAMESPACE=TESTENCR'
-
-# AMBIENTE DE PRODUÇÃO
-# url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SIATMS&$NAMESPACE=NOVACRUZ'
 
 # AMBIENTE DE TESTES
 url = url_ambiente_de_teste+'TESTENCR'
@@ -139,12 +134,12 @@ class ChromeAuto:
                 qtd_parcelas = int(lancamento_atual[-8])
                 a_vista_sem_desconto = float(lancamento_atual[0])
                 a_vista_com_desconto = float(lancamento_atual[3])
-                parcela = float(lancamento_atual[-7])
+                # parcela = float(lancamento_atual[-7])
                 desconto = round(a_vista_com_desconto*100/a_vista_sem_desconto,1)
 
-                novo_a_vista_sem_desconto = round(valor/uf,4)
-                novo_a_vista_com_desconto = round(novo_a_vista_sem_desconto/100*desconto,4)
-                novo_parcela = round(novo_a_vista_sem_desconto/qtd_parcelas,4)
+                novo_a_vista_sem_desconto = round(valor/uf,7)
+                novo_a_vista_com_desconto = round(novo_a_vista_sem_desconto/100*desconto,7)
+                novo_parcela = round(novo_a_vista_sem_desconto/qtd_parcelas,7)
 
                 lancamento_atual[0] = str(novo_a_vista_sem_desconto)
                 lancamento_atual[3] = str(novo_a_vista_com_desconto)
@@ -159,9 +154,9 @@ class ChromeAuto:
                 qtd_parcelas = int(lancamento_atual[-5][-1])
                 if qtd_parcelas == 0: qtd_parcelas = 1
                 
-                novo_valor = round((valor/uf)/qtd_parcelas,4)
+                novo_valor = round((valor/uf)/qtd_parcelas,7)
 
-                for piece in range(2,(qtd_parcelas*5+1),6):
+                for piece in range(2,(qtd_parcelas*5+3),6):
                     lancamento_atual[piece] = str(novo_valor)
 
                 lancamento_alterado = '#'.join(lancamento_atual)
