@@ -48,6 +48,10 @@ class ChromeAuto:
         global_relatorio.clear()
         global_relatorio.send_keys(f"MDININ(1{sequencial_de}")
 
+        quantidade_linhas = self.chrome.find_element(By.ID, "NodeCount")
+        quantidade_linhas.clear()
+        quantidade_linhas.send_keys("1000")
+
         # EXIBIR GLOBAL PESQUISADA
         botao_exibir = self.chrome.find_element(By.ID, "BTN_Display")
         botao_exibir.click()
