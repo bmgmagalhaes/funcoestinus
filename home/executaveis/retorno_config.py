@@ -17,6 +17,7 @@ lista_municipios_renomear_off_line = {
     'mta':'Messias Targino',
     'nis':'Nisia Floresta',
     'pef':'Passa e Fica',
+    'pah': 'Parelhas',
     'pat':'Patu',
     'sbn':'São Bento do Norte',
     'smg':'São Miguel do Gostoso',
@@ -32,6 +33,10 @@ lista_municipios_retorno = {
         'Goiana': {
             'PREF MUN DE GOIANA  104CAIXA ECON. FEDERAL':'.104',
             'PREFEITURA MUN GOIAN001BANCO DO BRASIL':'.001'
+        },
+        'Parelhas': {
+            'PM DE PARELHAS      104CAIXA ECON. FEDERAL':'.204',
+            'PARELHAS - ARRECA001BANCO DO BRASIL':'.904'
         },
         'Paulista':{
             'IPTU PAULISTA-PE    001BANCO DO BRASIL':'.001',
