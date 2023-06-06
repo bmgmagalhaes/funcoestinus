@@ -2,6 +2,9 @@ from datetime import datetime
 import os
 
 def unir_agz(diretorio):
+    """
+    Une retornos do tipo AGZ em um único arquivo, independente da data de pagamento
+    """
     lista_arquivos = os.listdir(diretorio)
     valor_total = 0
     pagamento_por_dia = {}
