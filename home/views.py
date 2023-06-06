@@ -20,6 +20,7 @@ from .executaveis.funcoes_compensacao_de_pagamento import unidades_fiscais, conf
 from .executaveis.funcoes_compensacao_de_pagamento import multa_juros, cruzando_dados_extrato_pagamento
 from .executaveis.funcoes_compensacao_de_pagamento import extrato_com_valores_em_aberto, executar_compensacao
 from .executaveis.juncao_agz import unir_agz
+from .executaveis.juncao_agz_de_um_dia import unir_agz_de_um_dia
 from .executaveis.renomear_arquivo_retorno import renomear_retorno
 
 def renomear(request, municipio):
@@ -143,6 +144,10 @@ def iss_nisia(request):
 
 def juncao_agz(request):
     unir_agz(DIRETORIO)
+    return redirect('index')
+
+def juncao_agz_de_um_dia(request):
+    unir_agz_de_um_dia(DIRETORIO)
     return redirect('index')
 
 def irrf_bananeiras(request):
