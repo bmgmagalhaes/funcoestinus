@@ -8,6 +8,7 @@ lista_municipios_renomear_off_line = {
     'are':'Arez',
     'ban':'Bananeiras',
     'bod':'Bodo',
+    'ext':'Extremoz',
     'gal':'Galinhos',
     'gav':'Georgino Avelino',    
     'goi':'Goiana',
@@ -92,6 +93,10 @@ lista_municipios_retorno = {
             'STA C CAPIBARIBE    001BANCO DO BRASIL':'.001',
             'PM S CRUZ CAPIBARIBE104CAIXA ECON. FEDERAL':'.104',
             'PREF MUN SANTA CRUZ 341BANCO ITAU':'.341',
+        },
+        'Extremoz':{
+            'PM EXTREMOZ - TRIBUT001BANCO DO BRASIL':'.001',
+            'PM EXTREMOZ         104CAIXA ECON. FEDERAL':'.104',
         },
         
                 

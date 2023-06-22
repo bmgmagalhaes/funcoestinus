@@ -45,6 +45,5 @@ def renomear_retorno(pasta_municipio, municipio):
 
 if __name__ == '__main__':
     municipio = input("Informe o município: ")
-    pasta_municipio = rf"c:\temp" + rf"\{municipio}"
+    pasta_municipio = rf"c:\temp"
     renomear_retorno(pasta_municipio, municipio)
-    # renomear_retorno(rf"c:\temp", municipio)
