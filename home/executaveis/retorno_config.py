@@ -68,7 +68,8 @@ lista_municipios_retorno = {
             'MUNICIPIO DE PATU TR001BANCO DO BRASIL':'.001'
         },
         'Messias Targino':{
-            'MUN MESSIAS TARGINO 104CAIXA ECON. FEDERAL':'.104'
+            'MUN MESSIAS TARGINO 104CAIXA ECON. FEDERAL':'.104',
+            'MESSIAS TARGINO TRIB001BANCO DO BRASIL':'.001',
         },
         'Timbauba dos Batistas':{
             'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002'
