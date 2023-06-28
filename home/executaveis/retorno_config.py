@@ -13,6 +13,7 @@ lista_municipios_renomear_off_line = {
     'gav':'Georgino Avelino',    
     'goi':'Goiana',
     'goh':'Goianinha',
+    'gon':'Sao Goncalo',
     'lda':'Lagoa Danta',
     'luc':'Lucena',
     'mta':'Messias Targino',
@@ -53,6 +54,11 @@ lista_municipios_retorno = {
         'Sao Miguel do Gostoso': {
             'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',
             'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A':'.001',
+        },
+        'Sao Goncalo': {
+            'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901',
+            'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
+            'PMSGA ARRECADACAO   001BANCO DO BRASIL':'.001',
         },
         'Serra Negra do Norte': {
             'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL':'.001',

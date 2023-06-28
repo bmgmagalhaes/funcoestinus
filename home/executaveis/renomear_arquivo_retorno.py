@@ -9,7 +9,7 @@ def renomear_retorno(pasta_municipio, municipio):
     descompactar_arquivo(pasta_municipio, os.listdir(pasta_municipio))
     lista_arquivos = executar_simples(pasta_municipio)
     orgaos_retornos = selecionar_municipio(municipio)
-       
+    
     nome_arquivo = ''
 
     for arquivo in lista_arquivos:
@@ -44,6 +44,7 @@ def renomear_retorno(pasta_municipio, municipio):
                 print(e)
 
 if __name__ == '__main__':
+    municipio = "Sao Goncalo"
     municipio = input("Informe o município: ")
     pasta_municipio = rf"c:\temp"
     renomear_retorno(pasta_municipio, municipio)
