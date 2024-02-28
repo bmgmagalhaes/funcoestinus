@@ -1,6 +1,6 @@
 import os
-from .juncao_simples import executar_simples
-from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
+from juncao_simples import executar_simples
+from utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
 
 def executar_santa_cruz_do_capibaribe(pasta_municipio):
     
@@ -19,6 +19,8 @@ def executar_santa_cruz_do_capibaribe(pasta_municipio):
                 os.rename(caminho_completo, f'{nome_arquivo}.104')
             elif 'PREF MUN SANTA CRUZ 341BANCO ITAU' in header:
                 os.rename(caminho_completo, f'{nome_arquivo}.341')
+            elif 'PREF. MUN. DE SANTA 004BANCO DO NORDESTE DO' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.004')
         
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")

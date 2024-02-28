@@ -1,6 +1,6 @@
 import os
-from .utilitarios import pegar_data_pagamento_arquivo_retorno, descompactar_arquivo
-from .juncao_simples import executar_simples
+from utilitarios import pegar_data_pagamento_arquivo_retorno, descompactar_arquivo
+from juncao_simples import executar_simples
 
 def executar_serra_negra(pasta_municipio):
     registro_de_pagamento = False
@@ -35,6 +35,7 @@ def executar_serra_negra(pasta_municipio):
                 for linha_pagamento in detalhe:
                     if 'U 06' in linha_pagamento:
                         registro_de_pagamento = True
+                        print("Achei pagamento em ", nome_arquivo)
                         break
                 if registro_de_pagamento:
                     os.rename(caminho_completo, rf'{nome_arquivo}.001')

@@ -1,20 +1,8 @@
+from imap_tools import MailBox, AND, MailMessageFlags
 import os
 
-from .dados_acesso import usuario, senha, servidor, DIRETORIO
-from imap_tools import MailBox, AND, MailMessageFlags
-from .arrecadacao_paulista import executar_paulista
-from .arrecadacao_goiana import executar_goiana
-from .arrecadacao_messias_targino import executar_messias_targino
-from .arrecadacao_passa_e_fica import executar_passa_e_fica
-from .arrecadacao_sao_bento_do_norte import executar_sao_bento_do_norte
-from .arrecadacao_patu import executar_patu
-from .arrecadacao_sao_miguel_do_gostoso import executar_sao_miguel_do_gostoso
-from .arrecadacao_timbauba import executar_timbauba
-from .arrecadacao_goianinha import executar_goianinha
-from .arrecadacao_lagoa_danta import executar_lagoa_danta
-from .arrecadacao_santa_cruz import executar_santa_cruz_do_capibaribe
-from .arrecadacao_lucena import executar_lucena
-from .arrecadacao_galinhos import executar_galinhos
+from renomear_arquivo_retorno import renomear_retorno
+from dados_acesso import usuario, senha, servidor, DIRETORIO
 
 
 if __name__ == '__main__':
@@ -25,7 +13,7 @@ if __name__ == '__main__':
         except:
             print("Pasta existente")
         
-        
+
         for anexo in msg.attachments:
             caminho_completo = os.path.join(pasta, anexo.filename)
         
@@ -41,86 +29,65 @@ if __name__ == '__main__':
             remetente = msg.from_.lower()
             
             
-            if 'paulista' in assunto:
-                pasta_municipio = DIRETORIO + rf"\Paulista"
-                baixar_arquivos(pasta_municipio)
-                executar_paulista(pasta_municipio)
-                continue
+            if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
+                    municipio = 'Paulista'
 
-            if 'arquivo' in assunto and 'goiana' in assunto:
-                pasta_municipio = DIRETORIO + rf"\Goiana"
-                baixar_arquivos(pasta_municipio)
-                executar_goiana(pasta_municipio)
-                continue
+            elif 'goiana' in assunto and 'suporte@tinus.com.br' in remetente:
+                municipio = 'Goiana'
 
-            if 'retorn' in assunto and 'willian' in remetente:
+            elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
                 municipio = 'Passa e Fica'
+                
+            elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
+                municipio = 'Sao Bento do Norte'
+                
+            elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
+                municipio = 'Patu'
+                
+            elif 'messias' in assunto and 'retorno' in assunto:
+                municipio = 'Messias Targino'
+                
+            elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
+                municipio = 'Sao Miguel do Gostoso'
+                
+            elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
+                municipio = 'Timbauba dos Batistas'
+                
+            elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
+                municipio = 'Lagoa Danta'
+            
+            elif 'tributacao@serranegra.rn.gov.br' in remetente or ('negra' in assunto and 'suporte@tinus.com.br' in remetente):
+                municipio = 'Serra Negra do Norte'
+
+            elif 'scc' in assunto and 'ret' in assunto and 'suporte@tinus.com.br' in remetente:
+                municipio = 'Santa Cruz do Capibaribe'
+
+            elif 'goiani' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
+                                    'carolinesemtri1@gmail.com' in remetente or
+                                    'suporte@tinus.com.br' in remetente):
+                municipio = 'Goianinha'
+            
+            elif ('arrecada' in assunto or 'baixa' in assunto or 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
+                municipio = 'Lucena'
+            
+            elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
+                municipio = 'Galinhos'
+
+            elif ('retorno' in assunto or 'baixa de arq' in assunto) and ('datbananeiras@gmail.com' in remetente):
+                municipio = 'Bananeiras'
+
+            elif 'tributacao@pmsenadorgeorginoavelino.rn.gov.br' in remetente:
+                municipio = 'Georgino'
+
+            elif ('Serra do Mel' in assunto or 'arq' in assunto):
+                municipio = 'Serra do Mel'
+            
+
+            if municipio:            
                 pasta_municipio = DIRETORIO + rf"\{municipio}"
                 baixar_arquivos(pasta_municipio)
-                executar_passa_e_fica(pasta_municipio)
-                # renomear_retorno(pasta_municipio, municipio)
-                continue
-
-            if ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Sao Bento do Norte"
-                baixar_arquivos(pasta_municipio)
-                executar_sao_bento_do_norte(pasta_municipio)
-                continue
-
-            if ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Patu"
-                baixar_arquivos(pasta_municipio)
-                executar_patu(pasta_municipio)
-                continue
-
-            if 'messias' in assunto and 'retorno' in assunto:
-                pasta_municipio = DIRETORIO + rf"\Messias Targino"
-                baixar_arquivos(pasta_municipio)
-                executar_messias_targino(pasta_municipio)
-                continue
-
-            if ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Sao Miguel do Gostoso"
-                baixar_arquivos(pasta_municipio)
-                executar_sao_miguel_do_gostoso(pasta_municipio)
-                continue
-
-            if 'timbauba' in assunto and 'tributacao2021tb@hotmail.com' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Timbauba dos Batistas"
-                baixar_arquivos(pasta_municipio)
-                executar_timbauba(pasta_municipio)
-                continue
-
-            if 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
-                pasta_municipio = DIRETORIO + rf"\Lagoa Danta"
-                baixar_arquivos(pasta_municipio)
-                executar_lagoa_danta(pasta_municipio)
-                continue
-
-            if 'scc' in assunto:
-                pasta_municipio = DIRETORIO + rf"\Santa Cruz do Capibaribe"
-                baixar_arquivos(pasta_municipio)
-                executar_santa_cruz_do_capibaribe(pasta_municipio)
-                continue
-
-            if 'arre' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
-                                      'carolinesemtri1@gmail.com' in remetente or
-                                      'suporte@tinus.com.br' in remetente):
-                pasta_municipio = DIRETORIO + rf"\Goianinha"
-                baixar_arquivos(pasta_municipio)
-                executar_goianinha(pasta_municipio)
-                continue
-
-            if ('lucena' in assunto or 'baixa de arq' in assunto ) and ('suporte@tinus.com.br' in remetente):
-                pasta_municipio = DIRETORIO + rf"\Lucena"
-                baixar_arquivos(pasta_municipio)
-                executar_lucena(pasta_municipio)
-                continue
-            
-            if 'arquivo de retorno' in assunto:
-                pasta_municipio = DIRETORIO + rf"\Galinhos"
-                baixar_arquivos(pasta_municipio)
-                executar_galinhos(pasta_municipio)
-                continue
-            
-
+                renomear_retorno(pasta_municipio, municipio)
+                tem_retorno, municipio = True, ''
+                os.system(f'explorer {pasta_municipio}')
+        
+    temp = ("Pressione enter pra encerrar:")

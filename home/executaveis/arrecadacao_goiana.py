@@ -1,6 +1,6 @@
 import os
-from .juncao_simples import executar_simples
-from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
+from juncao_simples import executar_simples
+from utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
 
 def executar_goiana(pasta_municipio):
 
@@ -17,6 +17,8 @@ def executar_goiana(pasta_municipio):
                 os.rename(caminho_completo, f'{nome_arquivo}.001')
             if 'PREF MUN DE GOIANA  104CAIXA ECON. FEDERAL' in header:
                 os.rename(caminho_completo, f'{nome_arquivo}.104')
+            if 'PREF. MUN. DE GOIANA004BANCO DO NORDESTE DO' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.004')
 
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")

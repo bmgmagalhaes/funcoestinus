@@ -19,6 +19,32 @@ def renomear_retorno(pasta_municipio, municipio):
                 header = retorno.readline()
                 detalhe = retorno.readlines()
 
+                # if not'DAF607' in arquivo:
+                    
+                    # registro_de_pagamento = True
+                    # print("TAMANHO =",len(header))
+                    # if len(header) == 241:
+                    #     registro_de_pagamento = False
+                    #     print("é 241 e registro FALSO",registro_de_pagamento)
+
+                    #     for linha_pagamento in detalhe:
+
+                    #         if 'U 06' in linha_pagamento:
+                    #             registro_de_pagamento = True
+                    #             print("tem pagamento e registro VERDADEIRO")
+                    #             break
+                            
+                    
+                    # print("RENOMEAR?",registro_de_pagamento)
+                    # if registro_de_pagamento:
+                    #     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
+                    #     # nome_arquivo = rf'{pasta_municipio}\MR{data}'
+                    # else:
+                    #     data = "sem pagamento"
+                    #     print("NÃO tem pagamento",data)
+                    # nome_arquivo = rf'{pasta_municipio}\MR{data}'
+                
+
                 if not'DAF607' in arquivo:
                     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
                     nome_arquivo = rf'{pasta_municipio}\MR{data}'
@@ -28,13 +54,17 @@ def renomear_retorno(pasta_municipio, municipio):
             continue
 
         for arquivo in lista_arquivos:
-
             header = ''
             caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
-            
+            # print(caminho_completo)
+            # print(nome_arquivo)
+            # print(header)
+            # print(orgaos_retornos)
             try:
                 # extensao = ''
                 for retorno, extensao in orgaos_retornos.items():
+                    # print(retorno)
+                    # print(extensao)
                     if retorno in header:
                         os.rename(caminho_completo, f'{nome_arquivo}{extensao}')
                         break
@@ -44,7 +74,7 @@ def renomear_retorno(pasta_municipio, municipio):
                 print(e)
 
 if __name__ == '__main__':
-    municipio = "Sao Goncalo"
+    # municipio = "Santa Cruz do Capibaribe"
     municipio = input("Informe o município: ")
     pasta_municipio = rf"c:\temp"
     renomear_retorno(pasta_municipio, municipio)

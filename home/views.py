@@ -13,7 +13,7 @@ from .executaveis import adicionar_irrf_bananeiras
 from .executaveis.alterar_iptu_nova_cruz import alterar_iptu
 from .executaveis import alterar_iptu_nova_cruz
 from .executaveis.transferencia_itbi import transferir_itbi
-from .executaveis.transferencia_mdinin import transferir_pagamento, listar_pagamentos
+from .executaveis.transferencia_mdinin import transferir_pagamento, listar_pagamentos, transferir_md
 from .executaveis.salvar_valores_de_globais import listar_regitros, executar_salvar_global
 from .executaveis.de_para_pagamento import carregar_situacao_atual_do_imovel_para, gravar_globais_com_pagamentos
 from .executaveis.funcoes_compensacao_de_pagamento import unidades_fiscais, configurando_extrato, configurando_pagamentos
@@ -81,7 +81,7 @@ def baixar_retorno(request):
                 elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
                     municipio = 'Patu'
                     
-                elif 'messias' in assunto and 'retorno' in assunto:
+                elif 'messias' in assunto and 'reto' in assunto:
                     municipio = 'Messias Targino'
                     
                 elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
@@ -189,10 +189,42 @@ def transferencia_pagamento(request):
 
     messages.success(request, f"Transferido o(s) pagamento(s) do sequencial {sequencial_de} "
                               f"para o sequencial {sequencial_para} em {namespace}")
-    transferir_pagamento(namespace, sequencial_de, sequencial_para, pagamentos_para_transferir)
+    md_completo = transferir_pagamento(namespace, sequencial_de, sequencial_para, pagamentos_para_transferir)
 
-    return render(request, 'home/index.html')
+    # return render(request, 'home/index.html')
+    return render(request, 'home/transferencia_pagamento_md.html', 
+                  {
+                      'md': md_completo,
+                      'contribuinte_de':sequencial_de,
+                      'contribuinte_para':sequencial_para,
+                      'namespace': namespace,
+                  }
+                  )
 
+def transferencia_pagamento_md(request):
+    if request.method != 'POST':
+        return render(request, 'home/transferencia_pagamento_md.html')
+    contribuinte_para = request.POST.get('contribuinte_para')
+    namespace = request.POST.get('namespace')
+    md_completo = request.POST.get('md')
+
+    modelo_para = request.POST.get('modelo_para')
+    parcela_para = request.POST.get('parcela_para')
+
+    print("Onde estou? VIEW")
+    print(__name__)
+
+    print(f'contribuinte_para: {contribuinte_para}')
+    print(f'namespace: {namespace}')
+    print(f'md_completo: {md_completo}')
+    print(f'modelo_para: {modelo_para}')
+    print(f'parcela_para: {parcela_para}')
+
+
+    # messages.success(request, f"{md_completo} Para {modelo_para}")
+    # transferir_md(md_completo, modelo_para, parcela_para, contribuinte_para, namespace)
+
+    return render(request, 'home/transferencia_pagamento_md.html')
 
 def exibir_pagamentos(request):
     if request.method != 'POST':

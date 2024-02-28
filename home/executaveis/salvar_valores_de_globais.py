@@ -2,6 +2,7 @@ from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, ur
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 # from time import sleep
 
 
@@ -15,16 +16,25 @@ class ChromeAuto:
 
     def __init__(self):
 
-        # self.caminho_driver = 'chromedriver'
-        self.caminho_driver = ChromeDriverManager().install()
+        # self.caminho_driver = ChromeDriverManager().install()
+        # self.opcoes = webdriver.ChromeOptions()
+        # self.opcoes.add_argument(r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
+        # self.opcoes.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # self.chrome = webdriver.Chrome(
+        #     self.caminho_driver,
+        #     options=self.opcoes
+
+        # )
+
+        self.caminho_driver = r'C:\cursoPython\funcoestinus\home\executaveis\chromedriver.exe'
         self.opcoes = webdriver.ChromeOptions()
-        self.opcoes.add_argument(r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
-        self.opcoes.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.chrome = webdriver.Chrome(
             self.caminho_driver,
             options=self.opcoes
 
         )
+
+
 
     def acessa(self, site):
         self.chrome.get(site)

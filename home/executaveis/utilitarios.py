@@ -175,12 +175,32 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
         with open(caminho_completo, 'r+') as retorno:
             header = retorno.readline()
             detalhe = retorno.readlines()
-            # if not'DAF607' in arquivo:
             data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
-            nome_arquivo = rf'{pasta_municipio}\MR{data}'
+
+
+
+            registro_de_pagamento = True
+            if len(header) == 241:
+                registro_de_pagamento = False
+                
+
+                for linha_pagamento in detalhe:
+
+                    if 'U 06' in linha_pagamento:
+                        registro_de_pagamento = True
+                        break
+                    
+            
+            if registro_de_pagamento:
+                # print("RENOMEAR?",data)
+                nome_arquivo = rf'{pasta_municipio}\MR{data}'
+            else:
+                nome_arquivo = rf'{pasta_municipio}\SEM PAGAMENTO-{data}'
                 
     except Exception as e:
-        print(f"Erro ao tratar o arquivo retorno {arquivo}")
+        print(f"Erro ao tratar o arquivo retorno 1 {arquivo}")
         print(e)
-
+    # print("caminho ", caminho_completo)
+    # print("nome_arquivo ", nome_arquivo)
+    # print("header ", header)
     return caminho_completo, nome_arquivo, header

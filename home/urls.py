@@ -12,6 +12,8 @@ urlpatterns = [
     path('alterar_iptu_nova_cruz/', views.iptu_nova_cruz, name='alterar_iptu_nova_cruz'),
     
     path('transferencia_pagamentos/', views.transferencia_pagamento, name='transferencia_pagamento'),
+    path('transferencia_pagamentos_md/', views.transferencia_pagamento_md, name='transferencia_pagamento_md'),
+
     path('lista_pagamentos/', views.exibir_pagamentos, name='listar_pagamentos'),
     path('lista_global/', views.listar_global, name='listar_global'),
     path('salva_global/', views.salvar_global, name='salvar_global'),

@@ -1,16 +1,25 @@
 from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from selenium import webdriver
+from selenium  import webdriver
+
 
 
 class ChromeAuto:
 
     def __init__(self):
-        self.caminho_driver = ChromeDriverManager().install()
+        # self.caminho_driver = ChromeDriverManager().install()
+        # self.opcoes = webdriver.ChromeOptions()
+        # self.opcoes.add_argument(r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
+        # self.opcoes.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # self.chrome = webdriver.Chrome(
+        #     self.caminho_driver,
+        #     options=self.opcoes
+
+        # )
+
+        self.caminho_driver = r'C:\cursoPython\funcoestinus\home\executaveis\chromedriver.exe'
         self.opcoes = webdriver.ChromeOptions()
-        self.opcoes.add_argument(r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
-        self.opcoes.add_experimental_option('excludeSwitches', ['enable-logging'])
         self.chrome = webdriver.Chrome(
             self.caminho_driver,
             options=self.opcoes
@@ -212,12 +221,12 @@ class ChromeAuto:
 def carregar_situacao_atual_do_imovel_para(sequencial_para, namespace):
     chrome = ChromeAuto()
 
-    # AMBIENTE DE PRODUÇÃO
-    url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
-
     # SE FOR AMBIENTE DE TESTE
     if 'TESTE' in namespace:
-        url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+        url = url_ambiente_de_teste + namespace
+    else:
+        # AMBIENTE DE PRODUÇÃO
+        url = url_ambiente_de_producao + namespace  
 
     chrome.acessa(url)
     chrome.fazer_login()

@@ -218,7 +218,7 @@ def calcular_total_acrescimos(dias_atraso, meses_atraso, juros, multa, limite_mu
     multa_limite_multa_juros = ['EXTREMOZ', 'TESTEEXT', 'GARANHUNS' , 'TESTEGAR', 'CAICO', 'TESTECAI']
     multa_limite_multa_juros += ['MOSSORO', 'TESTEMOS','SAOGONCALO','TESTEGON','OLINDA','TESTEOLI']
     multa_limite_multa_juros += ['PARNAMIRIM', 'TESTEPAR', 'CATOLEDOROCHA','TESTECDR', 'CAMARAGIBE']
-    multa_limite_multa_juros += ['TANGARA', 'NISIAFLORESTA', 'TESTENIS', 'CEARAMIRIM']
+    multa_limite_multa_juros += ['TANGARA', 'NISIAFLORESTA', 'TESTENIS', 'CEARAMIRIM', 'ALEXANDRIA']
     duas_faixas_limite_multa_juros = ['CABO']
     tres_faixas_limite_multa_juros = []
 
@@ -243,7 +243,7 @@ def calcular_total_acrescimos(dias_atraso, meses_atraso, juros, multa, limite_mu
         print(f'{namespace} é cálculo de multa com 4 faixas')
     else:
         print(f'{namespace} sem parâmetros de acréscimos encontrado')
-        temp = input("Encerre o programa!!!!!")
+        # temp = input("Encerre o programa!!!!!")
 
     return total_multa + total_juros
 

@@ -1,6 +1,6 @@
 import os
-from .juncao_simples import executar_simples
-from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
+from juncao_simples import executar_simples
+from utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
 
 def executar_sao_miguel_do_gostoso(pasta_municipio):
 
@@ -17,6 +17,13 @@ def executar_sao_miguel_do_gostoso(pasta_municipio):
                 os.rename(caminho_completo, f'{nome_arquivo}.237')
             if 'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A' in header:
                 os.rename(caminho_completo, f'{nome_arquivo}.001')
+
+            if 'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.002')
+
+            if 'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.104')
+            
 
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")

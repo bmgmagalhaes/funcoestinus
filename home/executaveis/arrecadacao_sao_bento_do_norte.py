@@ -1,6 +1,6 @@
 import os
-from .utilitarios import descompactar_arquivo, pegar_data_pagamento_arquivo_retorno
-from .juncao_simples import executar_simples
+from utilitarios import descompactar_arquivo, pegar_data_pagamento_arquivo_retorno
+from juncao_simples import executar_simples
 
 def executar_sao_bento_do_norte(pasta_municipio):
     registro_de_pagamento = False

@@ -7,12 +7,18 @@ class ChromeAuto:
 
     def __init__(self):
 
-        self.caminho_driver = ChromeDriverManager().install()
+        # self.caminho_driver = ChromeDriverManager().install()
+        # self.opcoes = webdriver.ChromeOptions()
+        # self.opcoes.add_argument(r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
+        # self.opcoes.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # self.chrome = webdriver.Chrome(
+        #     self.caminho_driver,
+        #     options=self.opcoes
+
+        # )
+
+        self.caminho_driver = r'C:\cursoPython\funcoestinus\home\executaveis\chromedriver.exe'
         self.opcoes = webdriver.ChromeOptions()
-        self.opcoes.add_argument(
-            r'user-data-dir=C:\Users\Usuario\AppData\Local\Google\Chrome\User Data\Default')
-        self.opcoes.add_experimental_option(
-            'excludeSwitches', ['enable-logging'])
         self.chrome = webdriver.Chrome(
             self.caminho_driver,
             options=self.opcoes
@@ -60,6 +66,7 @@ class ChromeAuto:
     def transferir_pagamento_mdinin(self, sequencial_de, sequencial_para, registro_para_transferir):
         self.exibir_pagamentos(sequencial_de)
         lista_pagamentos = []
+        lista_md = []
 
         if registro_para_transferir == 'todos':
             total_de_pagamentos = int(
@@ -71,8 +78,9 @@ class ChromeAuto:
             lista_pagamentos = [int(val) for val in registros]
 
         lista_pagamentos.sort(reverse=True)
-
+        
         for registro in lista_pagamentos:
+            
             # HABILITAR EDICAO
             habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
             if not habilitar_edicao.is_selected():
@@ -82,9 +90,16 @@ class ChromeAuto:
                                                                       f" tr:nth-child({str(registro)}) > td:nth-child(4) > a")
             editar_global.click()
             no_global = self.chrome.find_element(By.ID, "txtGlobal")
-            valor_original = self.chrome.find_element(
-                By.ID, "txtGlobal").get_property("value")
+            valor_original = no_global.get_property("value")
 
+            #CONVERTE MDININ EM MD E GUARDA EM UMA LISTA PRA RETORNO DO PRÓXIMO PROCEDIMENTO
+            posicao_data = valor_original.find(',') + 4
+            data = valor_original[posicao_data:posicao_data+6]
+            posicao_nreg = posicao_data + 6
+            nreg = str(int(valor_original[posicao_nreg:posicao_nreg+7]))
+            md = 'MD'+data+'('+nreg+')'
+            lista_md.append(md)
+            
             bkp = valor_original[0:7] + "ant" + valor_original[7:]
             transfere_para = valor_original[0:9] + sequencial_para
             if len(sequencial_para) == 8:
@@ -96,6 +111,8 @@ class ChromeAuto:
 
             no_global.clear()
             no_global.send_keys(bkp)
+
+            # TODO Descomentar SALVAR pra consolidar funcionamento
             salvar = self.chrome.find_element(By.ID, "BTN_Insert")
             salvar.click()
             no_global.clear()
@@ -103,29 +120,154 @@ class ChromeAuto:
             excluir_no_original = self.chrome.find_element(By.ID, "chkDelete")
             if not excluir_no_original.is_selected():
                 excluir_no_original.click()
+            
+            # TODO Descomentar SALVAR pra consolidar funcionamento
             salvar.click()
 
             self.exibir_pagamentos(sequencial_de)
+            
+        return lista_md
 
 
-def transferir_pagamento(namespace, sequencial_de, sequencial_para, pagamentos_para_transferir):
+
+    def bkp_md(self, lista_md):
+
+        self.exibir_pagamentos(sequencial_de)
+        md_completo = {}
+
+        for md in lista_md:
+
+            # CARREGAR MD
+            global_relatorio = self.chrome.find_element(By.ID, "$ID2")
+            global_relatorio.clear()
+            global_relatorio.send_keys(md)
+
+            # EXIBIR GLOBAL PESQUISADA
+            botao_exibir = self.chrome.find_element(By.ID, "BTN_Display")
+            botao_exibir.click()
+
+            # HABILITAR EDICAO
+            habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
+            if not habilitar_edicao.is_selected():
+                habilitar_edicao.click()
+            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(2) >"
+                                                      "td > form > table.DetailTable > tbody > tr.EvenRow > td:nth-child(4) > a")
+            
+            editar_global.click()
+            
+            
+            no_global = self.chrome.find_element(By.ID, "txtGlobal")
+            
+            detalhe_valor_md_atual = self.chrome.find_element(By.ID, "GValue").text
+            
+            # ADICIONANDO 'ant' AO REGISTRO ORIGINAL
+            bkp = md.replace("(", "ant(")
+            no_global.clear()
+            no_global.send_keys(bkp)
+            salvar = self.chrome.find_element(By.ID, "BTN_Insert")
+
+            # TODO Descomentar SALVAR pra consolidar funcionamento
+            # Salvar backup
+            salvar.click()
+
+            md_completo[md] = [detalhe_valor_md_atual,'MD','PC']
+
+        return md_completo            
+
+
+    def transferir_pagamento_md(self, sequencial_de, sequencial_para, registro_para_transferir):
+        self.exibir_pagamentos(sequencial_de)
+        lista_pagamentos = []
+        lista_md = []
+
+        if registro_para_transferir == 'todos':
+            total_de_pagamentos = int(
+                self.chrome.find_element(By.ID, "TotalText").text[7:])
+            for id in range(1, total_de_pagamentos + 1):
+                lista_pagamentos.append(id)
+        else:
+            registros = registro_para_transferir.split(";")
+            lista_pagamentos = [int(val) for val in registros]
+
+        lista_pagamentos.sort(reverse=True)
+        
+        for registro in lista_pagamentos:
+            
+            # HABILITAR EDICAO
+            habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
+            if not habilitar_edicao.is_selected():
+                habilitar_edicao.click()
+            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(2) > td >"
+                                                                      " form > table.DetailTable > tbody >"
+                                                                      f" tr:nth-child({str(registro)}) > td:nth-child(4) > a")
+            editar_global.click()
+            no_global = self.chrome.find_element(By.ID, "txtGlobal")
+            valor_original = no_global.get_property("value")
+
+            #CONVERTE MDININ EM MD E GUARDA EM UMA LISTA PRA RETORNO DO PRÓXIMO PROCEDIMENTO
+            posicao_data = valor_original.find(',') + 4
+            data = valor_original[posicao_data:posicao_data+6]
+            posicao_nreg = posicao_data + 6
+            nreg = str(int(valor_original[posicao_nreg:posicao_nreg+7]))
+            md = 'MD'+data+'('+nreg+')'
+            lista_md.append(md)
+            
+            bkp = valor_original[0:7] + "ant" + valor_original[7:]
+            transfere_para = valor_original[0:9] + sequencial_para
+            if len(sequencial_para) == 8:
+                transfere_para += valor_original[17:]
+            elif len(sequencial_para) == 7:
+                transfere_para += valor_original[16:]
+            else:
+                print("Quantidade de dígitos do Sequencial PARA inválido")
+
+            no_global.clear()
+            no_global.send_keys(bkp)
+
+            # TODO Descomentar SALVAR pra consolidar funcionamento
+            salvar = self.chrome.find_element(By.ID, "BTN_Insert")
+            salvar.click()
+            no_global.clear()
+            no_global.send_keys(transfere_para)
+            excluir_no_original = self.chrome.find_element(By.ID, "chkDelete")
+            if not excluir_no_original.is_selected():
+                excluir_no_original.click()
+            
+            # TODO Descomentar SALVAR pra consolidar funcionamento
+            salvar.click()
+
+            self.exibir_pagamentos(sequencial_de)
+            
+        return lista_md
+
+def transferir_pagamento(namespace, contribuinte_de, contribuinte_para, pagamentos_para_transferir):
     chrome = ChromeAuto()
 
-    if len(sequencial_para) != 8 and len(sequencial_para) != 7:
-        print("Sequencial 'Para' ínvalido")
-    if len(sequencial_de) != 8 and len(sequencial_de) != 7:
-        print("Sequencial 'De' ínvalido")
+    if len(contribuinte_para) != 8 and len(contribuinte_para) != 7:
+        print("Contribuinte 'Para' ínvalido")
+    if len(contribuinte_de) != 8 and len(contribuinte_de) != 7:
+        print("Contribuinte 'De' ínvalido")
 
-    url = 'https://www.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?%24NAMESPACE=' + namespace
-    # url = 'https://www2.tinus.com.br/csp/sys/exp/UtilExpGlobalView.csp?$ID2=SITCD&$NAMESPACE=' + namespace
+    if 'TESTE' in namespace:
+        # AMBIENTE DE TESTES
+        url = url_ambiente_de_teste + namespace
+    else:
+        # AMBIENTE DE PRODUÇÃO
+        url = url_ambiente_de_producao + namespace
 
     chrome.acessa(url)
     chrome.fazer_login()
     chrome.clica_entrar()
-    chrome.transferir_pagamento_mdinin(
-        sequencial_de, sequencial_para, pagamentos_para_transferir)
+    lista_md = chrome.transferir_pagamento_mdinin(
+        contribuinte_de, contribuinte_para, pagamentos_para_transferir)
+    
+    # chrome.acessa(url)
+    # md_completo = chrome.bkp_md(lista_md)
+
+    
 
     chrome.sair()
+    return md_completo
 
 
 def listar_pagamentos(namespace, sequencial_de):
@@ -134,11 +276,12 @@ def listar_pagamentos(namespace, sequencial_de):
     if len(sequencial_de) != 8 and len(sequencial_de) != 7:
         print("Sequencial 'De' ínvalido")
 
-    # AMBIENTE DE TESTES
-    # url = url_ambiente_de_teste+namespace
-
-    # AMBIENTE DE PRODUÇÃO
-    url = url_ambiente_de_producao+namespace
+    if 'TESTE' in namespace:
+        # AMBIENTE DE TESTES
+        url = url_ambiente_de_teste+namespace
+    else:
+        # AMBIENTE DE PRODUÇÃO
+        url = url_ambiente_de_producao+namespace
 
     chrome.acessa(url)
     chrome.fazer_login()
@@ -148,3 +291,44 @@ def listar_pagamentos(namespace, sequencial_de):
     return pagamentos
 
 
+
+def transferir_md(md_completo, modelo_para, parcela_para, contribuinte_para, namespace):
+
+
+
+    print("Onde estou? TRANSFERENCIA_MDININ.PY DEF TRANSFERIR_MD")
+    print(__name__)
+
+    print(f'contribuinte_para: {contribuinte_para}')
+    print(f'namespace: {namespace}')
+    print(f'md_completo: {md_completo}')
+    print(f'modelo_para: {modelo_para}')
+    print(f'parcela_para: {parcela_para}')
+
+    chrome = ChromeAuto()
+
+    # if len(contribuinte_para) != 8 and len(contribuinte_para) != 7:
+    #     print("Contribuinte 'Para' ínvalido")
+    # if len(contribuinte_de) != 8 and len(contribuinte_de) != 7:
+    #     print("Contribuinte 'De' ínvalido")
+
+    # if 'TESTE' in namespace:
+    #     # AMBIENTE DE TESTES
+    #     url = url_ambiente_de_teste + namespace
+    # else:
+    #     # AMBIENTE DE PRODUÇÃO
+    #     url = url_ambiente_de_producao + namespace
+
+    chrome.acessa(url)
+    chrome.fazer_login()
+    chrome.clica_entrar()
+    # lista_md = chrome.transferir_pagamento_mdinin(
+    #     contribuinte_de, contribuinte_para, pagamentos_para_transferir)
+    
+    chrome.acessa(url)
+    # md_completo = chrome.bkp_md(lista_md)
+
+    
+
+    chrome.sair()
+    return md_completo

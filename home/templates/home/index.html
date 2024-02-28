@@ -7,7 +7,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th colspan="4" style="text-align:center;"><br>
+        <th colspan="5" style="text-align:center;"><br>
             A pasta 'c:/temp' deve estar criada no Windows
         </th>
     </tr>
@@ -18,19 +18,23 @@
            <a href="{% url 'renomear' 'are' %}">Arez</a>
        </td>
        <td>
-           <a href="{% url 'renomear' 'ban' %}">Bananeiras</a>
-       </td>
+        <a href="{% url 'renomear' 'ban' %}">Bananeiras</a>
+        </td>
+        <td>
+            <a href="{% url 'renomear' 'cre' %}">Campo Redondo</a>
+        </td>
        <td>
         <a href="{% url 'renomear' 'gav' %}">Georgino Avelino</a>
        </td>
        <td>
         <a href="{% url 'renomear' 'gal' %}">Galinhos</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'goi' %}">Goiana</a>
-       </td>
+       
     </tr>
     <tr>
+        <td>
+            <a href="{% url 'renomear' 'goi' %}">Goiana</a>
+        </td>
        <td>
            <a href="{% url 'renomear' 'goh' %}">Goianinha</a>
        </td>
@@ -43,11 +47,12 @@
        <td>
            <a href="{% url 'renomear' 'mta' %}">Messias Targino</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'nis' %}">Nísia Floresta</a>
-       </td>
+       
     </tr>
     <tr>
+        <td>
+            <a href="{% url 'renomear' 'nis' %}">Nísia Floresta</a>
+        </td>
         <td>
             <a href="{% url 'renomear' 'pef' %}">Passa e Fica</a>
         </td>
@@ -60,13 +65,14 @@
        <td>
            <a href="{% url 'renomear' 'pau' %}">Paulista</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'scc' %}">Santa Cruz do Capibaribe</a>
-       </td>
+       
        
        
     </tr>
     <tr>
+        <td>
+            <a href="{% url 'renomear' 'scc' %}">Santa Cruz do Capibaribe</a>
+        </td>
         <td>
             <a href="{% url 'renomear' 'sbn' %}">São Bento do Norte</a>
         </td>
@@ -74,22 +80,33 @@
            <a href="{% url 'renomear' 'smg' %}">São Miguel do Gostoso</a>
        </td>
        <td>
-           <a href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a>
+           <a href="{% url 'renomear' 'sdm' %}">Serra do Mel</a>
        </td>
        <td>
-        <a href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas</a>
+        <a href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a>
        </td>
-       
-
    </tr>
-    <tr>
-        <td colspan="2" style="text-align:center;">
+
+
+   <tr>
+        <td>
+            <a href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas</a>
+        </td>
+    </tr>
+
+   <tr>
+        
+        <td></td>
+        <td></td>
+        <td style="text-align:center;">
             <a href="{% url 'baixar_retorno2' %}">
                 <img src="{% static 'img/logingmail.png' %}"
                      style="width:50px; height: 50px; margin-right: 10px;">
                 Baixar retorno do email
             </a>
         </td>
+        <td></td>
+        <td></td>
     </tr>
 
     </tbody>

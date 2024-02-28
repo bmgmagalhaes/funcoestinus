@@ -1,6 +1,6 @@
 import os
-from .juncao_simples import executar_simples
-from .utilitarios import gerar_nome_arquivo_retorno, descompactar_arquivo
+from juncao_simples import executar_simples
+from utilitarios import gerar_nome_arquivo_retorno, descompactar_arquivo
 
 def executar_georgino_avelino(pasta_municipio):
 
@@ -13,7 +13,7 @@ def executar_georgino_avelino(pasta_municipio):
         caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
         
         try:
-            if 'PREF MUN S GEORGINO 001BANCO DO BRASIL' in header:
+            if 'PM S G AVELINO TRIBU001BANCO DO BRASIL' in header:
                 os.rename(caminho_completo, rf'{nome_arquivo}.001')
             if 'PMSGA               104CAIXA ECON. FEDERAL' in header and header[81] != "1" :
                 os.rename(caminho_completo, rf'{nome_arquivo}.104')

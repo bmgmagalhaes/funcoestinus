@@ -12,6 +12,7 @@ lista_municipios_renomear_off_line = {
     'gal':'Galinhos',
     'gav':'Georgino Avelino',    
     'goi':'Goiana',
+    'cre':'Campo Redondo',
     'goh':'Goianinha',
     'gon':'Sao Goncalo',
     'lda':'Lagoa Danta',
@@ -21,9 +22,10 @@ lista_municipios_renomear_off_line = {
     'pef':'Passa e Fica',
     'pah': 'Parelhas',
     'pat':'Patu',
-    'sbn':'São Bento do Norte',
+    'sbn':'Sao Bento do Norte',
     'smg':'São Miguel do Gostoso',
     'snn':'Serra Negra do Norte',
+    'sdm':'Serra do Mel',
     'tdb':'Timbauba dos Batistas',
 }
 
@@ -51,10 +53,18 @@ lista_municipios_retorno = {
             'PASSA E FICA PREFEITURA       C ECON FEDERAL':'.904',
             'PM PASSA E FICA RN  104CAIXA ECON. FEDERAL':'.104',
         },
-        'Sao Miguel do Gostoso': {
+        'São Miguel do Gostoso': {
             'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',
             'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A':'.001',
+            'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL': '.104',
+            'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL': '.002',
         },
+
+            # if 'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO' in header:
+            # if 'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A' in header:
+            # if 'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL' in header:
+            # if 'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL' in header:
+            
         'Sao Goncalo': {
             'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901',
             'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
@@ -100,10 +110,20 @@ lista_municipios_retorno = {
             'STA C CAPIBARIBE    001BANCO DO BRASIL':'.001',
             'PM S CRUZ CAPIBARIBE104CAIXA ECON. FEDERAL':'.104',
             'PREF MUN SANTA CRUZ 341BANCO ITAU':'.341',
+            'PREF. MUN. DE SANTA 004BANCO DO NORDESTE DO':'.004',
+        },
+        'Serra do Mel':{
+            
+            'PREF MUNICIPAL S MEL001BANCO DO BRASIL':'.001',
+            '056847000000071867X':'.002',
+            'PM SERRA DO MEL     104CAIXA ECON. FEDERAL':'.104',
         },
         'Extremoz':{
             'PM EXTREMOZ - TRIBUT001BANCO DO BRASIL':'.001',
             'PM EXTREMOZ         104CAIXA ECON. FEDERAL':'.104',
+        },
+        'Campo Redondo':{
+            'P M DE CAMPO REDONDO104CAIXA ECON. FEDERAL':'.104',
         },
         
                 
