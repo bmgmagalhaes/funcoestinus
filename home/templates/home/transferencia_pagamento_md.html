@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load meus_filtros %}
+
+{%block titulo%}Escolher parcelas{%endblock%}
+{%block conteudo%}
+<br>
+<h4>Informar modelo e parcela pra atualizar</h4>
+<br>
+
+
+<form method="post" action="{% url 'transferencia_pagamento_md' %}">
+    {% csrf_token %}
+
+    <!-- <div class="form-group">
+        <h3>NAMESPACE: {{ namespace }}</h3>
+        
+        <label>DE {{ contribuinte_de }} PARA {{ contribuinte_para }}</label>
+        
+    </div> -->
+
+
+    <div class="form-group">
+        <label>NAMESPACE</label>
+        <input type="text" readonly required class="form-control" name="namespace"
+               value="{{ request.POST.namespace }}">
+    </div>
+    <div class="form-group">
+        <label>PARA</label>
+        <input type="text" readonly required class="form-control" name="contribuinte_para"
+               value="{{ contribuinte_para }}">
+    </div>
+    <div class="form-group">
+        <input type="text" readonly required class="form-control" name="md"
+               value="{{ md }}" hidden="True">
+    </div>
+
+    <table class="table">
+    <thead>
+    <tr>
+        <th>MD Atual</th>
+        <th>Modelo Para</th>
+        <th>Parcela</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        {% for chave, valor in md.items %}
+        <tr>
+            <td>{{chave}}</td>
+        
+            <td>
+                <input type="text" required class="form-control" size=2 maxlength=2
+                name="modelo_para" value="{{ valor }}">
+            </td>
+
+            <td>
+                <input type="text" required class="form-control" size=12 maxlength=12
+                name="parcela_para" value="{{ request.POST.parcela_para }}">
+            </td>
+        </tr>
+            
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Atualizar MD</button>
+</form>
+
+
+{%endblock%}

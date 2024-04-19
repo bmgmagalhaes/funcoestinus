@@ -39,17 +39,21 @@
            <a href="{% url 'renomear' 'goh' %}">Goianinha</a>
        </td>
        <td>
+        <a href="{% url 'renomear' 'laj' %}">Lajes</a>
+    </td>
+       <td>
            <a href="{% url 'renomear' 'lda' %}">Lagoa D'Anta</a>
        </td>
        <td>
            <a href="{% url 'renomear' 'luc' %}">Lucena</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'mta' %}">Messias Targino</a>
-       </td>
+       
        
     </tr>
     <tr>
+        <td>
+            <a href="{% url 'renomear' 'mta' %}">Messias Targino</a>
+        </td>
         <td>
             <a href="{% url 'renomear' 'nis' %}">Nísia Floresta</a>
         </td>
@@ -62,14 +66,16 @@
        <td>
            <a href="{% url 'renomear' 'pat' %}">Patu</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'pau' %}">Paulista</a>
-       </td>
-       
        
        
     </tr>
     <tr>
+        <td>
+            <a href="{% url 'renomear' 'pau' %}">Paulista</a>
+        </td>
+        <td>
+            <a href="{% url 'renomear' 'pav' %}">Pedro Avelino</a>
+           </td>
         <td>
             <a href="{% url 'renomear' 'scc' %}">Santa Cruz do Capibaribe</a>
         </td>
@@ -79,16 +85,18 @@
        <td>
            <a href="{% url 'renomear' 'smg' %}">São Miguel do Gostoso</a>
        </td>
-       <td>
-           <a href="{% url 'renomear' 'sdm' %}">Serra do Mel</a>
-       </td>
-       <td>
-        <a href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a>
-       </td>
+    
+       
    </tr>
 
 
    <tr>
+    <td>
+        <a href="{% url 'renomear' 'sdm' %}">Serra do Mel</a>
+    </td>
+        <td>
+        <a href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a>
+       </td>
         <td>
             <a href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas</a>
         </td>
@@ -98,14 +106,21 @@
         
         <td></td>
         <td></td>
-        <td style="text-align:center;">
+        <!-- <td style="text-align:center;">
             <a href="{% url 'baixar_retorno2' %}">
                 <img src="{% static 'img/logingmail.png' %}"
                      style="width:50px; height: 50px; margin-right: 10px;">
                 Baixar retorno do email
             </a>
+        </td> -->
+        
+        <td style="text-align:center;">
+            <a href="{% url 'baixar_retorno_beta' %}">
+                <img src="{% static 'img/logingmail.png' %}"
+                     style="width:50px; height: 50px; margin-right: 10px;">
+                Baixar Retorno (beta)
+            </a>
         </td>
-        <td></td>
         <td></td>
     </tr>
 

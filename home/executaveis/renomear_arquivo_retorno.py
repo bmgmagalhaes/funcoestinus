@@ -56,15 +56,11 @@ def renomear_retorno(pasta_municipio, municipio):
         for arquivo in lista_arquivos:
             header = ''
             caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
-            # print(caminho_completo)
-            # print(nome_arquivo)
-            # print(header)
-            # print(orgaos_retornos)
+
             try:
                 # extensao = ''
                 for retorno, extensao in orgaos_retornos.items():
-                    # print(retorno)
-                    # print(extensao)
+
                     if retorno in header:
                         os.rename(caminho_completo, f'{nome_arquivo}{extensao}')
                         break

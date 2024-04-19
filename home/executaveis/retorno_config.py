@@ -15,13 +15,15 @@ lista_municipios_renomear_off_line = {
     'cre':'Campo Redondo',
     'goh':'Goianinha',
     'gon':'Sao Goncalo',
+    'laj':'Lajes',
     'lda':'Lagoa Danta',
     'luc':'Lucena',
     'mta':'Messias Targino',
     'nis':'Nisia Floresta',
     'pef':'Passa e Fica',
-    'pah': 'Parelhas',
+    'pah':'Parelhas',
     'pat':'Patu',
+    'pav':'Pedro Avelino',
     'sbn':'Sao Bento do Norte',
     'smg':'São Miguel do Gostoso',
     'snn':'Serra Negra do Norte',
@@ -47,11 +49,15 @@ lista_municipios_retorno = {
             'PM DE PAULISTA      104CAIXA ECON. FEDERAL':'.104',
             'PM PAULISTA         033BANCO SANTANDER':'.033',
             'PREF.MUN.DE PAULISTA237BANCO BRADESCO':'.237',
-            'PREF MUN PAULISTA  P341BANCO ITAU S.A.':'.341'
+            'PREF MUN PAULISTA  P341BANCO ITAU S.A.':'.341',
+            'PREF. MUN. DE PAULIS004BANCO DO NORDESTE':'.004'
         },
         'Passa e Fica':{
             'PASSA E FICA PREFEITURA       C ECON FEDERAL':'.904',
             'PM PASSA E FICA RN  104CAIXA ECON. FEDERAL':'.104',
+        },
+        'Pedro Avelino':{
+            'MUN PEDRO AVELINO   104CAIXA ECON. FEDERAL':'.104',
         },
         'São Miguel do Gostoso': {
             'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',
@@ -59,11 +65,6 @@ lista_municipios_retorno = {
             'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL': '.104',
             'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL': '.002',
         },
-
-            # if 'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO' in header:
-            # if 'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A' in header:
-            # if 'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL' in header:
-            # if 'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL' in header:
             
         'Sao Goncalo': {
             'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901',
@@ -80,6 +81,7 @@ lista_municipios_retorno = {
         'Sao Bento do Norte': {
             'SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL':'.104',
         },
+
         'Patu': {
             'MUNICIPIO DE PATU TR001BANCO DO BRASIL':'.001'
         },
@@ -89,6 +91,9 @@ lista_municipios_retorno = {
         },
         'Timbauba dos Batistas':{
             'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002'
+        },
+        'Lajes':{
+            'PM LAJES            104CAIXA ECON. FEDERAL':'.104'
         },
         'Lagoa Danta':{
             'PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL':'.104'

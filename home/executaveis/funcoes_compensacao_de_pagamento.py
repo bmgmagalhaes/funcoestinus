@@ -218,7 +218,7 @@ def calcular_total_acrescimos(dias_atraso, meses_atraso, juros, multa, limite_mu
     multa_limite_multa_juros = ['EXTREMOZ', 'TESTEEXT', 'GARANHUNS' , 'TESTEGAR', 'CAICO', 'TESTECAI']
     multa_limite_multa_juros += ['MOSSORO', 'TESTEMOS','SAOGONCALO','TESTEGON','OLINDA','TESTEOLI']
     multa_limite_multa_juros += ['PARNAMIRIM', 'TESTEPAR', 'CATOLEDOROCHA','TESTECDR', 'CAMARAGIBE']
-    multa_limite_multa_juros += ['TANGARA', 'NISIAFLORESTA', 'TESTENIS', 'CEARAMIRIM', 'ALEXANDRIA']
+    multa_limite_multa_juros += ['TANGARA', 'NISIAFLORESTA', 'TESTENIS', 'CEARAMIRIM', 'ALEXANDRIA', 'SERRACAIADA']
     duas_faixas_limite_multa_juros = ['CABO']
     tres_faixas_limite_multa_juros = []
 

@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('baixar_retorno/', views.baixar_retorno, name='baixar_retorno2'),
+    path('baixar_retorno_beta/', views.baixar_retorno_beta, name='baixar_retorno_beta'),
 
     path('iss_nisia/', views.iss_nisia, name='iss_nisia'),
     path('irrf_bananeiras/', views.irrf_bananeiras, name='irrf_bananeiras'),

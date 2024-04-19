@@ -23,6 +23,10 @@ def executar_paulista(pasta_municipio):
                 os.rename(caminho_completo, f'{nome_arquivo}.237')
             elif 'PREF MUN PAULISTA  P341BANCO ITAU S.A.' in header:
                 os.rename(caminho_completo, f'{nome_arquivo}.341')
+            elif 'PREF. MUN. DE PAULIS004BANCO DO NORDESTE DO' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.004')
+
+                
         
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
