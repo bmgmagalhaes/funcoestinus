@@ -22,4 +22,5 @@ def executar_arez(pasta_municipio):
             print(e)
 
 if __name__ == '__main__':
+    # TESTE DE ALTERACAO
     executar_arez(rf"c:\temp")
