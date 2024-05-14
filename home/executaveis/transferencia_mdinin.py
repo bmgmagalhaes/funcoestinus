@@ -1,7 +1,8 @@
-from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste
+from .dados_acesso import login_cache, senha_cache, url_ambiente_de_producao, url_ambiente_de_teste, CHROME_DRIVER_PATH
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 
 class ChromeAuto:
 
@@ -17,12 +18,14 @@ class ChromeAuto:
 
         # )
 
-        self.caminho_driver = r'C:\cursoPython\funcoestinus\home\executaveis\chromedriver.exe'
-        self.opcoes = webdriver.ChromeOptions()
-        self.chrome = webdriver.Chrome(
-            self.caminho_driver,
-            options=self.opcoes
+        chrome_options = webdriver.ChromeOptions()
+        chrome_service = Service(
+            executable_path=str(CHROME_DRIVER_PATH),
+        )
 
+        self.chrome = webdriver.Chrome(
+            service=chrome_service,
+            options=chrome_options
         )
 
     def acessa(self, site):
