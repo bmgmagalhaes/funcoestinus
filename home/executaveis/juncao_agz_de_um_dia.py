@@ -14,7 +14,6 @@ def unir_agz_de_um_dia(diretorio):
     # CONJUNTO DE DATAS EXSTENTE EM TODOS OS ARQUIVOS DA PASTA
     datas_de_retornos = set([])
 
-
     for item in lista_arquivos:
 
         with open(rf'{diretorio}\{item}', 'r+') as arquivo:

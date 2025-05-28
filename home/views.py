@@ -507,11 +507,11 @@ def baixar_retorno_beta(request):
             if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
                 municipio = 'Paulista'
 
-            elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
-                municipio = 'Passa e Fica'
+            # elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
+            #     municipio = 'Passa e Fica'
                 
-            elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
-                municipio = 'Sao Bento do Norte'
+            # elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
+            #     municipio = 'Sao Bento do Norte'
                 
             elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
                 municipio = 'Patu'
@@ -535,16 +535,21 @@ def baixar_retorno_beta(request):
                                     'carolinesemtri1@gmail.com' in remetente):
                 municipio = 'Goianinha'
             
-            elif ('arrecada' in assunto or 'baixa' in assunto or 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
+            elif ('arreca' in assunto or 'baixa' in assunto and 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
                 municipio = 'Lucena'
             
-            elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
-                municipio = 'Galinhos'
+            # elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
+            #     municipio = 'Galinhos'
 
             elif ('retor' in assunto or 'baixa de arq' in assunto) and ('luiz' in remetente):
-                municipio = 'Bananeiras'       
+                municipio = 'Bananeiras'   
             
-            print("Município: ", municipio)
+            elif ('goiana' in assunto and 'baixa' in assunto) and ('suporte' in remetente):
+                municipio = 'Goiana'    
+
+            # elif ('retor' in assunto or 'arqui' in assunto) and ('avelino' in remetente):
+            #     municipio = 'Pedro Avelino'       
+            
             if municipio:            
                 pasta_municipio = DIRETORIO + rf"\{municipio}"                    
                 try:

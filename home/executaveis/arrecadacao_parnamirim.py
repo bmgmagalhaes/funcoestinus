@@ -21,6 +21,8 @@ def executar_parnamirim(pasta_municipio):
                 os.rename(caminho_completo, f'{nome_arquivo}.001')
             elif 'PM PARNAMIRIM       104CAIXA ECON. FEDERAL' in header:
                 os.rename(caminho_completo, f'{nome_arquivo}.104')
+            elif '2008798913700000000MUNICIPIO DE PARNAMIRIM       C ECON FEDERAL' in header:
+                os.rename(caminho_completo, f'{nome_arquivo}.404')
 
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")

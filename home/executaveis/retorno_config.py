@@ -9,14 +9,19 @@ lista_municipios_renomear_off_line = {
     'ban':'Bananeiras',
     'bod':'Bodo',
     'ext':'Extremoz',
+    'equ':'Equador',
     'gal':'Galinhos',
     'gav':'Georgino Avelino',    
     'goi':'Goiana',
     'cre':'Campo Redondo',
+    'can':'Canguaretama',
+    'crv':'Caicara do Rio do Vento',
     'goh':'Goianinha',
     'gon':'Sao Goncalo',
+    'ipa':'Ipanguacu',
     'laj':'Lajes',
     'lda':'Lagoa Danta',
+    'ldv':'Lagoa de Velhos',
     'luc':'Lucena',
     'mta':'Messias Targino',
     'nis':'Nisia Floresta',
@@ -24,21 +29,46 @@ lista_municipios_renomear_off_line = {
     'pah':'Parelhas',
     'pat':'Patu',
     'pav':'Pedro Avelino',
+    'pve':'Pedro Velho',
+    'rdf':'Rio do Fogo',
     'sbn':'Sao Bento do Norte',
-    'smg':'São Miguel do Gostoso',
+    'smg':'Sao Miguel do Gostoso',
     'snn':'Serra Negra do Norte',
+    'sta':'Serra Talhada',
     'sdm':'Serra do Mel',
     'tdb':'Timbauba dos Batistas',
+    'uir':'Uirauna',
 }
 
 lista_municipios_retorno = {
+        'Uirauna': {
+            'PREF MUN DE UIRAUNA 001BANCO DO BRASIL':'.001'
+        },
+        'Arez': {
+            'ARES ARRECADAÇÃO 001BANCO DO BRASIL':'.001'
+        },
         'Galinhos': {
             'PREF MUN DE GALINHOS001BANCO DO BRASIL':'.001',
             'PMGALINHOS          104CAIXA ECON. FEDERAL':'.104'
         },
+        'Georgino Avelino': {
+            'PM S G AVELINO TRIBU001BANCO DO BRASIL':'.001',
+            'PMSGA               104CAIXA':'.104'
+        },
         'Goiana': {
             'PREF MUN DE GOIANA  104CAIXA ECON. FEDERAL':'.104',
             'PREFEITURA MUN GOIAN001BANCO DO BRASIL':'.001'
+        },
+        'Ipanguacu': {
+            'PMIPANGUACU         104CAIXA':'.104',
+            'ARRECADAÇÃO MUN IPAN001BANCO DO BRASIL':'.001'
+        },
+        'Lagoa de Velhos': {
+            'PM LAGOA VELHOS TRIB001BANCO DO BRASIL':'.001'
+        },
+        
+        'Equador': {
+            'EQUADOR - ARRECADACA001BANCO DO BRASIL':'.001'
         },
         'Parelhas': {
             'PM DE PARELHAS      104CAIXA ECON. FEDERAL':'.204',
@@ -58,13 +88,22 @@ lista_municipios_retorno = {
         },
         'Pedro Avelino':{
             'MUN PEDRO AVELINO   104CAIXA ECON. FEDERAL':'.104',
+            'ARRECADACAO PM P AVE001BANCO DO BRASIL':'.001',
         },
-        'São Miguel do Gostoso': {
-            'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',
+        'Pedro Velho':{
+            'MUN. PEDRO VELHO    104CAIXA ECON. FEDERAL':'.104',
+        },
+        'Rio do Fogo':{
+            'PREF MUN RIO DO FOGO001BANCO DO BRASIL':'.001',
+        },
+        'Sao Miguel do Gostoso': {
+            'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',  
             'P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A':'.001',
             'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL': '.104',
-            'PREFEITURA MUNICIPAL DE SAO MI001BANCO DO BRASIL': '.002',
+            'MUNICIPIO DE SAO MIGUEL DO GOS001BANCO DO BRASIL': '.002',
         },
+        
+        
             
         'Sao Goncalo': {
             'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901',
@@ -75,8 +114,15 @@ lista_municipios_retorno = {
             'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL':'.001',
             '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL':'.002',
             'PM S NEGRA DO NORTE 104CAIXA':'.104',
-            '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL':'.004',
+            # '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL':'.004',
             'SERRA NEGRA NORTE TR001BANCO DO BRASIL  S/A':'.005',
+        },
+        'Serra Talhada': {
+            'PREFEITURA MUN S. TA001BANCO DO BRASIL':'.001',
+            '577561 MUNICIPIO DE SERRA TALHADA    BANCO DO BRASIL':'.002',
+            'PREFEITURA DE SERRA TALHADA   237BRADESCO':'.237',
+            'PM SERRA TALHADA    104CAIXA ECON. FEDERAL':'.104',
+            'PM DE SERRA TALHADA 033BANCO SANTANDER':'.033',
         },
         'Sao Bento do Norte': {
             'SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL':'.104',
@@ -93,7 +139,8 @@ lista_municipios_retorno = {
             'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002'
         },
         'Lajes':{
-            'PM LAJES            104CAIXA ECON. FEDERAL':'.104'
+            'PM LAJES            104CAIXA ECON. FEDERAL':'.104',
+            'PREFEITURA MUNIC DE 001BANCO DO BRASIL  S/A':'.001'
         },
         'Lagoa Danta':{
             'PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL':'.104'
@@ -129,6 +176,15 @@ lista_municipios_retorno = {
         },
         'Campo Redondo':{
             'P M DE CAMPO REDONDO104CAIXA ECON. FEDERAL':'.104',
+        },
+        'Caicara do Rio do Vento':{
+            'PREF CAIC RIO DO VEN001BANCO DO BRASIL  S/A':'.001',
+        },
+        'Canguaretama':{
+            'P.M. DE CANGUARETAMA237BANCO BRADESCO S/A':'.237',
+            'P M CANGUARETAMA TRI001BANCO DO BRASIL  S/A':'.904',
+            '70556 MUNICIPIO DE CANGUARETAMA     BANCO DO BRASIL':'.905',
+            '272299 MUNICIPIO DE CANGUARETAMA     BANCO DO BRASIL':'.914',
         },
         
                 

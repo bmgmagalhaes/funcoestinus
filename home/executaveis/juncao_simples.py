@@ -14,7 +14,7 @@ def verificar_dia_util(data):
 
     dia_semana = datetime.strptime(data,"%y%m%d")
 
-    # RETORNANDO AO DIA ANTERIOR DA DISPONIBILIZACAO DO ARQUIVO(REGIME DE CAIXA)
+    # RETORNANDO AO DIA ANTERIOR DA DISPONIBILIZACAO DO REGIME DE CAIXA
     dia_semana += timedelta(days=-1)
 
     if dia_semana.weekday() == 5:
@@ -61,6 +61,7 @@ def executar_simples(diretorio):
             # VERIFICANDO SE É DO TESOURO NACIONAL E RENOMEANDO
             if 'DAF607              ' in header:
                 data_regime_caixa_tesouro = header[80:86]
+                
                 data_tesouro = verificar_dia_util(data_regime_caixa_tesouro)
                 try:
                     lista_remessa_serpro.append(remessa_serpro)

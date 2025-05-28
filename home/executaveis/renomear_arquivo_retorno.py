@@ -1,5 +1,5 @@
 import os
-from .utilitarios import pegar_data_pagamento_arquivo_retorno, descompactar_arquivo
+from .utilitarios import pegar_data_pagamento_arquivo_retorno
 from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
 from .juncao_simples import executar_simples
 from .retorno_config import selecionar_municipio

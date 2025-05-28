@@ -157,15 +157,19 @@ class ChromeAuto:
                 botao_exibir.click()
 
                 # Habilitar edição
+                print("Habilitar edição")
                 habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
 
                 if not habilitar_edicao.is_selected():
                     habilitar_edicao.click()
 
+                print("Achei editar global")
                 editar_global = self.chrome.find_element(By.CSS_SELECTOR,
-                                                         "body > table > tbody > tr:nth-child(2) > td > form >"
+                                                         "body > table > tbody > tr:nth-child(3) > td > form >"
                                                          " table.DetailTable > tbody > tr.EvenRow >"
                                                          " td:nth-child(4) > a")
+                print("Cliquei editar global")
+                
                 editar_global.click()
 
                 texto_no_global = self.chrome.find_element(By.ID, "txtGlobal")
@@ -186,15 +190,20 @@ class ChromeAuto:
 
             else:
                 # Habilitar edição
+                print("Habilitar edição else")
+
                 habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
 
                 if not habilitar_edicao.is_selected():
                     habilitar_edicao.click()
+                
+                print("Achei editar global  else")
 
                 editar_global = self.chrome.find_element(By.CSS_SELECTOR,
-                                                         "body > table > tbody > tr:nth-child(2) > td > form >"
+                                                         "body > table > tbody > tr:nth-child(3) > td > form >"
                                                          " table.DetailTable > tbody > tr.EvenRow >"
                                                          " td:nth-child(4) > a")
+                print("Cliquei editar global else")
                 editar_global.click()
 
                 valor_pagamento_anterior = self.chrome.find_element(By.ID, "GValue").text

@@ -88,7 +88,7 @@ class ChromeAuto:
             habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
             if not habilitar_edicao.is_selected():
                 habilitar_edicao.click()
-            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(2) > td >"
+            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(3) > td >"
                                                                       " form > table.DetailTable > tbody >"
                                                                       f" tr:nth-child({str(registro)}) > td:nth-child(4) > a")
             editar_global.click()
@@ -153,7 +153,7 @@ class ChromeAuto:
             habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
             if not habilitar_edicao.is_selected():
                 habilitar_edicao.click()
-            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(2) >"
+            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(3) >"
                                                       "td > form > table.DetailTable > tbody > tr.EvenRow > td:nth-child(4) > a")
             
             editar_global.click()
@@ -200,7 +200,7 @@ class ChromeAuto:
             habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
             if not habilitar_edicao.is_selected():
                 habilitar_edicao.click()
-            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(2) > td >"
+            editar_global = self.chrome.find_element(By.CSS_SELECTOR, f"body > table > tbody > tr:nth-child(3) > td >"
                                                                       " form > table.DetailTable > tbody >"
                                                                       f" tr:nth-child({str(registro)}) > td:nth-child(4) > a")
             editar_global.click()

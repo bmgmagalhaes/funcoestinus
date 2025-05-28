@@ -86,7 +86,7 @@ class ChromeAuto:
         lista_registros.sort(reverse=True)
 
         for registro in lista_registros:
-            print("Gravando registro", registro)
+            
             # HABILITAR EDICAO
             habilitar_edicao = self.chrome.find_element(By.ID, "chkEdit")
             if not habilitar_edicao.is_selected():
@@ -125,7 +125,15 @@ class ChromeAuto:
 def listar_regitros(namespace, mascara):
 
     chrome = ChromeAuto()
-    chrome.acessa(url+namespace)
+    # chrome.acessa(url+namespace)
+    
+    # SE FOR AMBIENTE DE TESTE
+    if 'TESTE' in namespace:
+        url = url_ambiente_de_teste + namespace
+    else:
+        # AMBIENTE DE PRODUÇÃO
+        url = url_ambiente_de_producao + namespace  
+    chrome.acessa(url)
     chrome.fazer_login()
     chrome.clica_entrar()
     registros = chrome.exibir_valores(mascara)
@@ -134,7 +142,15 @@ def listar_regitros(namespace, mascara):
 
 def executar_salvar_global (namespace, mascara, linha, excluir):
     chrome = ChromeAuto()
-    chrome.acessa(url + namespace)
+    # chrome.acessa(url + namespace)
+
+        # SE FOR AMBIENTE DE TESTE
+    if 'TESTE' in namespace:
+        url = url_ambiente_de_teste + namespace
+    else:
+        # AMBIENTE DE PRODUÇÃO
+        url = url_ambiente_de_producao + namespace  
+    chrome.acessa(url)
     chrome.fazer_login()
     chrome.clica_entrar()
     chrome.manutencao_de_global(mascara, linha, excluir)
