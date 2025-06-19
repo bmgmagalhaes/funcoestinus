@@ -25,6 +25,7 @@ lista_municipios_renomear_off_line = {
     'luc':'Lucena',
     'mta':'Messias Targino',
     'nis':'Nisia Floresta',
+    'oub':'Ouro Branco',
     'pef':'Passa e Fica',
     'pah':'Parelhas',
     'pat':'Patu',
@@ -34,6 +35,7 @@ lista_municipios_renomear_off_line = {
     'sbn':'Sao Bento do Norte',
     'smg':'Sao Miguel do Gostoso',
     'snn':'Serra Negra do Norte',
+    'sou':'Sousa',
     'sta':'Serra Talhada',
     'sdm':'Serra do Mel',
     'tdb':'Timbauba dos Batistas',
@@ -57,7 +59,8 @@ lista_municipios_retorno = {
         },
         'Goiana': {
             'PREF MUN DE GOIANA  104CAIXA ECON. FEDERAL':'.104',
-            'PREFEITURA MUN GOIAN001BANCO DO BRASIL':'.001'
+            'PREFEITURA MUN GOIAN001BANCO DO BRASIL':'.001',
+            'PREF. MUN. DE GOIANA004BANCO DO NORDESTE DO':'.004'
         },
         'Ipanguacu': {
             'PMIPANGUACU         104CAIXA':'.104',
@@ -65,6 +68,9 @@ lista_municipios_retorno = {
         },
         'Lagoa de Velhos': {
             'PM LAGOA VELHOS TRIB001BANCO DO BRASIL':'.001'
+        },
+        'Ouro Branco': {
+            'PREF MUN DE OURO BRA001BANCO DO BRASIL':'.001'
         },
         
         'Equador': {
@@ -169,6 +175,13 @@ lista_municipios_retorno = {
             'PREF MUNICIPAL S MEL001BANCO DO BRASIL':'.001',
             '056847000000071867X':'.002',
             'PM SERRA DO MEL     104CAIXA ECON. FEDERAL':'.104',
+        },
+        'Sousa':{
+            
+            'PREF. MUN. SOUSA IPT001BANCO DO BRASIL':'.001',
+            'PREF DE SOUSA       004BANCO DO NORDESTE':'.004',
+            'ARREC PM SOUSA      104CAIXA ECON. FEDERAL':'.104',
+            # 'MUN DE SOUSA        104CAIXA ECON. FEDERAL':'.104',
         },
         'Extremoz':{
             'PM EXTREMOZ - TRIBUT001BANCO DO BRASIL':'.001',

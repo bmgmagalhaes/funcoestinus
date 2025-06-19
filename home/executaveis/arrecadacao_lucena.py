@@ -1,6 +1,6 @@
 import os
-from .juncao_simples import executar_simples
-from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
+from juncao_simples import executar_simples
+from utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
 
 def executar_lucena(pasta_municipio):
 

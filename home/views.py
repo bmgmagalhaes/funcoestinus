@@ -98,6 +98,9 @@ def baixar_retorno(request):
                 elif 'tributacao@serranegra.rn.gov.br' in remetente or ('negra' in assunto and 'suporte@tinus.com.br' in remetente):
                     municipio = 'Serra Negra do Norte'
 
+                elif 'talhada' in assunto and 'suporte@tinus.com.br' in remetente:
+                    municipio = 'Serra Talhada'
+
                 elif 'scc' in assunto and 'ret' in assunto and 'suporte@tinus.com.br' in remetente:
                     municipio = 'Santa Cruz do Capibaribe'
 

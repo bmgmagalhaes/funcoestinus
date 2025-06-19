@@ -210,7 +210,6 @@ def executar_lajes(pasta_municipio):
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)            
 
-
 def executar_itaja(pasta_municipio):
     
     lista_arquivos = executar_simples(pasta_municipio)
@@ -238,7 +237,63 @@ def executar_itaja(pasta_municipio):
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)            
 
+def executar_ouro_branco(pasta_municipio):
+    
+    lista_arquivos = executar_simples(pasta_municipio)
 
+    caminho_destino = rf'D:\Prefeituras\OUB\ARRECADA'
+    # os.system(f'explorer {caminho_destino}')
+
+    for arquivo in lista_arquivos:
+
+        header = ''
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
+
+        try:
+
+            if 'PREF MUN DE OURO BRA001BANCO DO BRASIL' in header:
+                nome_arquivo += '.001'
+
+            # Renomeia o retorno conforme a data
+            os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
+
+            # Move o arquivo para o diretório de destino
+            shutil.copy2(rf'{nome_arquivo}', caminho_destino)
+        
+        except Exception as e:
+            print(f"Erro ao tratar o arquivo retorno {arquivo}")
+            print(e)            
+
+def executar_georgino_avelino(pasta_municipio):
+
+    lista_arquivos = executar_simples(pasta_municipio)
+
+    caminho_destino = rf'D:\Prefeituras\GAV\ARRECADA'
+    # os.system(f'explorer {caminho_destino}')
+
+    for arquivo in lista_arquivos:
+
+        header = ''
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
+        
+
+        try:
+            if 'ARRECADACAO PM P AVE001BANCO DO BRASIL' in header:
+                nome_arquivo += '.001'
+
+            elif 'MUN PEDRO AVELINO   104CAIXA ECON. FEDERAL' in header:
+                nome_arquivo += '.104'
+
+            # Renomeia o retorno conforme a data
+            os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
+
+            # Move o arquivo para o diretório de destino
+            shutil.copy2(rf'{nome_arquivo}', caminho_destino)
+
+
+        except Exception as e:
+            print(f"Erro ao tratar o arquivo retorno {arquivo}")
+            print(e)
 
 if __name__ == '__main__':
 
@@ -250,6 +305,8 @@ if __name__ == '__main__':
     executar_lajes(rf"H:\Arqs\LAJ\arquivoretorno")
     executar_sao_miguel_do_gostoso(rf"H:\Arqs\SMG\arquivoretorno")
     executar_itaja(rf"H:\Arqs\ITJ\arquivoretorno")
+    executar_ouro_branco(rf"H:\Arqs\OUB\arquivoretorno")
+    executar_georgino_avelino(rf"H:\Arqs\GAV\arquivoretorno")
     
     
     
