@@ -1,5 +1,6 @@
 import os
 from datetime import timedelta, datetime
+from time import sleep
 
 # VERIFICANDO SE JÁ FOI LIDO UM ARQUIVO COM A MESMA DATA PR ADICIONAR NO MESMO MN___.999
 
@@ -11,16 +12,33 @@ def data_existe(data, lista):
 
 # VERIFICAR SE A DATA DE GERACAO É UM FIM DE SEMANA E PASSAR PRA O DIA ANTERIOR
 def verificar_dia_util(data):
+    """
+    Retorna o dia útil anterior à data do regime de caixa. São considerados sábado, domingo e feriados nacionais.
+    Feriados municipais não são considerados, pois podem ter pagamentos do Simples Nacional.
+    """
+
+    # LISTA COM FERIADOS NACIONAIS 2025
+    feriados = ['250101','250418','250421','250501','250907','251012','251102','251115','251120','251225']
+
 
     dia_semana = datetime.strptime(data,"%y%m%d")
-
+    
     # RETORNANDO AO DIA ANTERIOR DA DISPONIBILIZACAO DO REGIME DE CAIXA
     dia_semana += timedelta(days=-1)
+    
+    while (True):
+        #Se for sábado
+        if dia_semana.weekday() == 5:
+            dia_semana += timedelta(days=-1)
+        #Senão, se for 
+        elif dia_semana.weekday() == 6:
+            dia_semana += timedelta(days=-2)
 
-    if dia_semana.weekday() == 5:
-        dia_semana += timedelta(days=-1)
-    elif dia_semana.weekday() == 6:
-        dia_semana += timedelta(days=-2)
+        #Se estiver entre a lista de feriados nacionais
+        if dia_semana.strftime('%y%m%d') in feriados:
+            dia_semana += timedelta(days=-1)
+        else:
+            break
 
     return dia_semana.strftime("%y%m%d")
 
@@ -45,6 +63,7 @@ def executar_simples(diretorio):
             # ALERTA PRA ARQUIVO COM ERRO NO HEADER
             if '!DOCTYPE HTML PUBLIC' in header or 'Ocorreu um problema' in header:
                 print(f'Arquivo {item} com erro. É recomendável refazer o download.')
+                sleep(5)
                 continue
 
             detalhe = arquivo.readlines()

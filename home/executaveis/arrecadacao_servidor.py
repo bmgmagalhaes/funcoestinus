@@ -2,7 +2,15 @@ import os, shutil
 from juncao_simples import executar_simples
 from utilitarios import gerar_nome_arquivo_retorno
 
+DESTINO_PREFIXO = rf'D:\Prefeituras'
+DESTINO_SUFIXO = rf'\ARRECADA'
+
+ORIGEM_PREFIXO = rf'H:\Arqs'
+ORIGEM_SUFIXO = rf'\arquivoretorno'
+
 def executar_pedro_avelino(pasta_municipio):
+
+    
 
     lista_arquivos = executar_simples(pasta_municipio)
 
@@ -278,10 +286,10 @@ def executar_georgino_avelino(pasta_municipio):
         
 
         try:
-            if 'ARRECADACAO PM P AVE001BANCO DO BRASIL' in header:
+            if 'PM S G AVELINO TRIBU001BANCO DO BRASIL' in header:
                 nome_arquivo += '.001'
 
-            elif 'MUN PEDRO AVELINO   104CAIXA ECON. FEDERAL' in header:
+            elif 'PMSGA               104CAIXA ECON. FEDERAL' in header:
                 nome_arquivo += '.104'
 
             # Renomeia o retorno conforme a data
