@@ -18,6 +18,7 @@ lista_municipios_renomear_off_line = {
     'crv':'Caicara do Rio do Vento',
     'goh':'Goianinha',
     'gon':'Sao Goncalo',
+    'jds':'Jardim do Serido',
     'ipa':'Ipanguacu',
     'laj':'Lajes',
     'lda':'Lagoa Danta',
@@ -31,6 +32,7 @@ lista_municipios_renomear_off_line = {
     'pat':'Patu',
     'pav':'Pedro Avelino',
     'pve':'Pedro Velho',
+    'pur':'Pureza',
     'rdf':'Rio do Fogo',
     'sbn':'Sao Bento do Norte',
     'smg':'Sao Miguel do Gostoso',
@@ -108,9 +110,10 @@ lista_municipios_retorno = {
             'PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL': '.104',
             'MUNICIPIO DE SAO MIGUEL DO GOS001BANCO DO BRASIL': '.002',
         },
-        
-        
-            
+        'Pureza': {
+            'ARRECADACAO PUREZA  001BANCO DO BRASIL':'.001',
+            'PMPUREZA            104CAIXA ECON. FEDERAL': '.104',
+        },  
         'Sao Goncalo': {
             'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901',
             'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
@@ -198,6 +201,16 @@ lista_municipios_retorno = {
             '70556 MUNICIPIO DE CANGUARETAMA     BANCO DO BRASIL':'.905',
             '272299 MUNICIPIO DE CANGUARETAMA     BANCO DO BRASIL':'.914',
         },
+        'Nisia Floresta':{
+            'PMDENISIAFLORESTA   104CAIXA ECON. FEDERAL':'.104',
+            'PREF MUN NISIA FLORE001BANCO DO BRASI':'.001',
+        },
+        'Jardim do Serido':{
+            '3512214  2807793':'.001', 
+            'MUN JARDIM DO SERIDO001BANCO DO BRASIL  S/A':'.901',#agz
+            '3512214  3178850':'.902',
+        },
+
         
                 
         

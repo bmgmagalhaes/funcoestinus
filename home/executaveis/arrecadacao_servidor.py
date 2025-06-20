@@ -2,6 +2,19 @@ import os, shutil
 from juncao_simples import executar_simples
 from utilitarios import gerar_nome_arquivo_retorno
 
+LISTA_MUNICIPIOS = {
+
+        # A barra invertida antes da sigla é necessária, pois a string será usada pra integrar o caminho dos diretórios do servidor
+        '\GAV': {
+            'PM S G AVELINO TRIBU001BANCO DO BRASIL':'.001',
+            'PMSGA               104CAIXA':'.104'
+        },
+        '\LUC':{
+            'PM DE LUCENA/PB     104CAIXA ECON. FEDERAL':'.104',
+            'PREF MUNIC LUCENA   001BANCO DO BRASIL':'.001',
+        },
+}
+
 ORIGEM_PREFIXO = rf'H:\Arqs'
 ORIGEM_SUFIXO = rf'\arquivoretorno'
 
@@ -11,8 +24,6 @@ DESTINO_SUFIXO = rf'\ARRECADA'
 # PARA TESTES LOCAIS
 # ORIGEM_PREFIXO = rf'C:\temp'
 # ORIGEM_SUFIXO = rf''
-
-# DESTINO_PREFIXO = rf'C:\Users\bmgon\Downloads\CSVFinal'
 # DESTINO_SUFIXO = rf''
 
 
@@ -322,8 +333,53 @@ def executar_georgino_avelino(sigla):
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)
 
+def renomear_retorno_generico(sigla, retorno_config):
+
+    diretorio_origem = ORIGEM_PREFIXO+sigla+ORIGEM_SUFIXO
+    diretorio_destino = DESTINO_PREFIXO+sigla+DESTINO_SUFIXO
+    
+    lista_arquivos = executar_simples(diretorio_origem)
+        
+    for arquivo in lista_arquivos:
+
+        #SE ARQUIVO FOR SIMPLES NACIONAL OU TESOURO NACIONAL, PASSA PRA O ARQUIVO SEGUINTE SEM TENTAR RENOMEAR
+        if 'MN' in arquivo or 'MS' in arquivo:
+
+            # Move o arquivo para o diretório de destino
+            shutil.copy2(rf'{diretorio_origem}\{arquivo}', diretorio_destino)
+            continue
+
+        header = ''
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(diretorio_origem, arquivo)
+        
+        try:
+
+            arquivo_identificado = False
+
+            for cabecalho, codigo_banco in retorno_config.items():
+            
+                if cabecalho in header:
+                    nome_arquivo += codigo_banco
+                    arquivo_identificado = True
+                    break
+
+            if arquivo_identificado:
+    
+                # Renomeia o retorno conforme a data
+                os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
+
+                # Move o arquivo para o diretório de destino
+                shutil.copy2(rf'{nome_arquivo}', diretorio_destino)
+
+
+        except Exception as e:
+            print(f"Erro ao tratar o arquivo retorno {arquivo}")
+            print(e)
+
+
 if __name__ == '__main__':
 
+<<<<<<< HEAD
     executar_pedro_avelino(rf"\PAV")
     executar_galinhos(rf"H:\Arqs\GAL\arquivoretorno")
     executar_equador(rf"H:\Arqs\EQU\arquivoretorno")
@@ -335,6 +391,25 @@ if __name__ == '__main__':
     executar_ouro_branco(rf"H:\Arqs\OUB\arquivoretorno")
     executar_georgino_avelino(rf"\GAV")
     # temp = input("Enter para fechar")
+=======
+    # executar_pedro_avelino(rf"\PAV")
+    # executar_galinhos(rf"H:\Arqs\GAL\arquivoretorno")
+    # executar_equador(rf"H:\Arqs\EQU\arquivoretorno")
+    # executar_caicara_ro_rio_do_vento(rf"H:\Arqs\CRV\arquivoretorno")
+    # executar_passa_e_fica(rf"H:\Arqs\PEF\arquivoretorno")
+    # executar_lajes(rf"H:\Arqs\LAJ\arquivoretorno")
+    # executar_sao_miguel_do_gostoso(rf"H:\Arqs\SMG\arquivoretorno")
+    # executar_itaja(rf"H:\Arqs\ITJ\arquivoretorno")
+    # executar_ouro_branco(rf"H:\Arqs\OUB\arquivoretorno")
+    # executar_georgino_avelino(rf"\GAV")
+
+
+    for sigla in LISTA_MUNICIPIOS:
+        renomear_retorno_generico(sigla, LISTA_MUNICIPIOS[sigla])
+        
+    
+
+>>>>>>> 85e080e (Resolvido retorno do Simples Nacional no servidor)
     
     
     
