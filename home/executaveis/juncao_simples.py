@@ -18,7 +18,11 @@ def verificar_dia_util(data):
     """
 
     # LISTA COM FERIADOS NACIONAIS 2025
-    feriados = ['250101','250418','250421','250501','250907','251012','251102','251115','251120','251225']
+    feriados = [
+        '250101','250303','250304','250418','250421','250501','250619','250907','251012','251102','251115','251120','251225',
+        '260101','260216','260217','260403','260421','260501','260604','260907','261012','261102','261115','261120','261225',
+        '270101','270208','270209','270326','270421','270501','270527','270907','271012','271102','271115','271120','271225',
+        '280101','280228','280229','280414','280421','280501','280615','280907','281012','281102','281115','281120','281225']
 
 
     dia_semana = datetime.strptime(data,"%y%m%d")
@@ -48,11 +52,15 @@ def executar_simples(diretorio):
     Verifica se tem DAF607 e executa Junção do Simples e Tesouro Nacional
     Retorna lista de arquivos atualizadas após remoção dos DAFs
     """
+
+    # print("Diretório = ", diretorio)
+
     lista_arquivos = os.listdir(diretorio)
     novo_arquivo = []
     lista_remessa_serpro = []
 
     for item in lista_arquivos:
+        # print("nome INICIO exec simples = ", item)
         if 'DAF607' not in item:
             continue
         with open(rf'{diretorio}\{item}', 'r+') as arquivo:
@@ -62,7 +70,7 @@ def executar_simples(diretorio):
     
             # ALERTA PRA ARQUIVO COM ERRO NO HEADER
             if '!DOCTYPE HTML PUBLIC' in header or 'Ocorreu um problema' in header:
-                print(f'Arquivo {item} com erro. É recomendável refazer o download.')
+                # print(f'Arquivo {item} com erro. É recomendável refazer o download.')
                 sleep(5)
                 continue
 
@@ -125,4 +133,5 @@ def executar_simples(diretorio):
             trailer_final = '999999999' + registros + total_pago
             criar_arquivo_simples.write(trailer_final)
     lista_arquivos = os.listdir(diretorio)
+    # print("lista_arquivos FINAL EXEC SN = ", lista_arquivos)
     return lista_arquivos

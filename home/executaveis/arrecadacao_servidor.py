@@ -2,25 +2,38 @@ import os, shutil
 from juncao_simples import executar_simples
 from utilitarios import gerar_nome_arquivo_retorno
 
-DESTINO_PREFIXO = rf'D:\Prefeituras'
-DESTINO_SUFIXO = rf'\ARRECADA'
-
 ORIGEM_PREFIXO = rf'H:\Arqs'
 ORIGEM_SUFIXO = rf'\arquivoretorno'
 
-def executar_pedro_avelino(pasta_municipio):
+DESTINO_PREFIXO = rf'D:\Prefeituras'
+DESTINO_SUFIXO = rf'\ARRECADA'
 
+# PARA TESTES LOCAIS
+# ORIGEM_PREFIXO = rf'C:\temp'
+# ORIGEM_SUFIXO = rf''
+
+# DESTINO_PREFIXO = rf'C:\Users\bmgon\Downloads\CSVFinal'
+# DESTINO_SUFIXO = rf''
+
+
+def executar_pedro_avelino(sigla):    
+
+    diretorio_origem = ORIGEM_PREFIXO+sigla+ORIGEM_SUFIXO
+    diretorio_destino = DESTINO_PREFIXO+sigla+DESTINO_SUFIXO
+
+    lista_arquivos = executar_simples(diretorio_origem)
     
-
-    lista_arquivos = executar_simples(pasta_municipio)
-
-    caminho_destino = rf'D:\Prefeituras\PAV\ARRECADA'
-    # os.system(f'explorer {caminho_destino}')
-
     for arquivo in lista_arquivos:
 
+        #SE ARQUIVO FOR SIMPLES NACIONAL OU TESOURO NACIONAL, PASSA PRA O ARQUIVO SEGUINTE SEM TENTAR RENOMEAR
+        if 'MN' in arquivo or 'MS' in arquivo:
+
+            # Move o arquivo para o diretório de destino
+            shutil.copy2(rf'{diretorio_origem}\{arquivo}', diretorio_destino)
+            continue
+
         header = ''
-        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(diretorio_origem, arquivo)
         
 
         try:
@@ -34,7 +47,7 @@ def executar_pedro_avelino(pasta_municipio):
             os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
 
             # Move o arquivo para o diretório de destino
-            shutil.copy2(rf'{nome_arquivo}', caminho_destino)
+            shutil.copy2(rf'{nome_arquivo}', diretorio_destino)
 
 
         except Exception as e:
@@ -272,19 +285,25 @@ def executar_ouro_branco(pasta_municipio):
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)            
 
-def executar_georgino_avelino(pasta_municipio):
+def executar_georgino_avelino(sigla):
 
-    lista_arquivos = executar_simples(pasta_municipio)
+    diretorio_origem = ORIGEM_PREFIXO+sigla+ORIGEM_SUFIXO
+    diretorio_destino = DESTINO_PREFIXO+sigla+DESTINO_SUFIXO
 
-    caminho_destino = rf'D:\Prefeituras\GAV\ARRECADA'
-    # os.system(f'explorer {caminho_destino}')
-
+    lista_arquivos = executar_simples(diretorio_origem)
+    
     for arquivo in lista_arquivos:
 
-        header = ''
-        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
-        
+        #SE ARQUIVO FOR SIMPLES NACIONAL OU TESOURO NACIONAL, PASSA PRA O ARQUIVO SEGUINTE SEM TENTAR RENOMEAR
+        if 'MN' in arquivo or 'MS' in arquivo:
 
+            # Move o arquivo para o diretório de destino
+            shutil.copy2(rf'{diretorio_origem}\{arquivo}', diretorio_destino)
+            continue
+
+        header = ''
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(diretorio_origem, arquivo)
+        
         try:
             if 'PM S G AVELINO TRIBU001BANCO DO BRASIL' in header:
                 nome_arquivo += '.001'
@@ -296,7 +315,7 @@ def executar_georgino_avelino(pasta_municipio):
             os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
 
             # Move o arquivo para o diretório de destino
-            shutil.copy2(rf'{nome_arquivo}', caminho_destino)
+            shutil.copy2(rf'{nome_arquivo}', diretorio_destino)
 
 
         except Exception as e:
@@ -305,7 +324,7 @@ def executar_georgino_avelino(pasta_municipio):
 
 if __name__ == '__main__':
 
-    executar_pedro_avelino(rf"H:\Arqs\PAV\arquivoretorno")
+    executar_pedro_avelino(rf"\PAV")
     executar_galinhos(rf"H:\Arqs\GAL\arquivoretorno")
     executar_equador(rf"H:\Arqs\EQU\arquivoretorno")
     executar_caicara_ro_rio_do_vento(rf"H:\Arqs\CRV\arquivoretorno")
@@ -314,7 +333,8 @@ if __name__ == '__main__':
     executar_sao_miguel_do_gostoso(rf"H:\Arqs\SMG\arquivoretorno")
     executar_itaja(rf"H:\Arqs\ITJ\arquivoretorno")
     executar_ouro_branco(rf"H:\Arqs\OUB\arquivoretorno")
-    executar_georgino_avelino(rf"H:\Arqs\GAV\arquivoretorno")
+    executar_georgino_avelino(rf"\GAV")
+    # temp = input("Enter para fechar")
     
     
     

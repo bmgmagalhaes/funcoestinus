@@ -180,8 +180,7 @@ lista_municipios_retorno = {
             
             'PREF. MUN. SOUSA IPT001BANCO DO BRASIL':'.001',
             'PREF DE SOUSA       004BANCO DO NORDESTE':'.004',
-            'ARREC PM SOUSA      104CAIXA ECON. FEDERAL':'.104',
-            # 'MUN DE SOUSA        104CAIXA ECON. FEDERAL':'.104',
+            'ARREC PM SOUSA      104CAIXA ECON. FEDERAL':'.104'
         },
         'Extremoz':{
             'PM EXTREMOZ - TRIBUT001BANCO DO BRASIL':'.001',
