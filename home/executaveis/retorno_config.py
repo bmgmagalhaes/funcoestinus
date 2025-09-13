@@ -207,7 +207,7 @@ lista_municipios_retorno = {
         },
         'Jardim do Serido':{
             '3512214  2807793':'.001', 
-            'MUN JARDIM DO SERIDO001BANCO DO BRASIL  S/A':'.901',#agz
+            'MUN JARDIM DO SERIDO001BANCO DO BRASIL  S/A':'.901',
             '3512214  3178850':'.902',
         },
 
