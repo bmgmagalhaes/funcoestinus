@@ -16,7 +16,7 @@ LISTA_MUNICIPIOS = {
             'PMSGA               104CAIXA':'.104'
         },
         '\PAV':{
-            'MUN PEDRO AVELINO   104CAIXA ECON. FEDERAL':'.104',
+            'PM PEDRO AVELINO    104CAIXA ECON. FEDERAL':'.104',
             'ARRECADACAO PM P AVE001BANCO DO BRASIL':'.001',
         },
         '\GAL':{
@@ -103,10 +103,35 @@ LISTA_MUNICIPIOS = {
         },
         '\LDA':{
             'PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL':'.104',
+            'ARRECADACAO LAGOA DA001BANCO DO BRASIL':'.001',
         },
-        # '\RDF':{
-        #     'PREF MUN RIO DO FOGO001BANCO DO BRASIL':'.001',
+        '\TDB':{
+            'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002',
+            'PM TIMBAUBA DOS BATI104CAIXA ECON. FEDERAL':'.104'
+        },
+        '\CAI':{
+            'CAICO ARRECADACAO TR001BANCO DO BRASIL':'.001', 
+            'MUNICIPIO DE CAICO            BANCO DO BRASIL':'.002',
+        },
+
+        # '\MAC':{
+        #     'PREF MACAIBA TRIB DI001BANCO DO BRASIL':'.001', 
+        #     'MUNICIPIO DE MACAIBA          001BANCO DO BRASIL':'.902', 
+        #     'PM DE MACAIBA       104CAIXA ECON. FEDERAL':'.104',
+        # },
+        '\RDF':{
+            'PREF MUN RIO DO FOGO001BANCO DO BRASIL':'.001',
+            'PMRIODOFOGO         104CAIXA ECON. FEDERAL':'.104',
         
+        },
+        # '\GON':{
+        #     'PMSGA ARRECADACAO   001BANCO DO BRASIL':'.001', 
+        #     'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901', 
+        #     'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
+        # },  
+        # '\CUR':{
+        #     'PM CURRAIS NOVOS RN 001BANCO DO BRASIL':'.001', 
+        #     'PREFEITURA MUNICIPAL DE CURRAIBANCO DO BRASIL':'.002',
         # },
 
 }
@@ -128,6 +153,8 @@ def renomear_retorno_generico(sigla, retorno_config):
     diretorio_origem = ORIGEM_PREFIXO+sigla+ORIGEM_SUFIXO
     diretorio_destino = DESTINO_PREFIXO+sigla+DESTINO_SUFIXO
     
+    # print("No diretório ", diretorio_origem)
+
     lista_arquivos = executar_simples(diretorio_origem)
         
     for arquivo in lista_arquivos:
@@ -175,5 +202,6 @@ def renomear_retorno_generico(sigla, retorno_config):
 if __name__ == '__main__':
 
     for sigla in LISTA_MUNICIPIOS:
+        print("Atualizando ", sigla)
         renomear_retorno_generico(sigla, LISTA_MUNICIPIOS[sigla])
         

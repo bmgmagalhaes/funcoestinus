@@ -53,9 +53,14 @@ def renomear_retorno(pasta_municipio, municipio):
             # Quando arquivo do tesouro for alterado, esse teste ignora parte da lista inconsistente
             continue
 
+        
         for arquivo in lista_arquivos:
             header = ''
             caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
+
+            # Ignora retorno temporário da Caixa de Parnamirim
+            if ('PARNAMIRIM       104CAIXA ECON. FEDERAL' in header) and ('CODIGO DE BARRAS' not in header):
+                continue
 
             try:
                 # extensao = ''

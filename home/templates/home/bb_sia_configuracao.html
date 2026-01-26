@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Document</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 100%;
+			height:1200;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1, h2, h3, h4, h5, h6 { margin-top: 1.5rem; margin-bottom: 1rem; }
+        pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        code { background: #f6f8fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+        blockquote { border-left: 4px solid #dfe2e5; padding-left: 1rem; margin: 1rem 0; color: #6a737d; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #dfe2e5; padding: 0.5rem; text-align: left; }
+        th { background: #f6f8fa; }
+    </style>
+</head>
+<body>
+<h1 id="h1--checklist-de-configura-o-do-bb-sia-baixa-autom-tica-dos-retornos-"><a name="📋 Checklist de Configuração do BB SIA (Baixa Automática dos Retornos)" class="reference-link"></a><span class="header-link octicon octicon-link"></span>📋 Checklist de Configuração do BB SIA (Baixa Automática dos Retornos)</h1><h2 id="h2-1-verifica-es-iniciais-no-em-studio-em-do-cach-"><a name="1. Verificações iniciais no &lt;em&gt;Studio&lt;/em&gt; do Caché" class="reference-link"></a><span class="header-link octicon octicon-link"></span>1. Verificações iniciais no <em>Studio</em> do Caché</h2><ul>
+<li>Verificar se as pastas Baixa/RealTime e Arrecada/API já existem dentro do servidor.  </li><li>Se existirem e não estiverem mapeadas, falar com Daniel.</li><li>Se não existir as pastas, ir pra etapa dois e fazer os mapeamentos.</li><li>Se existirem e já tiver os mapeamentos, ir pra etapa 3.</li></ul>
+<h2 id="h2-2-mapeamento-de-pacotes"><a name="2. Mapeamento de pacotes" class="reference-link"></a><span class="header-link octicon octicon-link"></span>2. Mapeamento de pacotes</h2><ul>
+<li>Menu → Configurar Namespaces  </li><li>Pesquisa Namespace → Mapeamentos de Pacote → Novo  </li></ul>
+<h3 id="h3-2-1"><a name="2.1" class="reference-link"></a><span class="header-link octicon octicon-link"></span>2.1</h3><ul>
+<li>Local do banco de dados do pacote: <strong>ARRECADACAO</strong>  </li><li>Nome do pacote: <strong>Baixa.RealTime</strong>  </li></ul>
+<h3 id="h3-2-2"><a name="2.2" class="reference-link"></a><span class="header-link octicon octicon-link"></span>2.2</h3><ul>
+<li>Local do banco de dados do pacote: <strong>ARRECADACAO</strong>  </li><li>Nome do pacote: <strong>Arrecada.API</strong>  </li></ul>
+<h2 id="h2-3-estrutura-de-pastas"><a name="3. Estrutura de pastas" class="reference-link"></a><span class="header-link octicon octicon-link"></span>3. Estrutura de pastas</h2><ul>
+<li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Acessar a pasta <code>D:\Prefeituras</code> e selecionar a sigla da prefeitura.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Confirmar existência das pastas <strong>ARRECADA</strong> e <strong>BaixaTemp</strong>. Se não existir, criar.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Localizar o arquivo <code>BB_Config.json</code> em <strong>BaixaTemp</strong>.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Configurar login e senha do BB SIA. Copiar conteúdo de outra prefeitura já configurada, mantendo padrão.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Limpar arquivos existentes dentro das pastas.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Acessar a pasta <code>H:\Arqs</code> e selecionar a sigla da prefeitura.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Verificar se existe a pasta <strong>arquivoretorno</strong>. Se não existir, criar.</li></ul>
+<h2 id="h2-4-agendamento-da-tarefa"><a name="4. Agendamento da tarefa" class="reference-link"></a><span class="header-link octicon octicon-link"></span>4. Agendamento da tarefa</h2><ul>
+<li>Acessar Portal do Caché e criar Nova Tarefa em:<br>  Operação do Sistema → Gerenciador de Tarefas → Nova Tarefa</li></ul>
+<ul>
+<li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Nome: <strong>Baixa Arquivo de Retorno</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Descrição: <strong>Faz o download do arquivo de retorno do BB</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Espaço de nome: <strong>NAMESPACE</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Tipo de tarefa: <strong>RunLegacyTask</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> ExecuteCode: <strong>do ##class(Baixa.RealTime.Util).getArquivoRetorno()</strong></li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Prioridade da tarefa: <strong>Normal</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Executar tarefa como usuário <strong>Admin</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Abrir arquivo de saída durante execução: <strong>Não</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Suspender tarefa em caso de erro: <strong>Não</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Reagendar tarefa após reinício do sistema: <strong>Sim</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Frequência: <strong>Diariamente</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Intervalo: <strong>1 dia</strong>  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Horário de execução: <strong>05:10:00</strong>  </li></ul>
+<h2 id="h2-5-teste-de-funcionamento"><a name="5. Teste de funcionamento" class="reference-link"></a><span class="header-link octicon octicon-link"></span>5. Teste de funcionamento</h2><ul>
+<li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Executar <em>debug</em> no método para garantir funcionamento.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Confirmar que os arquivos são baixados e enviados para <strong>arquivoretorno</strong>.  </li><li style="list-style: none;"><input type="checkbox" class="task-list-item-checkbox"> Para o debug, agendar a tarefa e executar manualmente para teste.  </li></ul>
+
+</body>
+</html>

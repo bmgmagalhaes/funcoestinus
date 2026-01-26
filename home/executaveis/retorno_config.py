@@ -7,6 +7,7 @@ lista_municipios_renomear_off_line = {
     'scc':'Santa Cruz do Capibaribe',
     'are':'Arez',
     'ban':'Bananeiras',
+    'bel':'Belo Jardim',
     'bod':'Bodo',
     'ext':'Extremoz',
     'equ':'Equador',
@@ -15,6 +16,7 @@ lista_municipios_renomear_off_line = {
     'goi':'Goiana',
     'cre':'Campo Redondo',
     'can':'Canguaretama',
+    'cai':'Caico',
     'crv':'Caicara do Rio do Vento',
     'goh':'Goianinha',
     'gon':'Sao Goncalo',
@@ -25,10 +27,12 @@ lista_municipios_renomear_off_line = {
     'ldv':'Lagoa de Velhos',
     'luc':'Lucena',
     'mta':'Messias Targino',
+    'ncr':'Nova Cruz',
     'nis':'Nisia Floresta',
     'oub':'Ouro Branco',
     'pef':'Passa e Fica',
     'pah':'Parelhas',
+    'par':'Parnamirim',
     'pat':'Patu',
     'pav':'Pedro Avelino',
     'pve':'Pedro Velho',
@@ -50,6 +54,13 @@ lista_municipios_retorno = {
         },
         'Arez': {
             'ARES ARRECADAÇÃO 001BANCO DO BRASIL':'.001'
+        },
+        'Belo Jardim': {
+            'TRIBUTOS BELO JARDIM001BANCO DO BRASIL':'.001',
+            'PREF MUN BELO JARDIM341BANCO ITAU S.A.':'.341',
+            'PMBELOJARDIM        104CAIXA ECON. FEDERAL':'.104',
+            'PM BELO JARDIM      033BANCO SANTANDER':'.033',
+            'PM DE BELO JARDIM - 237BANCO BRADESCO':'.237'
         },
         'Galinhos': {
             'PREF MUN DE GALINHOS001BANCO DO BRASIL':'.001',
@@ -103,6 +114,7 @@ lista_municipios_retorno = {
         },
         'Rio do Fogo':{
             'PREF MUN RIO DO FOGO001BANCO DO BRASIL':'.001',
+            'PMRIODOFOGO         104CAIXA ECON. FEDERAL':'.104',
         },
         'Sao Miguel do Gostoso': {
             'PREFEITURA MUNICIPAL DE SAO MI237BRADESCO':'.237',  
@@ -145,7 +157,8 @@ lista_municipios_retorno = {
             'MESSIAS TARGINO TRIB001BANCO DO BRASIL':'.001',
         },
         'Timbauba dos Batistas':{
-            'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002'
+            'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002',
+            'PM TIMBAUBA DOS BATI104CAIXA ECON. FEDERAL':'.104'
         },
         'Lajes':{
             'PM LAJES            104CAIXA ECON. FEDERAL':'.104',
@@ -190,7 +203,7 @@ lista_municipios_retorno = {
             'PM EXTREMOZ         104CAIXA ECON. FEDERAL':'.104',
         },
         'Campo Redondo':{
-            'P M DE CAMPO REDONDO104CAIXA ECON. FEDERAL':'.104',
+            'PM CAMPO REDONDO RN 104CAIXA ECON. FEDERAL':'.104',
         },
         'Caicara do Rio do Vento':{
             'PREF CAIC RIO DO VEN001BANCO DO BRASIL  S/A':'.001',
@@ -204,11 +217,25 @@ lista_municipios_retorno = {
         'Nisia Floresta':{
             'PMDENISIAFLORESTA   104CAIXA ECON. FEDERAL':'.104',
             'PREF MUN NISIA FLORE001BANCO DO BRASI':'.001',
+            'IPTU NISIA FLORESTA 756SICOOB POTIGUAR':'.756',
         },
         'Jardim do Serido':{
             '3512214  2807793':'.001', 
             'MUN JARDIM DO SERIDO001BANCO DO BRASIL  S/A':'.901',
             '3512214  3178850':'.902',
+        },
+        'Parnamirim':{
+            '2008769113600000000FUNDO MUNICIPAL DE SAUDE DE PAC ECON FEDERAL':'.204',
+            '779460100000000MUNICIPIO DE PARNAMIRIM       C ECON FEDERAL':'.304',
+            'ARRECADACAO PM PARNA001BANCO DO BRASIL':'.001',
+            'PM PARNAMIRIM       104CAIXA ECON. FEDERAL':'.104',
+            '2008798913700000000MUNICIPIO DE PARNAMIRIM       C ECON FEDERAL':'.404',
+        },
+        'Nova Cruz':{
+            'PM DE NOVA CRUZ - RN237BANCO BRADESCO S/A':'.237',
+            'PMNC ARRECADACAO    001BANCO DO BRASIL':'.001',
+            'PM DE NOVA CRUZ/RN  104CAIXA ECON. FEDERAL':'.904',
+            'PREF MUNICIPAL DE NOVA CRUZ   C ECON FEDERAL':'.104',
         },
 
         

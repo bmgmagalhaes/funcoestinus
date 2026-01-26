@@ -148,6 +148,9 @@ def iss_nisia(request):
     adicionar_iss(data, valor)
     return render(request, 'home/adicionar_iss_nisiafloresta.html', {"namespace": adicionar_iss_nisia.url})
 
+def bb_sia_config(request):
+    return render(request, 'home/bb_sia_configuracao.html')
+
 def juncao_agz(request):
     unir_agz(DIRETORIO)
     return redirect('index')
@@ -522,14 +525,14 @@ def baixar_retorno_beta(request):
             elif 'messias' in remetente and 'reto' in assunto:
                 municipio = 'Messias Targino'
                 
-            elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
-                municipio = 'Sao Miguel do Gostoso'
+            # elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
+            #     municipio = 'Sao Miguel do Gostoso'
                 
-            elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
-                municipio = 'Timbauba dos Batistas'
+            # elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
+            #     municipio = 'Timbauba dos Batistas'
                 
-            elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
-                municipio = 'Lagoa Danta'
+            # elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
+            #     municipio = 'Lagoa Danta'
             
             elif 'tributacao@serranegra.rn.gov.br' in remetente:
                 municipio = 'Serra Negra do Norte'
