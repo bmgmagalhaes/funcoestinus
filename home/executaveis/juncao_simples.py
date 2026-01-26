@@ -1,9 +1,19 @@
 import os
 from datetime import timedelta, datetime
 from time import sleep
+import shutil
+
+def salvar_original(diretorio, item, data):
+    # Cria a pasta com o nome da data, se não existir
+    pasta_data = os.path.join(diretorio, data)
+    os.makedirs(pasta_data, exist_ok=True)
+
+    # Move o arquivo original para dentro dessa pasta
+    origem = os.path.join(diretorio, item)
+    destino = os.path.join(pasta_data, item)
+    shutil.move(origem, destino)
 
 # VERIFICANDO SE JÁ FOI LIDO UM ARQUIVO COM A MESMA DATA PR ADICIONAR NO MESMO MN___.999
-
 def data_existe(data, lista):
     for i in lista:
         if data == i[0]:
@@ -71,7 +81,7 @@ def executar_simples(diretorio):
             # ALERTA PRA ARQUIVO COM ERRO NO HEADER
             if '!DOCTYPE HTML PUBLIC' in header or 'Ocorreu um problema' in header:
                 # print(f'Arquivo {item} com erro. É recomendável refazer o download.')
-                sleep(5)
+                # sleep(5)
                 continue
 
             detalhe = arquivo.readlines()
@@ -94,7 +104,8 @@ def executar_simples(diretorio):
                     lista_remessa_serpro.append(remessa_serpro)
                     os.rename(rf'{diretorio}\{item}', rf'{diretorio}\MS{data_tesouro}.991')
                 except:
-                    os.remove(rf'{diretorio}\{item}')
+                    salvar_original(diretorio, item, data_tesouro)
+                    # os.remove(rf'{diretorio}\{item}')
                 continue
 
             data_regime_caixa_simples = header[80:86]
@@ -110,8 +121,8 @@ def executar_simples(diretorio):
             else:
                 novo_arquivo.append([data_retorno_simples, header, *detalhe, data_regime_caixa_simples, valor_total])
             lista_remessa_serpro.append(remessa_serpro)
-
-            os.remove(rf'{diretorio}\{item}')
+            salvar_original(diretorio, item, data_retorno_simples)
+            # os.remove(rf'{diretorio}\{item}')
 
     # MONTANDO ARQUIVOS DO SIMPLES NO DIRETÓRIO
     for linha_detalhe in novo_arquivo:
