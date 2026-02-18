@@ -510,8 +510,8 @@ def baixar_retorno_beta(request):
             print(f"De: {remetente} | Assunto: {assunto}")
             municipio = ''
             
-            if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
-                municipio = 'Paulista'
+            # if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
+            #     municipio = 'Paulista'
 
             # elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
             #     municipio = 'Passa e Fica'
@@ -519,11 +519,11 @@ def baixar_retorno_beta(request):
             # elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
             #     municipio = 'Sao Bento do Norte'
                 
-            elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
+            if ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
                 municipio = 'Patu'
                 
-            elif 'messias' in remetente and 'reto' in assunto:
-                municipio = 'Messias Targino'
+            # elif 'messias' in remetente and 'reto' in assunto:
+            #     municipio = 'Messias Targino'
                 
             # elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
             #     municipio = 'Sao Miguel do Gostoso'
@@ -541,7 +541,7 @@ def baixar_retorno_beta(request):
                                     'carolinesemtri1@gmail.com' in remetente):
                 municipio = 'Goianinha'
             
-            elif ('arreca' in assunto or 'baixa' in assunto and 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
+            elif ('arreca' in assunto and 'luce' in assunto) and ('suporte@tinus.com.br' in remetente or 'receita.lucena.pb@gmail.com' in remetente):
                 municipio = 'Lucena'
             
             # elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):

@@ -114,6 +114,10 @@ LISTA_MUNICIPIOS = {
             'MUNICIPIO DE CAICO            BANCO DO BRASIL':'.002',
         },
 
+        '\PVE':{
+            'MUN. PEDRO VELHO    104CAIXA ECON. FEDERAL':'.104',
+            'PEDRO VELHO ARRECADA001BANCO DO BRASIL ':'.001',
+        },
         # '\MAC':{
         #     'PREF MACAIBA TRIB DI001BANCO DO BRASIL':'.001', 
         #     'MUNICIPIO DE MACAIBA          001BANCO DO BRASIL':'.902', 

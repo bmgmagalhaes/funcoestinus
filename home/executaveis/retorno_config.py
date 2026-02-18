@@ -50,7 +50,8 @@ lista_municipios_renomear_off_line = {
 
 lista_municipios_retorno = {
         'Uirauna': {
-            'PREF MUN DE UIRAUNA 001BANCO DO BRASIL':'.001'
+            'PREF MUN DE UIRAUNA 001BANCO DO BRASIL':'.001',
+            'MUN UIRAUNA         104CAIXA ECON. FEDERAL':'.104'
         },
         'Arez': {
             'ARES ARRECADAÇÃO 001BANCO DO BRASIL':'.001'
@@ -111,6 +112,7 @@ lista_municipios_retorno = {
         },
         'Pedro Velho':{
             'MUN. PEDRO VELHO    104CAIXA ECON. FEDERAL':'.104',
+            'PEDRO VELHO ARRECADA001BANCO DO BRASIL ':'.001',
         },
         'Rio do Fogo':{
             'PREF MUN RIO DO FOGO001BANCO DO BRASIL':'.001',
