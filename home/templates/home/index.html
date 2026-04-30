@@ -1,199 +1,129 @@
 {% extends 'base.html' %}
 {% load static %}
-{%block titulo%}Página Inicial{%endblock%}
-{%block conteudo%}
+{% block titulo %}Página Inicial{% endblock %}
+{% block conteudo %}
 {% include 'parciais/_messages.html' %}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th colspan="5" style="text-align:center;"><br>
-            A pasta 'c:/temp' deve estar criada no Windows
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><a href="{% url 'renomear' 'are' %}">Arez</a></td>
-    <td><a href="{% url 'renomear' 'ban' %}">Bananeiras</a></td>
-    <td><a href="{% url 'renomear' 'bel' %}">Belo Jardim</a></td>
-    <td><a href="{% url 'renomear' 'cav' %}">Caiçara do Rio do Vento</a></td>
-    <td><a href="{% url 'renomear' 'can' %}">Canguaretama</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'cre' %}">Campo Redondo</a></td>
-    <td><a href="{% url 'renomear' 'gal' %}">Galinhos</a></td>
-    <td><a href="{% url 'renomear' 'gav' %}">Georgino Avelino</a></td>
-    <td><a href="{% url 'renomear' 'goi' %}">Goiana</a></td>
-    <td><a href="{% url 'renomear' 'goh' %}">Goianinha</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'ipa' %}">Ipanguaçu</a></td>
-    <td><a href="{% url 'renomear' 'jds' %}">Jardim do Seridó</a></td>
-    <td><a href="{% url 'renomear' 'lda' %}">Lagoa D'Anta</a></td>
-    <td><a href="{% url 'renomear' 'ldv' %}">Lagoa de Velhos</a></td>
-    <td><a href="{% url 'renomear' 'laj' %}">Lajes</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'luc' %}">Lucena</a></td>
-    <td><a href="{% url 'renomear' 'mta' %}">Messias Targino</a></td>
-    <td><a href="{% url 'renomear' 'ncr' %}">Nova Cruz</a></td>
-    <td><a href="{% url 'renomear' 'nis' %}">Nísia Floresta</a></td>
-    <td><a href="{% url 'renomear' 'oub' %}">Ouro Branco</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'pah' %}">Parelhas</a></td>
-    <td><a href="{% url 'renomear' 'par' %}">Parnamirim</a></td>
-    <td><a href="{% url 'renomear' 'pau' %}">Paulista</a></td>
-    <td><a href="{% url 'renomear' 'pat' %}">Patu</a></td>
-    <td><a href="{% url 'renomear' 'pef' %}">Passa e Fica</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'pav' %}">Pedro Avelino</a></td>
-    <td><a href="{% url 'renomear' 'pve' %}">Pedro Velho</a></td>
-    <td><a href="{% url 'renomear' 'pur' %}">Pureza</a></td>
-    <td><a href="{% url 'renomear' 'rdf' %}">Rio do Fogo</a></td>
-    <td><a href="{% url 'renomear' 'scc' %}">Santa Cruz do Capibaribe</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'sbn' %}">São Bento do Norte</a></td>
-    <td><a href="{% url 'renomear' 'smg' %}">São Miguel do Gostoso</a></td>
-    <td><a href="{% url 'renomear' 'sdm' %}">Serra do Mel</a></td>
-    <td><a href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a></td>
-    <td><a href="{% url 'renomear' 'sta' %}">Serra Talhada</a></td>
-</tr>
-<tr>
-    <td><a href="{% url 'renomear' 'sou' %}">Sousa</a></td>
-    <td><a href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas</a></td>
-    <td><a href="{% url 'renomear' 'uir' %}">Uiraúna</a></td>
-</tr>
+<div class="container mt-4">
+
+  <!-- Seção Municípios -->
+  <h3 class="text-center mb-3">Municípios</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <tbody>
+        <tr>
+          <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'are' %}">Arez</a></td>
+          <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'ban' %}">Bananeiras</a></td>
+          <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'bel' %}">Belo Jardim</a></td>
+          <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'cav' %}">Caiçara do Rio do Vento</a></td>
+          <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'can' %}">Canguaretama</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'cre' %}">Campo Redondo</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'gal' %}">Galinhos</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'gav' %}">Georgino Avelino</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'goi' %}">Goiana</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'goh' %}">Goianinha</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'jds' %}">Jardim do Seridó</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'lda' %}">Lagoa D'Anta</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'laj' %}">Lajes</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'luc' %}">Lucena</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'ncr' %}">Nova Cruz</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'nis' %}">Nísia Floresta</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'oub' %}">Ouro Branco</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pah' %}">Parelhas</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'par' %}">Parnamirim</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pat' %}">Patu</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pef' %}">Passa e Fica</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pav' %}">Pedro Avelino</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pve' %}">Pedro Velho</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'pur' %}">Pureza</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'rdf' %}">Rio do Fogo</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'scc' %}">Santa Cruz</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'sbn' %}">São Bento do Norte</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'smg' %}">São Miguel do Gostoso</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'sdm' %}">Serra do Mel</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'snn' %}">Serra Negra do Norte</a></td>
+        </tr>
+        <tr>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'sta' %}">Serra Talhada</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'sou' %}">Sousa</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'tdb' %}">Timbaúba dos Batistas</a></td>
+           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'uir' %}">Uiraúna</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Seção Outras Funções -->
+  <h3 class="text-center mt-5 mb-3">Outras Funções</h3>
+  <div class="row text-center">
+    <div class="col-md-4 mb-3">
+      <a href="{% url 'baixar_retorno_beta' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/logingmail.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Retorno">
+        <br>Baixar Retorno (beta)
+      </a>
+    </div>
+    <div class="col-md-4 mb-3">
+      <a href="{% url 'bb_sia_config' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/bb.png' %}" class="mb-2" style="width:50px; height:50px;" alt="BB_SIA">
+        <br>Configuração do BB_SIA
+      </a>
+    </div>
+    <div class="col-md-4 mb-3">
+      <a href="{% url 'globais_e_manuais' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/cache.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Globais">
+        <br>Globais e Instruções
+      </a>
+    </div>
+    <div class="col-md-6 mb-3">
+      <a href="{% url 'juncao_agz' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/juncao.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Junção AGZ">
+        <br>Junção AGZ<br>
+        <small>Dias diferentes ficam no mesmo arquivo. Relatório CSV mostra total por dia.</small>
+      </a>
+    </div>
+    <div class="col-md-6 mb-3">
+      <a href="{% url 'juncao_agz_de_um_dia' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/juncao.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Junção AGZ por dia">
+        <br>Junção AGZ por dia<br>
+        <small>Une arquivos da mesma data.</small>
+      </a>
+      
+    </div>
+  </div>
+
+  <!-- Seção Automatização -->
+    <h3 class="text-center mt-5 mb-3">Automatização no Chrome</h3>
+    <div class="row text-center">
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'listar_pagamentos' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/transf_pagamento.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Transferência">
+        <br>Transferência de Pagamento: MDININ
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'listar_global' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/salvar.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Salvar Globais">
+        <br>Salvar Globais
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'de_para_pagamento' %}" class="btn btn-light w-100">
+        <img src="{% static 'img/de_para_pagamento.png' %}" class="mb-2" style="width:50px; height:50px;" alt="Compensação IPTU">
+        <br>Compensação de IPTU
+        </a>
+    </div>
+    </div>
 
 
-
-   <tr>
-        
-        <td></td>
-        <td></td>
-        <td style="text-align:center;">
-            <a href="{% url 'baixar_retorno_beta' %}">
-                <img src="{% static 'img/logingmail.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Baixar Retorno (beta)
-            </a>
-        </td>
-        <td></td>
-        
-        <td style="text-align:center;">
-            <a href="{% url 'bb_sia_config' %}">
-                <img src="{% static 'img/bb.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Passo pra Configuração do BB_SIA
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'globais_e_manuais' %}">
-                <img src="{% static 'img/cache.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Globais e Instruções
-            </a>
-
-        </td>
-    </tr>
-
-    </tbody>
-
-</table>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th colspan="3" style="text-align:center;">Outras funções (automatização no Chrome)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <a href="{% url 'iss_nisia' %}">
-                <img src="{% static 'img/moeda.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Arrecadação de Nísia (+ISS)
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'listar_pagamentos' %}">
-                <img src="{% static 'img/transf_pagamento.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Transferência de Pagamento: MDININ
-            </a>
-
-        </td>
-        <td>
-            <a href="{% url 'transferencia_itbi' %}">
-                <img src="{% static 'img/transf_itbi.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Transferência ITBI
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="{% url 'listar_global' %}">
-                <img src="{% static 'img/salvar.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Salvar Globais
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'de_para_pagamento' %}">
-                <img src="{% static 'img/de_para_pagamento.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Compensação de IPTU
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'irrf_bananeiras' %}">
-                <img src="{% static 'img/moeda.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                Arrecadação de Bananeiras (+IRRF)
-            </a>
-        </td>
-    </tr>
-
-
-    <tr>
-        <td>
-            <a href="{% url 'juncao_agz' %}">
-                <img src="{% static 'img/juncao.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                     <br>Junção AGZ<br>
-                    Dias diferentes ficam no mesmo arquivo<br>
-                    Um relatório em CSV mostrará o total por dia.
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'juncao_agz_de_um_dia' %}">
-                <img src="{% static 'img/juncao.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                     <br>Junção AGZ por dia<br>
-                    Une arquivos da mesma data<br>
-            </a>
-        </td>
-        <td>
-            <a href="{% url 'alterar_iptu_nova_cruz' %}">
-                <img src="{% static 'img/martelo.png' %}"
-                     style="width:50px; height: 50px; margin-right: 10px;">
-                     <br>IPTU - Nova Cruz<br>
-                    Função pra alterar valor do IPTU
-            </a>
-        </td>
-
-    </tr>
-
-
-
-    </tbody>
-
-</table>
-
-
-{%endblock%}
+</div>
+{% endblock %}
