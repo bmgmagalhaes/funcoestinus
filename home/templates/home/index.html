@@ -8,8 +8,15 @@
 
   <!-- Seção Municípios -->
   <h3 class="text-center mb-3">Municípios</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered text-center">
+    <!-- Campo de busca -->
+    <div class="mb-3 text-center">
+    <input type="text" id="searchMunicipio" class="form-control w-50 d-inline" 
+            placeholder="Digite o nome do município...">
+    </div>
+
+    <!-- Tabela de municípios -->
+    <div class="table-responsive">
+    <table class="table table-bordered text-center" id="municipiosTable">
       <tbody>
         <tr>
           <td><a class="btn btn-outline-primary w-100" href="{% url 'renomear' 'are' %}">Arez</a></td>
@@ -126,4 +133,20 @@
 
 
 </div>
+<!-- Script para filtrar célula por célula -->
+<script>
+  document.getElementById("searchMunicipio").addEventListener("keyup", function() {
+    let filter = this.value.toLowerCase();
+    let cells = document.querySelectorAll("#municipiosTable tbody td");
+
+    cells.forEach(cell => {
+      let text = cell.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        cell.style.display = "";   // mostra célula
+      } else {
+        cell.style.display = "none"; // esconde célula
+      }
+    });
+  });
+</script>
 {% endblock %}
