@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual de Globais do Caché</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 2rem; }
+    h1, h2, h3 { margin-top: 1.5rem; }
+    pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; }
+    code { background: #f6f8fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+
+<h1>📘 Manual de Globais do Caché</h1>
+
+<h2>Cadastro Imobiliário</h2>
+<table>
+  <tr><th>Global</th><th>Descrição</th><th>Observação</th></tr>
+  <tr>
+    <td><code>SICLCD</code></td>
+    <td>Cadastro de Logradouros</td>
+    <td><pre><code></code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICLCF</code></td>
+    <td>Cadastro de Face de Quadra</td>
+    <td><pre><code>(logradouro_bairro_CEP_numeração#1ºn#2 ºn #ValorM²##serviços1a12#processo)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICLTB</code></td>
+    <td>Cadastro de Título de Logradouro</td>
+    <td><pre><code></code></pre></td>
+  </tr>
+    <tr>
+    <td><code>SCICI</code></td>
+    <td>Cadastro Imobiliário</td>
+    <td><pre><code>(dados da ficha do imóvel)</code></pre></td>
+  </tr>
+    </tr>
+    <tr>
+    <td><code>SCIT(4</code></td>
+    <td>Tabelas com parâmetros para IPTU - Cobrança de TSD)</td>
+    <td><pre><code></code></pre></td>
+  </tr>
+</table>
+
+<h2>ITBI</h2>
+<table>
+  <tr><th>Global</th><th>Descrição</th><th>Observações</th></tr>
+  <tr>
+    <td><code>SITAREA</code></td>
+    <td>Alterar dados da área da certidão de ITBI</td>
+    <td><pre><code>SITAREA(número do ITBI)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SITICN</code></td>
+    <td>Alterar dados diversos da certidão de ITBI</td>
+    <td><pre><code>SITICN('número da Certidão)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SWITCD</code></td>
+    <td>Solicitações de ITIV online - email do adquirente</td>
+    <td><pre><code>SWITCD(PROCESSO</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SWCPKAD</code></td>
+    <td>Solicitações de ITIV online - email do requerente</td>
+    <td><pre><code>SWCPKAD('PROCESSO'</code></pre></td>
+  </tr>
+</table>
+
+<h2>Nota Avulsa</h2>
+<table>
+  <tr><th>Global</th><th>Descrição</th><th>Observações</th></tr>
+  <tr>
+    <td><code>SICMNF</code></td>
+    <td>Nota Fiscal Avulsa</td>
+    <td><pre><code>/code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICMIN</code></td>
+    <td>Item da Nota Avulsa</td>
+    <td><pre><code>Set ^SICMIN(1001,1) = "Serviço de limpeza"</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICMNFE</code></td>
+    <td>Elaboração da Nota Fiscal Avulsa</td>
+    <td><pre><code></code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICMLN</code></td>
+    <td>Descrição dos itens da Nota Avulsa</td>
+    <td><pre><code></code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICMNFIssRetido</code></td>
+    <td>Retenção obrigatória</td>
+    <td><pre><code>SICMNFIssRetido(108096372000175) = ""</code></pre></td>
+  </tr>
+</table>
+
+<h2>AUTO/NOTIFICAÇÃO/CONFISSÃO/OUTROS CRÉDITOS</h2>
+<table>
+  <tr>
+    <th>Global</th>
+    <th>Descrição</th>
+    <th>Observações</th>
+  </tr>
+  <tr>
+    <td><code>SIATDB</code></td>
+    <td>Informações de pagamento</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SIAIAI</code></td>
+    <td>Cadastro de Auto de Infração</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SIAIIN</code></td>
+    <td>Cadastro de Notificação</td>
+    <td></td>
+  </tr>
+</table>
+
+<h2>Emissão de Certidões</h2>
+<table>
+  <tr>
+    <th>Global</th>
+    <th>Descrição</th>
+    <th>Observações</th>
+  </tr>
+  <tr>
+    <td><code>SDFCNN</code></td>
+    <td>Histórico de Pendências</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SDFCNV</code></td>
+    <td>Dados de CND emitida</td>
+    <td></td>
+  </tr>
+</table>
+
+<h2>Emissão de Carta de Habite-se</h2>
+<table>
+  <tr>
+    <th>Global</th>
+    <th>Descrição</th>
+    <th>Observações</th>
+  </tr>
+  <tr>
+    <td><code>SCIEDCHAB</code></td>
+    <td>Dados da Carta de Habite-se emitida</td>
+    <td>Código de validação</td>
+  </tr>
+</table>
+
+<h2>Arrecadação</h2>
+<table>
+  <tr>
+    <th>Global</th>
+    <th>Descrição</th>
+    <th>Observações</th>
+  </tr>
+  <tr>
+    <td><code>SIATRR</code></td>
+    <td>Relatório de arrecadação</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SIATRRCR</code></td>
+    <td>Relatório do Regime de Caixa</td>
+    <td>Competência, Regime_de_caixa</td>
+  </tr>
+  <tr>
+    <td><code>SIATRBC</code></td>
+    <td>Relatório do Regime de Caixa</td>
+    <td><pre><code>SIATRBC(102,101,20230406)</code></pre></td>
+  </tr>
+</table>
+
+<h2>Diversos</h2>
+<table>
+  <tr>
+    <th>Global</th>
+    <th>Descrição</th>
+    <th>Observações</th>
+  </tr>
+  <tr>
+    <td><code>SDFCJE</code></td>
+    <td>Certidão de Dívida Ativa</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SIDVIN</code></td>
+    <td>Permissões (Manager)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>INDNUMG</code></td>
+    <td>Nosso Número</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SICMPR</code></td>
+    <td>Lançamentos/Vencimentos de ISS, Alvará...</td>
+    <td><pre><code>SICMPR(L,...)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SCIDB</code></td>
+    <td>Definição dos exercícios inadimplentes</td>
+    <td><pre><code>SCIDB(18,...)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SIDVLGN</code></td>
+    <td>Log imóvel</td>
+    <td><pre><code>SIDVLGN(2, I - relançamento atual @de@para)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SIDVLGN</code></td>
+    <td>Log empresa</td>
+    <td><pre><code>SIDVLGN(3, I - relançamento atual @de@para)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SIDVLGN</code></td>
+    <td>Log imóvel</td>
+    <td><pre><code>SIDVLGN(5, L - relançamento anterior @de@para)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SWIDVIN</code></td>
+    <td>Habilitar usuário comum no Portal</td>
+    <td><pre><code>SWIDVIN(111111111111)</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SWDSDRNT</code></td>
+    <td>CNPJ de prestadores de outro município que os tomadores não conseguem declarar por constar que são emissores de NFS sem ser...</td>
+    <td><pre><code>SWDSDRNT("cnpj")</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SICMTB</code></td>
+    <td>Tabelas do Cadastro Mercantil</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>SIATTB</code></td>
+    <td>MULTAS E JUROS</td>
+    <td><pre><code>SIATTB(5) - Primeiro piece = valor mínimo em UF pra desativação de saldo devedor; Último piece = juros</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SWDSTPUS</code></td>
+    <td>CNPJ com inscrição, mas o endereço deve ser de fora (outro município) (Cadastro de Tomador ou Prestador no Portal)</td>
+    <td><pre><code>SWDSTPUS(CNPJ) = DataPedido#QuemPediu</code></pre></td>
+  </tr>
+  <tr>
+    <td><code>SIDVDAMVM</code></td>
+    <td>Controle de Permissão pra Ficha de Compensação em PARNAMIRIM</td>
+    <td><pre><code>SIDVDAMVM(MATR)=VALMIN # DATA , onde VALMIM é em R$. Se for para qualquer valor, colocar VALMIN=0.01  </code></pre></td>
+  </tr>
+  <tr>
+    <td>nNFSE.TBControleConvenioD</td>
+    <td>Cadastro de CPF do responsável da prefeitura para alterações dos dados no CNC (Nota Nacional)</td>
+    <td><pre><code>$lb("","MAC",1,1,1,"Configurado","027.629.734-22","01/01/2026","Publicar no portal")</code></pre></td>
+  </tr>
+</table>
+
+
+<h2>Passo a Passo - Excluir Alvará de Construção</h2>
+<ol style="background:#f9f9f9; padding:1rem; border-radius:6px; border:1px solid #ddd;">
+  <li>
+    <strong>Abrir o terminal do Caché</strong><br>
+    <span style="color:#555;">Acesso remoto do servidor</span>
+  </li>
+  <li>
+    <strong>Entrar no namespace no terminal do Caché</strong><br>
+    <code>D ^%CD &lt;enter&gt;</code>
+  </li>
+  <li>
+    <strong>Executar o comando de exclusão</strong><br>
+    <code>DO DELETE^CSPSCIEDCHAB</code>
+  </li>
+  <li>
+    <strong>Informar Código de Validação</strong><br>
+    <span style="color:#555;">Exemplo: <code>IUBI44532</code></span>
+  </li>
+</ol>
+
+<h2>Passo a Passo - Implementar Nota Avulsa Simplificada no Portal</h2>
+<ol style="background:#f9f9f9; padding:1rem; border-radius:6px; border:1px solid #ddd;">
+  <li>
+    <strong>Abrir Studio do Caché</strong><br>
+    <span style="color:#555;">Inicie o ambiente de desenvolvimento</span>
+  </li>
+  <li>
+    <strong>Entrar no NAMESPACE</strong><br>
+    <span style="color:#555;">Atalho: <code>F4</code></span>
+  </li>
+  <li>
+    <strong>Abrir arquivo</strong><br>
+    <span style="color:#555;">Atalho: <code>Ctrl+O</code> → <code>CSPWEBMENU2.int</code></span>
+  </li>
+  <li>
+    <strong>Procurar pela linha</strong><br>
+    <span style="color:#555;">Atalho: <code>Ctrl+F</code> → <code>wsicm90en</code></span>
+  </li>
+  <li>
+    <strong>Comentar opções antigas e colar novas</strong><br>
+    <span style="color:#555;">Depois compile com <code>Ctrl+F7</code></span>
+    <pre><code>;
+    S WLINK="wsnnavulsasimplificada.csp",WLEVEL3="Elaborar NFA Simplificada" D LEVEL3^CSPWEBMENU
+    S WLINK="wsnnavulsasimplificadaDam.csp",WLEVEL3="Emitir - DAM da NFA Simplificada" D LEVEL3^CSPWEBMENU
+    S WLINK="wsnnavulsasimplificadaNota.csp",WLEVEL3="Imprimir - NFA Simplificada" D LEVEL3^CSPWEBMENU
+    ;</code></pre>
+  </li>
+</ol>
+
+
+
+</body>
+</html>

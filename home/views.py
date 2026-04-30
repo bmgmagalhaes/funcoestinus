@@ -151,6 +151,9 @@ def iss_nisia(request):
 def bb_sia_config(request):
     return render(request, 'home/bb_sia_configuracao.html')
 
+def globais_e_manuais(request):
+    return render(request, 'home/globais_e_manuais.html')
+
 def juncao_agz(request):
     unir_agz(DIRETORIO)
     return redirect('index')
@@ -541,7 +544,7 @@ def baixar_retorno_beta(request):
                                     'carolinesemtri1@gmail.com' in remetente):
                 municipio = 'Goianinha'
             
-            elif ('arreca' in assunto and 'luce' in assunto) and ('suporte@tinus.com.br' in remetente or 'receita.lucena.pb@gmail.com' in remetente):
+            elif ('arrec' in assunto) and ('receita.lucena.pb@gmail.com' in remetente):
                 municipio = 'Lucena'
             
             # elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):

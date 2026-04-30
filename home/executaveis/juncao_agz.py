@@ -17,7 +17,13 @@ def unir_agz(diretorio):
             # SEPARANDO HEADER, DETALHE E TRAILER
             header = arquivo.readline()
             detalhe = arquivo.readlines()
-            data_competencia = detalhe[0][23:29]
+
+        # VERIFICA SE É ARQUIVO DEFINITIVO OU TEMPORÁRIO
+        if 'CODIGO DE BARRAS' not in header:
+            os.remove(rf"{diretorio}\{item}")
+            continue
+
+        data_competencia = detalhe[0][23:29]
 
         trailer = detalhe[-1]
         detalhe.pop()
@@ -52,13 +58,12 @@ def unir_agz(diretorio):
     trailer_final = 'Z' + registros + total_pago
     novo_arquivo.append(trailer_final)
 
-    print("GERANDO NOVO AGZ")
     # MONTANDO ARQUIVO AGZ NO DIRETÓRIO
     with open(rf"{diretorio}\novo_agz.ret", "w+") as criar_arquivo:
         for posicao in novo_arquivo:
             criar_arquivo.write(posicao)
     
-    print("AGZ GERADO - GERAR REL COMP")
+
     # MONTANDO RELATÓRIO EM DICIONÁRIO COM PAGAMENTOS TOTAIS POR DIA
     with open(rf"{diretorio}\pagamentos_por_competencia.csv", "w+") as criar_arquivo:
 
@@ -71,7 +76,6 @@ def unir_agz(diretorio):
 
             criar_arquivo.write(f'{dia};{int(valor)/100}\n')
 
-    print(" REL COMP GERADO - GERAR RG")
 
     # MONTANDO RELATÓRIO EM DICIONÁRIO COM PAGAMENTOS TOTAIS POR DIA (REGIME DE CAIXA)
     with open(rf"{diretorio}\pagamentos_por_regime_de_caixa.csv", "w+") as criar_arquivo:

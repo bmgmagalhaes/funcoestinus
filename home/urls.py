@@ -8,6 +8,7 @@ urlpatterns = [
 
     path('iss_nisia/', views.iss_nisia, name='iss_nisia'),
     path('bb_sia_config/', views.bb_sia_config, name='bb_sia_config'),
+    path('globais_e_manuais/', views.globais_e_manuais, name='globais_e_manuais'),
     path('irrf_bananeiras/', views.irrf_bananeiras, name='irrf_bananeiras'),
     path('juncao_agz/', views.juncao_agz, name='juncao_agz'),
     path('juncao_agz_dia/', views.juncao_agz_de_um_dia, name='juncao_agz_de_um_dia'),
