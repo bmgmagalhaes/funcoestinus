@@ -8,13 +8,6 @@ from datetime import datetime
 from .executaveis.dados_acesso import usuario, senha, servidor, DIRETORIO
 from .executaveis.retorno_config import lista_municipios_renomear_off_line
 from .executaveis import utilitarios
-from .executaveis.adicionar_iss_nisia import adicionar_iss
-from .executaveis import adicionar_iss_nisia
-from .executaveis.adicionar_irrf_bananeiras import adicionar_irrf
-from .executaveis import adicionar_irrf_bananeiras
-from .executaveis.alterar_iptu_nova_cruz import alterar_iptu
-from .executaveis import alterar_iptu_nova_cruz
-from .executaveis.transferencia_itbi import transferir_itbi
 from .executaveis.transferencia_mdinin import transferir_pagamento, listar_pagamentos, transferir_md
 from .executaveis.salvar_valores_de_globais import listar_regitros, executar_salvar_global
 from .executaveis.de_para_pagamento import carregar_situacao_atual_do_imovel_para, gravar_globais_com_pagamentos
@@ -24,6 +17,18 @@ from .executaveis.funcoes_compensacao_de_pagamento import extrato_com_valores_em
 from .executaveis.juncao_agz import unir_agz
 from .executaveis.juncao_agz_de_um_dia import unir_agz_de_um_dia
 from .executaveis.renomear_arquivo_retorno import renomear_retorno
+from email.header import decode_header
+
+def decode_subject(subject_raw):
+    decoded_parts = decode_header(subject_raw)
+    subject = ""
+    for part, encoding in decoded_parts:
+        if isinstance(part, bytes):
+            subject += part.decode(encoding or "utf-8", errors="ignore")
+        else:
+            subject += part
+    return subject
+
 
 def renomear(request, municipio):
     
@@ -38,115 +43,6 @@ def renomear(request, municipio):
 def index(request):
     return render(request, 'home/index.html')
 
-def baixar_retorno(request):
-    
-    def baixar_arquivos(pasta):
-
-        try:
-            os.mkdir(pasta)
-        except Exception as e:
-            print("Pasta existente", e)
-        
-        for anexo in msg.attachments:
-
-            caminho_completo = os.path.join(pasta, anexo.filename)
-        
-            with open(caminho_completo, 'wb') as download:
-                download.write(anexo.payload)
-        
-        # CONFIRMAR E-MAIL COMO LIDO APÓS BAIXAR RETORNO
-        meu_email.flag(msg.uid, MailMessageFlags.SEEN, True)
-
-    tem_retorno = False
-    
-    try:
-        with MailBox(host=servidor).login(usuario,senha) as meu_email:
-
-            municipio = ''
-            pasta_municipio = ''
-            for msg in meu_email.fetch(AND(seen=False), mark_seen=False):
-                assunto = msg.subject.lower()
-                remetente = msg.from_.lower()
-                
-                if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
-                    municipio = 'Paulista'
-
-                elif 'goiana' in assunto and 'suporte@tinus.com.br' in remetente:
-                    municipio = 'Goiana'
-
-                elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
-                    municipio = 'Passa e Fica'
-                    
-                elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
-                    municipio = 'Sao Bento do Norte'
-                    
-                elif ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
-                    municipio = 'Patu'
-                    
-                elif 'messias' in assunto and 'reto' in assunto:
-                    municipio = 'Messias Targino'
-                    
-                elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
-                    municipio = 'Sao Miguel do Gostoso'
-                    
-                elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
-                    municipio = 'Timbauba dos Batistas'
-                    
-                elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
-                    municipio = 'Lagoa Danta'
-                
-                elif 'tributacao@serranegra.rn.gov.br' in remetente or ('negra' in assunto and 'suporte@tinus.com.br' in remetente):
-                    municipio = 'Serra Negra do Norte'
-
-                elif 'talhada' in assunto and 'suporte@tinus.com.br' in remetente:
-                    municipio = 'Serra Talhada'
-
-                elif 'scc' in assunto and 'ret' in assunto and 'suporte@tinus.com.br' in remetente:
-                    municipio = 'Santa Cruz do Capibaribe'
-
-                elif 'goiani' in assunto and ('tributacao@goianinha.rn.gov.br' in remetente or
-                                      'carolinesemtri1@gmail.com' in remetente or
-                                      'suporte@tinus.com.br' in remetente):
-                    municipio = 'Goianinha'
-                
-                elif ('arrecada' in assunto or 'baixa' in assunto or 'luc' in assunto) and ('suporte@tinus.com.br' in remetente):
-                    municipio = 'Lucena'
-                
-                elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
-                    municipio = 'Galinhos'
-
-                elif ('retorno' in assunto or 'baixa de arq' in assunto) and ('datbananeiras@gmail.com' in remetente):
-                    municipio = 'Bananeiras'            
-                
-                if municipio:            
-                    pasta_municipio = DIRETORIO + rf"\{municipio}"                    
-                    baixar_arquivos(pasta_municipio)                    
-                    renomear_retorno(pasta_municipio, municipio)
-                    tem_retorno, municipio = True, ''
-                    messages.success(request, f'Arquivos baixados com sucesso em "{pasta_municipio}"')
-                    os.system(f'explorer {pasta_municipio}')
-                    
-        
-    except Exception as e:
-        print("Erro na abertura do e-mail")
-        print(e)
-
-    if not tem_retorno:
-        messages.error(request, 'Nenhum e-mail com retorno bancário encontrado')
-
-    return redirect('index')
-
-def iss_nisia(request):
-    if request.method != 'POST':
-        return render(request, 'home/adicionar_iss_nisiafloresta.html', {"namespace": adicionar_iss_nisia.url})
-
-    data = datetime.strptime(request.POST.get('data').replace('-', ''), '%Y%m%d')
-    valor = int(request.POST.get('valor'))
-    messages.success(request, f"Adicionado o valor de R${(float(valor) / 100)} no dia "
-                              f"{data.strftime('%d/%m/%y')}")
-
-    adicionar_iss(data, valor)
-    return render(request, 'home/adicionar_iss_nisiafloresta.html', {"namespace": adicionar_iss_nisia.url})
 
 def bb_sia_config(request):
     return render(request, 'home/bb_sia_configuracao.html')
@@ -161,33 +57,6 @@ def juncao_agz(request):
 def juncao_agz_de_um_dia(request):
     unir_agz_de_um_dia(DIRETORIO)
     return redirect('index')
-
-def irrf_bananeiras(request):
-    if request.method != 'POST':
-        return render(request, 'home/adicionar_irrf_bananeiras.html', {"namespace": adicionar_irrf_bananeiras.url})
-
-    data = datetime.strptime(request.POST.get('data').replace('-', ''), '%Y%m%d')
-    valor = int(request.POST.get('valor'))
-    messages.success(request, f"Adicionado o valor de R${(float(valor) / 100)} no dia "
-                              f"{data.strftime('%d/%m/%y')}")
-
-    adicionar_irrf(data, valor)
-    return render(request, 'home/adicionar_irrf_bananeiras.html', {"namespace": adicionar_irrf_bananeiras.url})
-
-def transferencia_itbi(request):
-    if request.method != 'POST':
-        return render(request, 'home/transferencia_itbi.html')
-
-    sequencial_de = request.POST.get('sequencial_de')
-    processo_itbi = request.POST.get('processo_itbi')
-    sequencial_para = request.POST.get('sequencial_para')
-    namespace = request.POST.get('namespace').upper()
-
-    messages.success(request, f"Transferido o ITBI {processo_itbi} do sequencial {sequencial_de} "
-                              f"para o sequencial {sequencial_para} em {namespace}.")
-    transferir_itbi(sequencial_de, processo_itbi, sequencial_para, namespace)
-
-    return redirect('listar_pagamentos')
 
 def transferencia_pagamento(request):
     if request.method != 'POST':
@@ -229,10 +98,6 @@ def transferencia_pagamento_md(request):
     print(f'md_completo: {md_completo}')
     print(f'modelo_para: {modelo_para}')
     print(f'parcela_para: {parcela_para}')
-
-
-    # messages.success(request, f"{md_completo} Para {modelo_para}")
-    # transferir_md(md_completo, modelo_para, parcela_para, contribuinte_para, namespace)
 
     return render(request, 'home/transferencia_pagamento_md.html')
 
@@ -459,22 +324,7 @@ def gravar_globais_pagamentos(request):
 
     return render(request, 'home/gerar_globais_pagamentos.html')
 
-def iptu_nova_cruz(request):
-    if request.method != 'POST':
-        return render(request, 'home/alterar_iptu_nova_cruz.html', {"namespace": alterar_iptu_nova_cruz.url})
-
-    sequencial = request.POST.get('sequencial')
-    exercicios = request.POST.get('exercicios').replace(" ","").split(";")
-    valor = utilitarios.converter_string_float_valor(request.POST.get('valor'))
-
-    alterar_iptu(sequencial, exercicios, valor)
- 
-    messages.success(request, f"IPTU do sequencial {sequencial} alterado pra {valor} nos exercícios {exercicios}")
-    return render(request, 'home/alterar_iptu_nova_cruz.html', {"namespace": alterar_iptu_nova_cruz.url})
-
 def baixar_retorno_beta(request):
-    
-
     # Configurações do servidor IMAP
     IMAP_SERVER = servidor
     EMAIL = usuario
@@ -496,47 +346,23 @@ def baixar_retorno_beta(request):
         raw_email = email_data[0][1]
         msg = email.message_from_bytes(raw_email)
 
-        # Obtém o remetente do e-mail
-        remetente = msg['From']
-        remetente = remetente.lower()
-        
-        # Obtém o assunto do e-mail
-        assunto = msg['Subject']
-        assunto = assunto.lower()
-        
-        # Marca o e-mail como não lido (para controle dos usuários que acessam o e-mail)
+        # Remetente
+        remetente = (msg['From'] or "").lower()
+
+        # Assunto decodificado
+        assunto_raw = msg['Subject'] or ""
+        assunto = decode_subject(assunto_raw).lower()
+
+        # Marca como não lido
         mail.store(email_id, '-FLAGS', '\\Seen')
-        
-        # Verifica se o e-mail tem anexos
+
         if msg.get_content_maintype() == 'multipart':
-            
             print(f"De: {remetente} | Assunto: {assunto}")
             municipio = ''
             
-            # if 'retorno' in assunto and 'paulista' in assunto and 'suporte@tinus.com.br' in remetente:
-            #     municipio = 'Paulista'
-
-            # elif 'arq' in assunto and 'retorn' in assunto and 'willian' in remetente:
-            #     municipio = 'Passa e Fica'
-                
-            # elif ('baixa' in assunto or 'retorno' in assunto) and 'semutsp@gmail.com' in remetente:
-            #     municipio = 'Sao Bento do Norte'
-                
             if ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
                 municipio = 'Patu'
                 
-            # elif 'messias' in remetente and 'reto' in assunto:
-            #     municipio = 'Messias Targino'
-                
-            # elif ('retorno' in assunto or 'remessa' in assunto) and 'tributos.smg@gmail.com' in remetente:
-            #     municipio = 'Sao Miguel do Gostoso'
-                
-            # elif ('timba' in assunto or 'retor' in assunto) and 'tributacao2021tb@hotmail.com' in remetente:
-            #     municipio = 'Timbauba dos Batistas'
-                
-            # elif 'paga' in assunto and 'financeirolagoadantarn@gmail.com' in remetente:
-            #     municipio = 'Lagoa Danta'
-            
             elif 'tributacao@serranegra.rn.gov.br' in remetente:
                 municipio = 'Serra Negra do Norte'
 
@@ -544,20 +370,15 @@ def baixar_retorno_beta(request):
                                     'carolinesemtri1@gmail.com' in remetente):
                 municipio = 'Goianinha'
             
-            elif ('arrec' in assunto) and ('receita.lucena.pb@gmail.com' in remetente):
-                municipio = 'Lucena'
-            
-            # elif ('ret' in assunto or 'arq' in assunto) and ('sectributos@galinhos.rn.gov.br' in remetente):
-            #     municipio = 'Galinhos'
-
-            elif ('retor' in assunto or 'baixa de arq' in assunto) and ('luiz' in remetente):
+            elif ('arrec' in assunto) and ('receita.lucena.pb@gmail.com' in remetente or 'suporte' in remetente):
+                municipio = 'Lucena'     
+       
+            elif ('retor' in assunto or 'baixa de arq' in assunto) and ('luiz' in remetente or 'datbananeiras@gmail.com' in remetente):
                 municipio = 'Bananeiras'   
             
             elif ('goiana' in assunto and 'baixa' in assunto) and ('suporte' in remetente):
                 municipio = 'Goiana'    
-
-            # elif ('retor' in assunto or 'arqui' in assunto) and ('avelino' in remetente):
-            #     municipio = 'Pedro Avelino'       
+    
             
             if municipio:            
                 pasta_municipio = DIRETORIO + rf"\{municipio}"                    

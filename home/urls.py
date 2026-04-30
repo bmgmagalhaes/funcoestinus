@@ -3,16 +3,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('baixar_retorno/', views.baixar_retorno, name='baixar_retorno2'),
+    # path('baixar_retorno/', views.baixar_retorno, name='baixar_retorno2'),
     path('baixar_retorno_beta/', views.baixar_retorno_beta, name='baixar_retorno_beta'),
 
-    path('iss_nisia/', views.iss_nisia, name='iss_nisia'),
     path('bb_sia_config/', views.bb_sia_config, name='bb_sia_config'),
     path('globais_e_manuais/', views.globais_e_manuais, name='globais_e_manuais'),
-    path('irrf_bananeiras/', views.irrf_bananeiras, name='irrf_bananeiras'),
     path('juncao_agz/', views.juncao_agz, name='juncao_agz'),
     path('juncao_agz_dia/', views.juncao_agz_de_um_dia, name='juncao_agz_de_um_dia'),
-    path('alterar_iptu_nova_cruz/', views.iptu_nova_cruz, name='alterar_iptu_nova_cruz'),
     
     path('transferencia_pagamentos/', views.transferencia_pagamento, name='transferencia_pagamento'),
     path('transferencia_pagamentos_md/', views.transferencia_pagamento_md, name='transferencia_pagamento_md'),
@@ -20,7 +17,6 @@ urlpatterns = [
     path('lista_pagamentos/', views.exibir_pagamentos, name='listar_pagamentos'),
     path('lista_global/', views.listar_global, name='listar_global'),
     path('salva_global/', views.salvar_global, name='salvar_global'),
-    path('transf_itbi/', views.transferencia_itbi, name='transferencia_itbi'),
     path('<str:municipio>', views.renomear, name='renomear'),
 
     path('de_para_pagamento/', views.de_para_pagamentos, name='de_para_pagamento'),
