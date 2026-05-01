@@ -3,13 +3,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    # path('baixar_retorno/', views.baixar_retorno, name='baixar_retorno2'),
     path('baixar_retorno_beta/', views.baixar_retorno_beta, name='baixar_retorno_beta'),
 
     path('bb_sia_config/', views.bb_sia_config, name='bb_sia_config'),
     path('globais_e_manuais/', views.globais_e_manuais, name='globais_e_manuais'),
     path('juncao_agz/', views.juncao_agz, name='juncao_agz'),
     path('juncao_agz_dia/', views.juncao_agz_de_um_dia, name='juncao_agz_de_um_dia'),
+    path('relatorio_sjm/', views.estoque_divida_ativa_sao_jose_de_mipibu, name='estoque_divida_ativa_sao_jose_de_mipibu'),
     
     path('transferencia_pagamentos/', views.transferencia_pagamento, name='transferencia_pagamento'),
     path('transferencia_pagamentos_md/', views.transferencia_pagamento_md, name='transferencia_pagamento_md'),
