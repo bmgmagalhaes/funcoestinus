@@ -3,12 +3,12 @@ Arquivo para concentrar dados com a relação Município x Retorno x Órgão de 
 """
 
 lista_municipios_renomear_off_line = {
-    'pau':'Paulista',
+    # 'pau':'Paulista',
     'scc':'Santa Cruz do Capibaribe',
     'are':'Arez',
     'ban':'Bananeiras',
     'bel':'Belo Jardim',
-    'bod':'Bodo',
+    # 'bod':'Bodo',
     'ext':'Extremoz',
     'equ':'Equador',
     'gal':'Galinhos',
@@ -26,7 +26,7 @@ lista_municipios_renomear_off_line = {
     'lda':'Lagoa Danta',
     'ldv':'Lagoa de Velhos',
     'luc':'Lucena',
-    'mta':'Messias Targino',
+    # 'mta':'Messias Targino',
     'ncr':'Nova Cruz',
     'nis':'Nisia Floresta',
     'oub':'Ouro Branco',
@@ -94,14 +94,14 @@ lista_municipios_retorno = {
             'PM DE PARELHAS      104CAIXA ECON. FEDERAL':'.204',
             'PARELHAS - ARRECA001BANCO DO BRASIL':'.904'
         },
-        'Paulista':{
-            'IPTU PAULISTA-PE    001BANCO DO BRASIL':'.001',
-            'PM DE PAULISTA      104CAIXA ECON. FEDERAL':'.104',
-            'PM PAULISTA         033BANCO SANTANDER':'.033',
-            'PREF.MUN.DE PAULISTA237BANCO BRADESCO':'.237',
-            'PREF MUN PAULISTA  P341BANCO ITAU S.A.':'.341',
-            'PREF. MUN. DE PAULIS004BANCO DO NORDESTE':'.004'
-        },
+        # 'Paulista':{
+        #     'IPTU PAULISTA-PE    001BANCO DO BRASIL':'.001',
+        #     'PM DE PAULISTA      104CAIXA ECON. FEDERAL':'.104',
+        #     'PM PAULISTA         033BANCO SANTANDER':'.033',
+        #     'PREF.MUN.DE PAULISTA237BANCO BRADESCO':'.237',
+        #     'PREF MUN PAULISTA  P341BANCO ITAU S.A.':'.341',
+        #     'PREF. MUN. DE PAULIS004BANCO DO NORDESTE':'.004'
+        # },
         'Passa e Fica':{
             'PASSA E FICA PREFEITURA       C ECON FEDERAL':'.904',
             'PM PASSA E FICA RN  104CAIXA ECON. FEDERAL':'.104',
@@ -154,10 +154,10 @@ lista_municipios_retorno = {
         'Patu': {
             'MUNICIPIO DE PATU TR001BANCO DO BRASIL':'.001'
         },
-        'Messias Targino':{
-            'MUN MESSIAS TARGINO 104CAIXA ECON. FEDERAL':'.104',
-            'MESSIAS TARGINO TRIB001BANCO DO BRASIL':'.001',
-        },
+        # 'Messias Targino':{
+        #     'MUN MESSIAS TARGINO 104CAIXA ECON. FEDERAL':'.104',
+        #     'MESSIAS TARGINO TRIB001BANCO DO BRASIL':'.001',
+        # },
         'Timbauba dos Batistas':{
             'MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL':'.002',
             'PM TIMBAUBA DOS BATI104CAIXA ECON. FEDERAL':'.104'
