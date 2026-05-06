@@ -7,14 +7,21 @@ from .retorno_config import selecionar_municipio
 def renomear_retorno(pasta_municipio, municipio):
 
     descompactar_arquivo(pasta_municipio, os.listdir(pasta_municipio))
-    lista_arquivos = executar_simples(pasta_municipio)
+    lista_arquivos, log_de_arquivo_com_erro = executar_simples(pasta_municipio)
     orgaos_retornos = selecionar_municipio(municipio)
     
     nome_arquivo = ''
 
+    print("Lista arqs = ", lista_arquivos)
+
     for arquivo in lista_arquivos:
         try:
             caminho_completo = os.path.join(pasta_municipio, arquivo)
+            # caminho_completo = pasta_municipio+arquivo
+            # print("Município = ", municipio)
+            # print("Caminho = ", caminho_completo)
+            # print("Arquivo = ", arquivo)
+            # print("Caminho completo = ", caminho_completo)
             with open(caminho_completo, 'r+') as retorno:
                 header = retorno.readline()
                 detalhe = retorno.readlines()
@@ -49,8 +56,9 @@ def renomear_retorno(pasta_municipio, municipio):
                     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
                     nome_arquivo = rf'{pasta_municipio}\MR{data}'
                     
-        except:
+        except Exception as e:
             # Quando arquivo do tesouro for alterado, esse teste ignora parte da lista inconsistente
+            print(e)
             continue
 
         
