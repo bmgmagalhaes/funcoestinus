@@ -67,24 +67,28 @@ def executar_simples(diretorio):
 
     log_de_arquivos_com_problema = ''
 
-    # print("Diretório = ", diretorio)
+    # print("Diretório (executar_simples)= ", diretorio)
 
     lista_arquivos = os.listdir(diretorio)
+
+    # print("lista_arquivos (executar_simples)= ", lista_arquivos)
     novo_arquivo = []
     lista_remessa_serpro = []
 
     for item in lista_arquivos:
+        # print('Lendo arquivo', item)
         if 'DAF607' not in item:
+            # print("Não é DAF")
             continue
         with open(rf'{diretorio}\{item}', 'r+') as arquivo:
+            # print('Trando Simples no arquivo', item)
 
             # SEPARANDO HEADER, DETALHE E TRAILER
             header = arquivo.readline()
     
             # ALERTA PRA ARQUIVO COM ERRO NO HEADER
             if 'DAF607' not in header or 'Ocorreu um problema' in header:
-                log_de_arquivos_com_problema += f'Arquivo {item} com erro. É recomendável refazer o download. | HEADER: {header}\n'
-                # print(log_de_arquivos_com_problema)
+                log_de_arquivos_com_problema += f'{item} com erro. É recomendável refazer o download. | HEADER: {header}\n'
                 # sleep(5)
                 continue
             
