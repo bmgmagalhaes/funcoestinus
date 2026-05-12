@@ -1,6 +1,6 @@
 import os
 from datetime import timedelta, datetime
-from time import sleep
+# from time import sleep
 import shutil
 
 def salvar_original(diretorio, item, data):
@@ -65,6 +65,8 @@ def executar_simples(diretorio):
     Retorna lista de arquivos atualizadas após remoção dos DAFs
     """
 
+    log_de_arquivos_com_problema = ''
+
     # print("Diretório = ", diretorio)
 
     lista_arquivos = os.listdir(diretorio)
@@ -72,7 +74,6 @@ def executar_simples(diretorio):
     lista_remessa_serpro = []
 
     for item in lista_arquivos:
-        # print("nome INICIO exec simples = ", item)
         if 'DAF607' not in item:
             continue
         with open(rf'{diretorio}\{item}', 'r+') as arquivo:
@@ -81,10 +82,22 @@ def executar_simples(diretorio):
             header = arquivo.readline()
     
             # ALERTA PRA ARQUIVO COM ERRO NO HEADER
-            if '!DOCTYPE HTML PUBLIC' in header or 'Ocorreu um problema' in header:
-                # print(f'Arquivo {item} com erro. É recomendável refazer o download.')
+            if 'DAF607' not in header or 'Ocorreu um problema' in header:
+                log_de_arquivos_com_problema += f'Arquivo {item} com erro. É recomendável refazer o download. | HEADER: {header}\n'
+                # print(log_de_arquivos_com_problema)
                 # sleep(5)
                 continue
+            
+            # if '!DOCTYPE HTML PUBLIC' in header or 'Ocorreu um problema' in header:
+            #     print(f'Arquivo {item} com erro. É recomendável refazer o download.')
+            #     print(f'header do arquivo = {header}')
+            #     sleep(5)
+            #     continue
+            # if 'Not found' in header or 'Ocorreu um problema' in header:
+            #     print(f'Arquivo {item} com erro. É recomendável refazer o download.')
+            #     print(f'header do arquivo = {header}')
+            #     sleep(5)
+            #     continue
 
             detalhe = arquivo.readlines()
 
@@ -147,4 +160,4 @@ def executar_simples(diretorio):
             criar_arquivo_simples.write(trailer_final)
     lista_arquivos = os.listdir(diretorio)
     # print("lista_arquivos FINAL EXEC SN = ", lista_arquivos)
-    return lista_arquivos
+    return lista_arquivos, log_de_arquivos_com_problema
