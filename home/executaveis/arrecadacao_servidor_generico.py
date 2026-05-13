@@ -22,6 +22,9 @@ LISTA_MUNICIPIOS = {
             'PMCM - ARRECADACAO  001BANCO DO BRASIL  S/A': '.001',
             'PMCEARAMIRIM        104CAIXA ECON. FEDERAL': '.104',
         },
+        '\CRE': {
+            'PM CAMPO REDONDO RN 104CAIXA ECON. FEDERAL': '.104',
+        },
         '\CRV': {
             'PREF CAIC RIO DO VEN001BANCO DO BRASIL': '.001',
         },
@@ -175,7 +178,7 @@ def renomear_retorno_generico(sigla, retorno_config):
     log_de_arquivos_com_problema = f'\nMunicípio {sigla}\n' 
     log_de_arquivos_com_problema += log_simples
     
-    # Remover da lista as pasta com os originais do DAF607 e copia para a pasta destino
+    # Remover da lista as pastas com os originais do DAF607 e copia para a pasta destino
     for item in lista_arquivos:
         
         caminho_item = os.path.join(diretorio_origem, item)
@@ -256,4 +259,4 @@ if __name__ == '__main__':
                 criar_arquivo.write(linha)
 
 
-    time.sleep(10)
+    # time.sleep(10)
