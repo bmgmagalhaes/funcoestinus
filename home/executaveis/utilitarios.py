@@ -177,7 +177,9 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
             detalhe = retorno.readlines()
             data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
 
-
+            # Verifica se é um arquivo temporário (retorno de rajada) e altera o hearder pra não ser lido na arrecadação
+            if "G      " in detalhe[0]:
+                header = 'temporario'
 
             registro_de_pagamento = True
             if len(header) == 241:
