@@ -48,6 +48,11 @@ LISTA_MUNICIPIOS = {
             'PMG-ARREC IMPOSTOS/T001BANCO DO BRASIL': '.001',
             'PM GOIANINHA        104CAIXA ECON. FEDERAL': '.104',
         },
+        '\GON':{
+            'PMSGA ARRECADACAO   001BANCO DO BRASIL':'.001', 
+            'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901', 
+            'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
+        },  
         '\ITJ': {
             '104CAIXA ECON. FEDERAL': '.104',
         },
@@ -63,6 +68,11 @@ LISTA_MUNICIPIOS = {
         '\LDA': {
             'PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL': '.104',
             'ARRECADACAO LAGOA DA001BANCO DO BRASIL': '.001',
+        },
+        '\MAC':{
+            'PREF MACAIBA TRIB DI001BANCO DO BRASIL':'.001', 
+            'MUNICIPIO DE MACAIBA          001BANCO DO BRASIL':'.902', 
+            'PM MACAIBA          104CAIXA ECON. FEDERAL':'.104',
         },
         '\MON': {
             'P M MONTE ALEGRE IPT001BANCO DO BRASIL': '.001',
@@ -129,23 +139,12 @@ LISTA_MUNICIPIOS = {
             'PM TIMBAUBA DOS BATI104CAIXA ECON. FEDERAL': '.104',
         },
     
-
-
-
         # MUNICÍPIOS QUE AINDA DEPENDEM DA CONCLUSÃO DA CONFIGURAÇÃO PARA O DOWNLOAD AUTOMÁTICO
-        # '\MAC':{
-        #     'PREF MACAIBA TRIB DI001BANCO DO BRASIL':'.001', 
-        #     'MUNICIPIO DE MACAIBA          001BANCO DO BRASIL':'.902', 
-        #     'PM DE MACAIBA       104CAIXA ECON. FEDERAL':'.104',
-        # },
-        # '\GON':{
-        #     'PMSGA ARRECADACAO   001BANCO DO BRASIL':'.001', 
-        #     'MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL':'.901', 
-        #     'PMSGAMARANTERN      104CAIXA ECON. FEDERAL':'.104',
-        # },  
+
         # '\CUR':{
         #     'PM CURRAIS NOVOS RN 001BANCO DO BRASIL':'.001', 
-        #     'PREFEITURA MUNICIPAL DE CURRAIBANCO DO BRASIL':'.002',
+        #     '33251 MUNICIPIO DE CURRAIS NOVOS    BANCO DO BRASIL':'.002',
+        #     'PPM CURRAIS NOVOS   104CAIXA ECON. FEDERAL':'.104',
         # },
 
 }
