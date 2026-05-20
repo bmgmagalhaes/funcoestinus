@@ -310,11 +310,17 @@
   <li>
     <strong>Comentar opções antigas e colar novas</strong><br>
     <span style="color:#555;">Depois compile com <code>Ctrl+F7</code></span>
-    <pre><code>;
+    <pre><code>
+    ;
+	  If $$DisponinilizarOpcao^CSPSCAEM20CD(){
+		  S WLINK="wscaem20cd.csp",WLEVEL3="Cadastramento de Autônomo" D LEVEL3^CSPWEBMENU
+	  }
+
     S WLINK="wsnnavulsasimplificada.csp",WLEVEL3="Elaborar NFA Simplificada" D LEVEL3^CSPWEBMENU
     S WLINK="wsnnavulsasimplificadaDam.csp",WLEVEL3="Emitir - DAM da NFA Simplificada" D LEVEL3^CSPWEBMENU
     S WLINK="wsnnavulsasimplificadaNota.csp",WLEVEL3="Imprimir - NFA Simplificada" D LEVEL3^CSPWEBMENU
-    ;</code></pre>
+    ;
+  </code></pre>
   </li>
 </ol>
 
