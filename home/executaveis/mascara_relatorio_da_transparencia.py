@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-def mascarar_documento(doc):
+def aplicar_mascara_dos_dados(doc):
     doc = str(doc)
     numeros = re.sub(r'\D', '', doc)
     
@@ -14,15 +14,18 @@ def mascarar_documento(doc):
     else:
         return doc
 
-# Lendo o CSV com separador correto e encoding Latin-1
-df = pd.read_csv(r"c:/temp/BasePortaldaTransparenciaDividaAtiva.csv", 
-                 encoding="latin1", sep=";")
 
-# Mantendo apenas as colunas desejadas
-df = df[["CpfCnpjDevedor", "NomeDevedor", "ValorTotal"]]
+def mascarar_dados_da_divida_ativa(diretorio):
+    
+    # Lendo o CSV com separador correto e encoding Latin-1
+    df = pd.read_csv(rf"{diretorio}\BasePortaldaTransparenciaDividaAtiva.csv", 
+                    encoding="latin1", sep=";")
 
-# Aplicando a máscara
-df["CpfCnpjDevedor"] = df["CpfCnpjDevedor"].apply(mascarar_documento)
+    # Mantendo apenas as colunas desejadas
+    df = df[["CpfCnpjDevedor", "NomeDevedor", "ValorTotal"]]
 
-# Salvando resultado em UTF-8
-df.to_csv(r"c:\temp\arquivo_final.csv", index=False, encoding="utf-8", sep=';')
+    # Aplicando a máscara
+    df["CpfCnpjDevedor"] = df["CpfCnpjDevedor"].apply(aplicar_mascara_dos_dados)
+
+    # Salvando resultado em UTF-8
+    df.to_csv(r"c:\temp\arquivo_final.csv", index=False, encoding="utf-8", sep=';')

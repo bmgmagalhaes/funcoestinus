@@ -10,6 +10,8 @@ urlpatterns = [
     path('juncao_agz/', views.juncao_agz, name='juncao_agz'),
     path('juncao_agz_dia/', views.juncao_agz_de_um_dia, name='juncao_agz_de_um_dia'),
     path('relatorio_sjm/', views.estoque_divida_ativa_sao_jose_de_mipibu, name='estoque_divida_ativa_sao_jose_de_mipibu'),
+    path('portal/', views.mascarar_dados_para_portal_transparencia, name='mascarar_dados_para_portal_transparencia'),
+    
     
     path('transferencia_pagamentos/', views.transferencia_pagamento, name='transferencia_pagamento'),
     path('transferencia_pagamentos_md/', views.transferencia_pagamento_md, name='transferencia_pagamento_md'),

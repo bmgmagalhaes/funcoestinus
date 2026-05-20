@@ -16,6 +16,7 @@ from .executaveis.funcoes_compensacao_de_pagamento import multa_juros, cruzando_
 from .executaveis.funcoes_compensacao_de_pagamento import extrato_com_valores_em_aberto, executar_compensacao
 from .executaveis.juncao_agz import unir_agz
 from .executaveis.gerar_relatorio_divida_ativa_sjm import funcao_ajustar_relario_da_sjm
+from .executaveis.mascara_relatorio_da_transparencia import mascarar_dados_da_divida_ativa
 from .executaveis.juncao_agz_de_um_dia import unir_agz_de_um_dia
 from .executaveis.renomear_arquivo_retorno import renomear_retorno
 from email.header import decode_header
@@ -57,6 +58,10 @@ def juncao_agz(request):
 
 def estoque_divida_ativa_sao_jose_de_mipibu(request):
     funcao_ajustar_relario_da_sjm(DIRETORIO)
+    return redirect('index')
+
+def mascarar_dados_para_portal_transparencia(request):
+    mascarar_dados_da_divida_ativa(DIRETORIO)
     return redirect('index')
 
 def juncao_agz_de_um_dia(request):
