@@ -1,7 +1,7 @@
 import os, shutil
 from juncao_simples import executar_simples
-from utilitarios import gerar_nome_arquivo_retorno
-import time
+from utilitarios import gerar_nome_arquivo_retorno, obter_dia_util_anterior
+from datetime import datetime
 """
 Orientações gerais antes de gerar o executável:
 
@@ -154,7 +154,7 @@ ORIGEM_SUFIXO = rf'\arquivoretorno'
 DESTINO_PREFIXO = rf'D:\Prefeituras'
 DESTINO_SUFIXO = rf'\ARRECADA'
 
-DIRETORIO_DO_LOG = rf"D:\Prefeituras\Tratar Retornos"
+DIRETORIO_DO_LOG = rf"D:\Prefeituras\Tratar Retornos\log"
 
 # PARA TESTES LOCAIS (COMENTAR LINHAS PRA PRODUÇÃO)
 # ORIGEM_PREFIXO = rf'C:\temp'
@@ -163,19 +163,28 @@ DIRETORIO_DO_LOG = rf"D:\Prefeituras\Tratar Retornos"
 # DESTINO_PREFIXO = rf'C:\temp\D'
 # DESTINO_SUFIXO = rf''
 
-# DIRETORIO_DO_LOG = rf'C:\temp'
+# DIRETORIO_DO_LOG = rf'C:\temp\log'
 
 
 def renomear_retorno_generico(sigla, retorno_config):
 
+    # Armazena a data esperada pra atualização da arrecadação (dia útil anterior) para controle do log
+    data_esperada_da_atualizacao = obter_dia_util_anterior()
+
+    # Variável para apurar quais retornos ficaram ausente no movimento diário
+    retornos_bancarios_esperados = list(retorno_config.values())
+
+    # Adicionando Simples Nacional como padrão geral
+    retornos_bancarios_esperados.append('.999')
+
     diretorio_origem = ORIGEM_PREFIXO+sigla+ORIGEM_SUFIXO
     diretorio_destino = DESTINO_PREFIXO+sigla+DESTINO_SUFIXO
     
+    lista_arquivos, log_do_simples = executar_simples(diretorio_origem)
 
-    lista_arquivos, log_simples = executar_simples(diretorio_origem)
+    registros_do_arquivo_de_log = f'\nMunicípio {sigla}\n' 
+    registros_do_arquivo_de_log += log_do_simples
 
-    log_de_arquivos_com_problema = f'\nMunicípio {sigla}\n' 
-    log_de_arquivos_com_problema += log_simples
     
     # Remover da lista as pastas com os originais do DAF607 e copia para a pasta destino
     for item in lista_arquivos:
@@ -189,12 +198,18 @@ def renomear_retorno_generico(sigla, retorno_config):
         
 
     for arquivo in lista_arquivos:
-   
+
         #SE ARQUIVO FOR SIMPLES NACIONAL OU TESOURO NACIONAL, PASSA PRA O ARQUIVO SEGUINTE SEM TENTAR RENOMEAR
             
         if 'MN' in arquivo:
             # Move o arquivo para o diretório de destino
             shutil.copy2(rf'{diretorio_origem}\{arquivo}', diretorio_destino)
+            
+            data_retorno_simples_nacional = arquivo[2:8]
+            
+            if data_retorno_simples_nacional == data_esperada_da_atualizacao:
+                # Remove o Simples Nacional da lista de retornos aguardados se for retorno do dia
+                retornos_bancarios_esperados.remove('.999')            
             continue
 
         if 'MS' in arquivo:
@@ -208,9 +223,11 @@ def renomear_retorno_generico(sigla, retorno_config):
 
         header = ''
         
-        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(diretorio_origem, arquivo)
-        
+        caminho_origem, nome_arquivo, header = gerar_nome_arquivo_retorno(diretorio_origem, arquivo)        
+
         try:
+            
+            
             for nome_do_banco, codigo_banco in retorno_config.items():
                 
                 if nome_do_banco in header:
@@ -220,42 +237,61 @@ def renomear_retorno_generico(sigla, retorno_config):
                     # Renomeia o retorno conforme a data
                     os.rename(rf'{caminho_origem}', rf'{nome_arquivo}')
 
+                    # Controle de datas para gestão do arquivo de log
+                    data_do_arquivo_retorno = nome_arquivo[-10:-4]
+                      
+                    if data_do_arquivo_retorno == data_esperada_da_atualizacao:
+                        # Remove da lista de retornos aguardados o código do banco encontrado se for do dia da atualização
+                        retornos_bancarios_esperados.remove(codigo_banco)
+
                     # Move o arquivo para o diretório de destino
                     shutil.copy2(rf'{nome_arquivo}', diretorio_destino)
-                
-
                     continue
                 
 
                 elif 'Not Found' in header and "DAF607" not in arquivo:
                     # Grava nome do arquivo e conteúdo parcial do arquivo com problema no arquivo de log
-                    log_de_arquivos_com_problema += f"Arquivo corrompido: {arquivo}\nHeader: {header}\n"
+                    registros_do_arquivo_de_log += f"Arquivo corrompido: {arquivo}\nHeader: {header}\n"
                 
 
         except Exception as e:
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)
 
-    return log_de_arquivos_com_problema
+    if retornos_bancarios_esperados:
+        registros_do_arquivo_de_log += 'Retornos ausentes: '
+        for codigo in retornos_bancarios_esperados:
+            registros_do_arquivo_de_log += f'{codigo} '
+
+    return registros_do_arquivo_de_log
 
 
-if __name__ == '__main__':
+def gerar_arquivo_de_log(log_de_arquivos_com_problema):
 
-    log_de_arquivos_com_problema = ''
-    for sigla in LISTA_MUNICIPIOS:
+    # Data e hora atual
+    agora = datetime.now()
+    data_e_hora = agora.strftime("%y%m%d%H%M%S")
 
-        try:
+    with open(rf"{DIRETORIO_DO_LOG}\log_retorno_{data_e_hora}.txt", "w+") as criar_arquivo:
            
-           log_de_arquivos_com_problema += renomear_retorno_generico(sigla, LISTA_MUNICIPIOS[sigla])
-        except FileNotFoundError as f:
-            print(f"Pasta do município {sigla} não encontrada")
-    
-    if log_de_arquivos_com_problema:
-
-        with open(rf"{DIRETORIO_DO_LOG}\log_de_arquivos_com_problema.txt", "w+") as criar_arquivo:
             criar_arquivo.write("LOG de arquivo retorno: \n")
             for linha in log_de_arquivos_com_problema:
                 criar_arquivo.write(linha)
 
 
-    # time.sleep(10)
+    # print(log_de_arquivos_com_problema)
+
+if __name__ == '__main__':
+
+    registros_de_log = ''
+    
+    for sigla in LISTA_MUNICIPIOS:
+        try:
+
+            registros_de_log += renomear_retorno_generico(sigla, LISTA_MUNICIPIOS[sigla])
+
+        except FileNotFoundError as f:
+            print(f"Pasta do município {sigla} não encontrada")
+    
+    gerar_arquivo_de_log(registros_de_log)
+        
