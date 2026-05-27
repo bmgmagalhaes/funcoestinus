@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import timedelta, datetime
 from zipfile import ZipFile, is_zipfile
 
 def converter_string_lista_credito(credito_string):
@@ -211,3 +211,44 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
         print(f"Erro ao tratar o arquivo retorno 1 {arquivo}")
         print(e)
     return caminho_completo, nome_arquivo, header
+
+def obter_dia_util_anterior():
+    """
+    Retorna o dia útil anterior à data atual. 
+    São considerados sábados, domingos e feriados nacionais.
+    Feriados municipais não são considerados, pois podem ter pagamentos do Simples Nacional.
+    """
+
+    data_de_hoje = datetime.now()
+    data_formatada = data_de_hoje.strftime("%y%m%d")
+
+    # LISTA COM FERIADOS NACIONAIS 2025
+    feriados = [
+        '250101','250303','250304','250418','250421','250501','250619','250907','251012','251102','251115','251120','251225',
+        '260101','260216','260217','260403','260421','260501','260604','260907','261012','261102','261115','261120','261225',
+        '270101','270208','270209','270326','270421','270501','270527','270907','271012','271102','271115','271120','271225',
+        '280101','280228','280229','280414','280421','280501','280615','280907','281012','281102','281115','281120','281225',
+        '290101','290212','290213','290330','290421','290501','290607','290907','291012','291102','291115','291120','291225',
+        '300101','300304','300305','300419','300421','300501','300620','300907','301012','301102','301115','301120','301225']     
+
+
+    dia_semana = datetime.strptime(data_formatada,"%y%m%d")
+    
+    # RETORNANDO AO DIA ANTERIOR DA DISPONIBILIZACAO DO REGIME DE CAIXA
+    dia_semana += timedelta(days=-1)
+    
+    while (True):
+        #Se for sábado
+        if dia_semana.weekday() == 5:
+            dia_semana += timedelta(days=-1)
+        #Senão, se for 
+        elif dia_semana.weekday() == 6:
+            dia_semana += timedelta(days=-2)
+
+        #Se estiver entre a lista de feriados nacionais
+        if dia_semana.strftime('%y%m%d') in feriados:
+            dia_semana += timedelta(days=-1)
+        else:
+            break
+
+    return dia_semana.strftime("%y%m%d")
