@@ -373,13 +373,6 @@ def baixar_retorno_beta(request):
             if ('arquivo' in assunto or 'retorno' in assunto) and 'prefeiturapatu@gmail.com' in remetente:
                 municipio = 'Patu'
                 
-            elif 'tributacao@serranegra.rn.gov.br' in remetente:
-                municipio = 'Serra Negra do Norte'
-
-            elif ('goiani' in assunto or 'arreca' in assunto) and ('tributacao@goianinha.rn.gov.br' in remetente or
-                                    'carolinesemtri1@gmail.com' in remetente):
-                municipio = 'Goianinha'
-            
             elif ('arrec' in assunto) and ('receita.lucena.pb@gmail.com' in remetente or 'suporte' in remetente):
                 municipio = 'Lucena'     
        
@@ -388,6 +381,8 @@ def baixar_retorno_beta(request):
             
             elif ('goiana' in assunto and 'baixa' in assunto) and ('suporte' in remetente):
                 municipio = 'Goiana'    
+            elif ('belo' in assunto and 'retorno' in assunto) and ('suporte' in remetente):
+                municipio = 'Belo Jardim'    
     
             
             if municipio:            
