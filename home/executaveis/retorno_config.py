@@ -1,5 +1,6 @@
 """
-Arquivo para concentrar dados com a relação Município x Retorno x Órgão de todos os municípios
+Usado para renomear os arquivos de retorno, a partir do header, e definir a extensão correta para cada arquivo, de acordo com o executável do município
+APENAS PARA A FUNÇÃO WEB
 """
 
 lista_municipios_renomear_off_line = {
@@ -26,7 +27,7 @@ lista_municipios_renomear_off_line = {
     'lda':'Lagoa Danta',
     'ldv':'Lagoa de Velhos',
     'luc':'Lucena',
-    # 'mta':'Messias Targino',
+    'mam':'Mamanguape',
     'ncr':'Nova Cruz',
     'nis':'Nisia Floresta',
     'oub':'Ouro Branco',
@@ -83,10 +84,12 @@ lista_municipios_retorno = {
         'Lagoa de Velhos': {
             'PM LAGOA VELHOS TRIB001BANCO DO BRASIL':'.001'
         },
+        'Mamanguape': {
+            'PMM - Tributos Munic001BANCO DO BRASIL':'.001'
+        },
         'Ouro Branco': {
             'PREF MUN DE OURO BRA001BANCO DO BRASIL':'.001'
         },
-        
         'Equador': {
             'EQUADOR - ARRECADACA001BANCO DO BRASIL':'.001'
         },

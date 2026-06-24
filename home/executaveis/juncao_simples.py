@@ -140,6 +140,8 @@ def executar_simples(diretorio):
             else:
                 novo_arquivo.append([data_retorno_simples, header, *detalhe, data_regime_caixa_simples, valor_total])
             lista_remessa_serpro.append(remessa_serpro)
+
+            # Gravando o arquivo original em uma pasta com o nome da data da arrecadação para evitar perda de dados e facilitar a localização do arquivo original em caso de necessidade de reprocessamento
             salvar_original(diretorio, item, data_retorno_simples)
             # os.remove(rf'{diretorio}\{item}')
 

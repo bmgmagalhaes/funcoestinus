@@ -74,6 +74,9 @@ LISTA_MUNICIPIOS = {
             'MUNICIPIO DE MACAIBA          001BANCO DO BRASIL':'.902', 
             'PM MACAIBA          104CAIXA ECON. FEDERAL':'.104',
         },
+        '\MAM':{
+            'PMM - Tributos Munic001BANCO DO BRASIL':'.001', 
+        },
         '\MON': {
             'P M MONTE ALEGRE IPT001BANCO DO BRASIL': '.001',
         },
@@ -124,10 +127,10 @@ LISTA_MUNICIPIOS = {
             'MUNICIPIO DE SAO MIGUEL DO GOS001BANCO DO BRASIL': '.002',
         },
         '\SNN': {
-            'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL': '.001',
-            '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.002',
+            # 'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL': '.001',
+            # '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.002',
             'PM S NEGRA DO NORTE 104CAIXA': '.104',
-            '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.004',
+            # '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.004',
             'SERRA NEGRA NORTE TR001BANCO DO BRASIL  S/A': '.005',
         },
         '\STM': {
@@ -157,13 +160,13 @@ DESTINO_SUFIXO = rf'\ARRECADA'
 DIRETORIO_DO_LOG = rf"D:\Prefeituras\Tratar Retornos\log"
 
 # PARA TESTES LOCAIS (COMENTAR LINHAS PRA PRODUÇÃO)
-# ORIGEM_PREFIXO = rf'C:\temp'
-# ORIGEM_SUFIXO = rf''
+ORIGEM_PREFIXO = rf'C:\temp'
+ORIGEM_SUFIXO = rf''
 
-# DESTINO_PREFIXO = rf'C:\temp\D'
-# DESTINO_SUFIXO = rf''
+DESTINO_PREFIXO = rf'C:\temp\D'
+DESTINO_SUFIXO = rf''
 
-# DIRETORIO_DO_LOG = rf'C:\temp\log'
+DIRETORIO_DO_LOG = rf'C:\temp\log'
 
 
 def renomear_retorno_generico(sigla, retorno_config):
@@ -182,7 +185,7 @@ def renomear_retorno_generico(sigla, retorno_config):
     
     lista_arquivos, log_do_simples = executar_simples(diretorio_origem)
 
-    registros_do_arquivo_de_log = f'\nMunicípio {sigla}\n' 
+    registros_do_arquivo_de_log = f'\n{sigla[1:]}\n' 
     registros_do_arquivo_de_log += log_do_simples
 
     

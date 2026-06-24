@@ -19,9 +19,9 @@ def unir_agz(diretorio):
             detalhe = arquivo.readlines()
 
         # VERIFICA SE É ARQUIVO DEFINITIVO OU TEMPORÁRIO
-        if 'CODIGO DE BARRAS' not in header:
-            os.remove(rf"{diretorio}\{item}")
-            continue
+        # if 'CODIGO DE BARRAS' not in header:
+        #     os.remove(rf"{diretorio}\{item}")
+        #     continue
 
         data_competencia = detalhe[0][23:29]
 
