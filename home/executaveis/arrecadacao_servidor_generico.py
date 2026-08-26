@@ -13,73 +13,77 @@ Orientações gerais antes de gerar o executável:
 ### Lista dos municípios com atualização "automática" e seus headers com respectivos códigos bancários
 LISTA_MUNICIPIOS = {
     # A barra invertida antes da sigla é necessária, pois a string será usada pra integrar o caminho dos diretórios do servidor
-    "\ANG": {
+    r"\ANG": {
         "IMPOSTOS MUNICIPAIS 001BANCO DO BRASIL  S/A": ".001",
     },
-    "\CAI": {
+    r"\CAI": {
         "CAICO ARRECADACAO TR001BANCO DO BRASIL": ".001",
         "MUNICIPIO DE CAICO            BANCO DO BRASIL": ".002",
     },
-    "\CEA": {
+    r"\CEA": {
         "PMCM - ARRECADACAO  001BANCO DO BRASIL  S/A": ".001",
         "PMCEARAMIRIM        104CAIXA ECON. FEDERAL": ".104",
     },
-    "\CRE": {
+    r"\CEC": {
+        "P M C CORA TRIBUTOS 001BANCO DO BRASIL": ".001",
+        "MUNICIPIO CERRO CORA104CAIXA ECON": ".104",
+    },
+    r"\CRE": {
         "PM CAMPO REDONDO RN 104CAIXA ECON. FEDERAL": ".104",
     },
-    "\CRV": {
+    r"\CRV": {
         "PREF CAIC RIO DO VEN001BANCO DO BRASIL": ".001",
     },
-    "\EQU": {
+    r"\EQU": {
         "EQUADOR - ARRECADACA001BANCO DO BRASIL": ".001",
     },
-    "\EXT": {
+    r"\EXT": {
         "PM EXTREMOZ - TRIBUT001BANCO DO BRASIL  S/A": ".001",
         "PM EXTREMOZ         104CAIXA ECON. FEDERAL": ".104",
     },
-    "\GAL": {
+    r"\GAL": {
         "PMGALINHOS          104CAIXA ECON. FEDERAL": ".104",
         "PREF MUN DE GALINHOS001BANCO DO BRASIL": ".001",
     },
-    "\GAV": {
+    r"\GAV": {
         "PM S G AVELINO TRIBU001BANCO DO BRASIL": ".001",
         "PMSGA               104CAIXA ECON. FEDERAL": ".104",
     },
-    "\GOH": {
+    r"\GOH": {
         "00000307963 MUNICIPIO DE GOIANINHA": ".901",
         "PMG-ARREC IMPOSTOS/T001BANCO DO BRASIL": ".001",
         "PM GOIANINHA        104CAIXA ECON. FEDERAL": ".104",
     },
-    "\GON": {
+    r"\GON": {
         "PMSGA ARRECADACAO   001BANCO DO BRASIL": ".001",
         "MUNICIPIO DE SAO GONCALO DO AMBANCO DO BRASIL": ".901",
         "PMSGAMARANTERN      104CAIXA ECON. FEDERAL": ".104",
     },
-    "\ITJ": {
+    r"\ITJ": {
         "104CAIXA ECON. FEDERAL": ".104",
     },
-    "\JDS": {
+    r"\JDS": {
         "3512214  2807793": ".001",
         "MUN JARDIM DO SERIDO001BANCO DO BRASIL  S/A": ".901",  # agz
         "3512214  3178850": ".902",
     },
-    "\LAJ": {
+    r"\LAJ": {
         "PREFEITURA MUNIC DE 001BANCO DO BRASIL  S/A": ".001",
         "PM LAJES            104CAIXA ECON. FEDERAL": ".104",
     },
-    "\LDA": {
+    r"\LDA": {
         "PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL": ".104",
         "ARRECADACAO LAGOA DA001BANCO DO BRASIL": ".001",
     },
-    "\MAC": {
+    r"\MAC": {
         "PREF MACAIBA TRIB DI001BANCO DO BRASIL": ".001",
         "MUNICIPIO DE MACAIBA          001BANCO DO BRASIL": ".902",
         "PM MACAIBA          104CAIXA ECON. FEDERAL": ".104",
     },
-    "\MAM": {
+    r"\MAM": {
         "PMM - Tributos Munic001BANCO DO BRASIL": ".001",
     },
-    "\MON": {
+    r"\MON": {
         "P M MONTE ALEGRE IPT001BANCO DO BRASIL": ".001",
     },
     r"\NIS": {
@@ -87,59 +91,72 @@ LISTA_MUNICIPIOS = {
         "PMDENISIAFLORESTA   104CAIXA": ".104",
         "NISIA FLORESTA 756SICOOB": ".756",
     },
-    "\OUB": {
+    r"\NCR": {
+        "PMNC ARRECADACAO    001BANCO DO BRASIL": ".001",
+        "PM DE NOVA CRUZ/RN  104CAIXA ECON. FEDERAL": ".904",
+        "PM DE NOVA CRUZ - RN237BANCO BRADESCO": ".237",
+    },
+    r"\OUB": {
         "PREF MUN DE OURO BRA001BANCO DO BRASIL": ".001",
     },
-    "\PAR": {
+    r"\PAH": {
+        "PM DE PARELHAS      104CAIXA ECON. FEDERAL": ".204",
+        "PM PARELHAS - ARRECA001BANCO DO BRASIL": ".904",
+    },
+    r"\PAR": {
         "2008769113600000000FUNDO MUNICIPAL DE SAUDE DE PAC ECON FEDERAL": ".204",
         "779460100000000MUNICIPIO DE PARNAMIRIM       C ECON FEDERAL": ".304",
         "ARRECADACAO PM PARNA001BANCO DO BRASIL": ".001",
         "PM PARNAMIRIM       104CAIXA ECON. FEDERAL": ".104",
         "2008798913700000000MUNICIPIO DE PARNAMIRIM       C ECON FEDERAL": ".404",
     },
-    "\PAV": {
+    r"\PAV": {
         "PM PEDRO AVELINO    104CAIXA ECON. FEDERAL": ".104",
         "ARRECADACAO PM P AVE001BANCO DO BRASIL": ".001",
     },
-    "\PEF": {
+    r"\PEF": {
         "PASSA E FICA PREFEITURA       C ECON FEDERAL": ".904",
     },
-    "\PUR": {
+    r"\PEN": {
+        "MUN DE PENDENCIAS RN001BANCO DO BRASIL": ".001",
+        "PM DE PENDENCIAS    104CAIXA ECON. FEDERAL": ".104",
+    },
+    r"\PUR": {
         "ARRECADACAO PUREZA  001BANCO DO BRASIL": ".001",
         "PMPUREZA            104CAIXA ECON. FEDERAL": ".104",
     },
-    "\PVE": {
+    r"\PVE": {
         "MUN. PEDRO VELHO    104CAIXA ECON. FEDERAL": ".104",
         "PEDRO VELHO ARRECADA001BANCO DO BRASIL ": ".001",
     },
-    "\RDF": {
+    r"\RDF": {
         "PREF MUN RIO DO FOGO001BANCO DO BRASIL": ".001",
         "PMRIODOFOGO         104CAIXA ECON. FEDERAL": ".104",
     },
-    "\SBN": {
+    r"\SBN": {
         "SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL": ".104",
     },
-    "\SJM": {
+    r"\SJM": {
         "PREF MUN S J MIPIBU 001BANCO DO BRASIL": ".901",
         "PM SAO JOSE MIPIBU  104CAIXA ECON. FEDERAL": ".104",
     },
-    "\SMG": {
+    r"\SMG": {
         "P M SAO MIGUEL DO GO001BANCO DO BRASIL  S/A": ".001",
         "PM S M DO GOSTOSO RN104CAIXA ECON. FEDERAL": ".104",
         "MUNICIPIO DE SAO MIGUEL DO GOS001BANCO DO BRASIL": ".002",
     },
-    "\SNN": {
+    r"\SNN": {
         # 'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL': '.001',
         # '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.002',
         "PM S NEGRA DO NORTE 104CAIXA": ".104",
         # '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.004',
         "SERRA NEGRA NORTE TR001BANCO DO BRASIL  S/A": ".005",
     },
-    "\STM": {
+    r"\STM": {
         "ARRECADACAO SAO TOME001BANCO DO BRASIL": ".001",
         "PM DE SAO TOME      104CAIXA ECON. FEDERAL": ".104",
     },
-    "\TDB": {
+    r"\TDB": {
         "MUNICIPIO DE TIMBAUBA DOS BATI001BANCO DO BRASIL": ".002",
         "PM TIMBAUBA DOS BATI104CAIXA ECON. FEDERAL": ".104",
     },
@@ -159,13 +176,13 @@ DESTINO_SUFIXO = r"\ARRECADA"
 DIRETORIO_DO_LOG = r"D:\Prefeituras\Tratar Retornos\log"
 
 # PARA TESTES LOCAIS (COMENTAR LINHAS PRA PRODUÇÃO)
-ORIGEM_PREFIXO = r"C:\temp"
-ORIGEM_SUFIXO = r""
+# ORIGEM_PREFIXO = r"C:\temp"
+# ORIGEM_SUFIXO = r""
 
-DESTINO_PREFIXO = r"C:\temp\D"
-DESTINO_SUFIXO = r""
+# DESTINO_PREFIXO = r"C:\temp\D"
+# DESTINO_SUFIXO = r""
 
-DIRETORIO_DO_LOG = r"C:\temp\log"
+# DIRETORIO_DO_LOG = r"C:\temp\log"
 
 
 def renomear_retorno_generico(sigla, retorno_config):
@@ -175,6 +192,7 @@ def renomear_retorno_generico(sigla, retorno_config):
 
     # Variável para apurar quais retornos ficaram ausente no movimento diário
     retornos_bancarios_esperados = list(retorno_config.values())
+    # Remove exceções dos retornos para alguns municípios
 
     # Adicionando Simples Nacional como padrão geral
     retornos_bancarios_esperados.append(".999")
@@ -184,7 +202,7 @@ def renomear_retorno_generico(sigla, retorno_config):
 
     lista_arquivos, log_do_simples = executar_simples(diretorio_origem)
 
-    registros_do_arquivo_de_log = f"\n{sigla[1:]}\n"
+    registros_do_arquivo_de_log = f"\n{sigla[1:]}: "
     registros_do_arquivo_de_log += log_do_simples
 
     # Remover da lista as pastas com os originais do DAF607 e copia para a pasta destino
@@ -260,7 +278,7 @@ def renomear_retorno_generico(sigla, retorno_config):
             print(e)
 
     if retornos_bancarios_esperados:
-        registros_do_arquivo_de_log += "Retornos ausentes: "
+        # registros_do_arquivo_de_log += "Retornos ausentes: "
         for codigo in retornos_bancarios_esperados:
             registros_do_arquivo_de_log += f"{codigo} "
 
@@ -277,9 +295,8 @@ def gerar_arquivo_de_log(log_de_arquivos_com_problema):
         rf"{DIRETORIO_DO_LOG}\log_retorno_{data_e_hora}.txt", "w+"
     ) as criar_arquivo:
 
-        criar_arquivo.write("LOG de arquivo retorno: \n")
-        for linha in log_de_arquivos_com_problema:
-            criar_arquivo.write(linha)
+        criar_arquivo.write("Arquivo retorno ausente: \n")
+        criar_arquivo.writelines(log_de_arquivos_com_problema)
 
     # print(log_de_arquivos_com_problema)
 

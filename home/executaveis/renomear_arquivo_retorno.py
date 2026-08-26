@@ -1,16 +1,22 @@
 import os
-from .utilitarios import pegar_data_pagamento_arquivo_retorno
-from .utilitarios import descompactar_arquivo, gerar_nome_arquivo_retorno
+
 from .juncao_simples import executar_simples
 from .retorno_config import selecionar_municipio
+from .utilitarios import (
+    descompactar_arquivo,
+    gerar_nome_arquivo_retorno,
+    pegar_data_pagamento_arquivo_retorno,
+)
+
 
 def renomear_retorno(pasta_municipio, municipio):
 
     descompactar_arquivo(pasta_municipio, os.listdir(pasta_municipio))
     lista_arquivos, log_de_arquivo_com_erro = executar_simples(pasta_municipio)
+    orgaos_retornos = {}
     orgaos_retornos = selecionar_municipio(municipio)
-    
-    nome_arquivo = ''
+
+    nome_arquivo = ""
 
     print("Lista arqs = ", lista_arquivos)
 
@@ -22,52 +28,53 @@ def renomear_retorno(pasta_municipio, municipio):
             # print("Caminho = ", caminho_completo)
             # print("Arquivo = ", arquivo)
             # print("Caminho completo = ", caminho_completo)
-            with open(caminho_completo, 'r+') as retorno:
+            with open(caminho_completo, "r+") as retorno:
                 header = retorno.readline()
                 detalhe = retorno.readlines()
 
                 # if not'DAF607' in arquivo:
-                    
-                    # registro_de_pagamento = True
-                    # print("TAMANHO =",len(header))
-                    # if len(header) == 241:
-                    #     registro_de_pagamento = False
-                    #     print("é 241 e registro FALSO",registro_de_pagamento)
 
-                    #     for linha_pagamento in detalhe:
+                # registro_de_pagamento = True
+                # print("TAMANHO =",len(header))
+                # if len(header) == 241:
+                #     registro_de_pagamento = False
+                #     print("é 241 e registro FALSO",registro_de_pagamento)
 
-                    #         if 'U 06' in linha_pagamento:
-                    #             registro_de_pagamento = True
-                    #             print("tem pagamento e registro VERDADEIRO")
-                    #             break
-                            
-                    
-                    # print("RENOMEAR?",registro_de_pagamento)
-                    # if registro_de_pagamento:
-                    #     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
-                    #     # nome_arquivo = rf'{pasta_municipio}\MR{data}'
-                    # else:
-                    #     data = "sem pagamento"
-                    #     print("NÃO tem pagamento",data)
-                    # nome_arquivo = rf'{pasta_municipio}\MR{data}'
-                
+                #     for linha_pagamento in detalhe:
 
-                if not'DAF607' in arquivo:
+                #         if 'U 06' in linha_pagamento:
+                #             registro_de_pagamento = True
+                #             print("tem pagamento e registro VERDADEIRO")
+                #             break
+
+                # print("RENOMEAR?",registro_de_pagamento)
+                # if registro_de_pagamento:
+                #     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
+                #     # nome_arquivo = rf'{pasta_municipio}\MR{data}'
+                # else:
+                #     data = "sem pagamento"
+                #     print("NÃO tem pagamento",data)
+                # nome_arquivo = rf'{pasta_municipio}\MR{data}'
+
+                if "DAF607" not in arquivo:
                     data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
-                    nome_arquivo = rf'{pasta_municipio}\MR{data}'
-                    
+                    nome_arquivo = rf"{pasta_municipio}\MR{data}"
+
         except Exception as e:
             # Quando arquivo do tesouro for alterado, esse teste ignora parte da lista inconsistente
             print(e)
             continue
 
-        
         for arquivo in lista_arquivos:
-            header = ''
-            caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(pasta_municipio, arquivo)
+            header = ""
+            caminho_completo, nome_arquivo, header = gerar_nome_arquivo_retorno(
+                pasta_municipio, arquivo
+            )
 
             # Ignora retorno temporário da Caixa de Parnamirim
-            if ('PARNAMIRIM       104CAIXA ECON. FEDERAL' in header) and ('CODIGO DE BARRAS' not in header):
+            if ("PARNAMIRIM       104CAIXA ECON. FEDERAL" in header) and (
+                "CODIGO DE BARRAS" not in header
+            ):
                 continue
 
             try:
@@ -75,15 +82,16 @@ def renomear_retorno(pasta_municipio, municipio):
                 for retorno, extensao in orgaos_retornos.items():
 
                     if retorno in header:
-                        os.rename(caminho_completo, f'{nome_arquivo}{extensao}')
+                        os.rename(caminho_completo, f"{nome_arquivo}{extensao}")
                         break
 
             except Exception as e:
                 print(f"Erro ao tratar o arquivo retorno {arquivo}")
                 print(e)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # municipio = "Santa Cruz do Capibaribe"
     municipio = input("Informe o município: ")
-    pasta_municipio = rf"c:\temp"
+    pasta_municipio = r"c:\temp"
     renomear_retorno(pasta_municipio, municipio)
