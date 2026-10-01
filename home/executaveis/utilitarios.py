@@ -1,6 +1,7 @@
 import os
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from zipfile import ZipFile, is_zipfile
+
 
 def converter_string_lista_credito(credito_string):
 
@@ -9,10 +10,10 @@ def converter_string_lista_credito(credito_string):
 
     if credito_string:
 
-        credito_string = credito_string.replace('[', '').replace(']', '')
+        credito_string = credito_string.replace("[", "").replace("]", "")
         credito_string = credito_string.replace("'", "").replace(" ", "")
 
-        credito_string = credito_string.split(',')
+        credito_string = credito_string.split(",")
 
         credito_temp.append(credito_string)
 
@@ -20,19 +21,21 @@ def converter_string_lista_credito(credito_string):
 
             for regitros in range(0, len(item), 3):
                 if len(item[regitros]) > 6:
-                    item[regitros] = item[regitros].replace("/",'')
-                    item[regitros] = datetime.strptime(item[regitros],"%d%m%Y")
-                    item[regitros] = datetime.strftime(item[regitros],"%d%m%y")
+                    item[regitros] = item[regitros].replace("/", "")
+                    item[regitros] = datetime.strptime(item[regitros], "%d%m%Y")
+                    item[regitros] = datetime.strftime(item[regitros], "%d%m%y")
 
-                credito.append([item[regitros], float(item[regitros + 1]), item[regitros + 2]])
+                credito.append(
+                    [item[regitros], float(item[regitros + 1]), item[regitros + 2]]
+                )
 
     return credito
 
 
 def converter_string_dicionario_compensar(texto):
-    texto = texto.replace("{", '').replace("}", '').replace("],", ':')
-    texto = texto.replace(" ", '').replace("'", '').replace("[", '').replace("]", '')
-    texto = texto.split(':')
+    texto = texto.replace("{", "").replace("}", "").replace("],", ":")
+    texto = texto.replace(" ", "").replace("'", "").replace("[", "").replace("]", "")
+    texto = texto.split(":")
 
     dicionario = {}
 
@@ -44,10 +47,9 @@ def converter_string_dicionario_compensar(texto):
 
 
 def converter_string_dicionario_uf(texto):
-    texto = texto.replace("{", '').replace("}", '')
-    texto = texto.replace(" ", '').replace("'", '')
-    texto = texto.split(',')
-
+    texto = texto.replace("{", "").replace("}", "")
+    texto = texto.replace(" ", "").replace("'", "")
+    texto = texto.split(",")
 
     dicionario = {}
 
@@ -58,21 +60,21 @@ def converter_string_dicionario_uf(texto):
 
 
 def converter_string_dicionario_extrato(texto):
-    texto = texto.replace("{", '').replace("}", '').replace(" ", '')
-    texto = texto.replace("[[", '[').replace("]]", ']')
-    texto = texto.replace("],'", "]:'").replace("],[", "|").replace("'", '')
-    texto = texto.replace("[", '').replace("]", '')
+    texto = texto.replace("{", "").replace("}", "").replace(" ", "")
+    texto = texto.replace("[[", "[").replace("]]", "]")
+    texto = texto.replace("],'", "]:'").replace("],[", "|").replace("'", "")
+    texto = texto.replace("[", "").replace("]", "")
 
-    texto = texto.split(':')
+    texto = texto.split(":")
 
     dicionario = {}
 
     for indice in range(0, len(texto), 2):
 
         parcelas = texto[indice + 1].split("|")
-        for i in range(0, len(parcelas)):
+        for i in range(len(parcelas)):
 
-            parcelas[i] =parcelas[i].split(",")
+            parcelas[i] = parcelas[i].split(",")
             parcelas[i][2] = float(parcelas[i][2])
             parcelas[i][3] = float(parcelas[i][3])
             parcelas[i][4] = float(parcelas[i][4])
@@ -99,10 +101,10 @@ def converter_string_float_valor(texto):
 
 def converter_string_dicionario_globais(texto):
 
-    texto = texto.replace("{", '').replace("}", '')
-    texto = texto.replace(" ", '').replace("','",";")
-    texto = texto.replace("'", '')
-    texto = texto.split(';')
+    texto = texto.replace("{", "").replace("}", "")
+    texto = texto.replace(" ", "").replace("','", ";")
+    texto = texto.replace("'", "")
+    texto = texto.split(";")
 
     dicionario = {}
 
@@ -114,20 +116,21 @@ def converter_string_dicionario_globais(texto):
 
 
 def pegar_data_pagamento_arquivo_retorno(header, detalhe):
-    
+
     tamanho = len(header)
-    data = ''
+    data = ""
 
     if tamanho == 241:
-        data = datetime.strptime(header[143:151], '%d%m%Y')
-        data = datetime.strftime(data, '%y%m%d')
+        data = datetime.strptime(header[143:151], "%d%m%Y")
+        data = datetime.strftime(data, "%y%m%d")
     elif tamanho == 401:
-        data = datetime.strptime(header[94:100],'%d%m%y')
-        data = datetime.strftime(data, '%y%m%d')
+        data = datetime.strptime(header[94:100], "%d%m%y")
+        data = datetime.strftime(data, "%y%m%d")
     elif tamanho == 151:
         data = detalhe[0][23:29]
-    
+
     return data
+
 
 # Verificando se há .zip nos arquivos retornos baixados do e-mail
 def verificar_arquivo_zip(diretorio, lista_arquivos):
@@ -137,6 +140,7 @@ def verificar_arquivo_zip(diretorio, lista_arquivos):
         if is_zipfile(caminho_completo):
             return True
     return False
+
 
 # Descompactando os arquivos .zip
 def descompactar_arquivo(diretorio, lista_arquivos):
@@ -152,13 +156,14 @@ def descompactar_arquivo(diretorio, lista_arquivos):
 
             if is_zipfile(caminho_completo):
 
-                with ZipFile(caminho_completo, 'r') as retornos:
+                with ZipFile(caminho_completo, "r") as retornos:
                     retornos.extractall(diretorio)
 
                 os.remove(caminho_completo)
 
         lista_arquivos = os.listdir(diretorio)
         tem_zip = verificar_arquivo_zip(diretorio, lista_arquivos)
+
 
 # Gera o nome do correto pra cada arquivo retorno recebido
 def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
@@ -167,28 +172,27 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
     Retorna o caminho completo, o nome (sem extensão) e o header, para definir a extensão no executável do município
     """
 
-    nome_arquivo = ''
-    header = ''
+    nome_arquivo = ""
+    header = ""
     try:
         caminho_completo = os.path.join(pasta_municipio, arquivo)
 
-        with open(caminho_completo, 'r+') as retorno:
+        with open(caminho_completo, "r+") as retorno:
             header = retorno.readline()
             detalhe = retorno.readlines()
             data = pegar_data_pagamento_arquivo_retorno(header, detalhe)
 
             # Verifica se é um arquivo temporário (retorno de rajada) e altera o hearder pra não ser lido na arrecadação
             if "G      " in detalhe[0]:
-                header = 'temporario'
+                header = "temporario"
 
             registro_de_pagamento = True
             if len(header) == 241:
                 registro_de_pagamento = False
-                
 
                 for linha_pagamento in detalhe:
 
-                    if 'U 06' in linha_pagamento:
+                    if "U 06" in linha_pagamento:
                         registro_de_pagamento = True
                         break
             # if len(header) == 401:
@@ -199,22 +203,24 @@ def gerar_nome_arquivo_retorno(pasta_municipio, arquivo):
             #         if '70000000000' in linha_pagamento:
             #             registro_de_pagamento = True
             #             break
-                    
-            
+
             if registro_de_pagamento:
-                
-                nome_arquivo = rf'{pasta_municipio}\MR{data}'
+
+                nome_arquivo = rf"{pasta_municipio}\MR{data}"
             else:
-                nome_arquivo = rf'{pasta_municipio}\SEM PAGAMENTO-{data}'
-                
+                # Essa linha ficou redundante propositalmente pra estudar viabilidade de não controlar retornos sem pagamento no nome do arquivo
+                # nome_arquivo = rf'{pasta_municipio}\SEM PAGAMENTO-{data}'
+                nome_arquivo = rf"{pasta_municipio}\MR{data}"
+
     except Exception as e:
         print(f"Erro ao tratar o arquivo retorno 1 {arquivo}")
         print(e)
     return caminho_completo, nome_arquivo, header
 
+
 def obter_dia_util_anterior():
     """
-    Retorna o dia útil anterior à data atual. 
+    Retorna o dia útil anterior à data atual.
     São considerados sábados, domingos e feriados nacionais.
     Feriados municipais não são considerados, pois podem ter pagamentos do Simples Nacional.
     """
@@ -224,29 +230,101 @@ def obter_dia_util_anterior():
 
     # LISTA COM FERIADOS NACIONAIS 2025
     feriados = [
-        '250101','250303','250304','250418','250421','250501','250619','250907','251012','251102','251115','251120','251225',
-        '260101','260216','260217','260403','260421','260501','260604','260907','261012','261102','261115','261120','261225',
-        '270101','270208','270209','270326','270421','270501','270527','270907','271012','271102','271115','271120','271225',
-        '280101','280228','280229','280414','280421','280501','280615','280907','281012','281102','281115','281120','281225',
-        '290101','290212','290213','290330','290421','290501','290607','290907','291012','291102','291115','291120','291225',
-        '300101','300304','300305','300419','300421','300501','300620','300907','301012','301102','301115','301120','301225']     
+        "250101",
+        "250303",
+        "250304",
+        "250418",
+        "250421",
+        "250501",
+        "250619",
+        "250907",
+        "251012",
+        "251102",
+        "251115",
+        "251120",
+        "251225",
+        "260101",
+        "260216",
+        "260217",
+        "260403",
+        "260421",
+        "260501",
+        "260604",
+        "260907",
+        "261012",
+        "261102",
+        "261115",
+        "261120",
+        "261225",
+        "270101",
+        "270208",
+        "270209",
+        "270326",
+        "270421",
+        "270501",
+        "270527",
+        "270907",
+        "271012",
+        "271102",
+        "271115",
+        "271120",
+        "271225",
+        "280101",
+        "280228",
+        "280229",
+        "280414",
+        "280421",
+        "280501",
+        "280615",
+        "280907",
+        "281012",
+        "281102",
+        "281115",
+        "281120",
+        "281225",
+        "290101",
+        "290212",
+        "290213",
+        "290330",
+        "290421",
+        "290501",
+        "290607",
+        "290907",
+        "291012",
+        "291102",
+        "291115",
+        "291120",
+        "291225",
+        "300101",
+        "300304",
+        "300305",
+        "300419",
+        "300421",
+        "300501",
+        "300620",
+        "300907",
+        "301012",
+        "301102",
+        "301115",
+        "301120",
+        "301225",
+    ]
 
+    dia_semana = datetime.strptime(data_formatada, "%y%m%d")
 
-    dia_semana = datetime.strptime(data_formatada,"%y%m%d")
-    
     # RETORNANDO AO DIA ANTERIOR DA DISPONIBILIZACAO DO REGIME DE CAIXA
     dia_semana += timedelta(days=-1)
-    
-    while (True):
-        #Se for sábado
+
+    while True:
+        # Se for sábado
         if dia_semana.weekday() == 5:
             dia_semana += timedelta(days=-1)
-        #Senão, se for 
+        # Senão, se for
         elif dia_semana.weekday() == 6:
             dia_semana += timedelta(days=-2)
 
-        #Se estiver entre a lista de feriados nacionais
-        if dia_semana.strftime('%y%m%d') in feriados:
+        # Se estiver entre a lista de feriados nacionais
+        if dia_semana.strftime("%y%m%d") in feriados:
             dia_semana += timedelta(days=-1)
         else:
             break

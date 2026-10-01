@@ -48,6 +48,7 @@ lista_municipios_renomear_off_line = {
     "sdm": "Serra do Mel",
     "tdb": "Timbauba dos Batistas",
     "uir": "Uirauna",
+    "vit": "Vitoria",
 }
 
 lista_municipios_retorno = {
@@ -143,6 +144,8 @@ lista_municipios_retorno = {
     },
     "Sao Bento do Norte": {
         "SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL": ".104",
+        "MUNICIPIO DE SAO BENTO DO NORTBANCO DO BRASIL": ".002",
+        "TRIBUTO SAO BENTO NO001BANCO DO BRASIL": ".001",
     },
     "Patu": {"MUNICIPIO DE PATU TR001BANCO DO BRASIL": ".001"},
     # 'Messias Targino':{
@@ -228,6 +231,10 @@ lista_municipios_retorno = {
     },
     "Olinda": {
         "MUNICIPIO DE OLINDA           BANCO SANTANDER": ".033",
+    },
+    "Vitoria": {
+        "PM VITORIA STO ANTAO104CAIXA ECON. FEDERAL": ".104",
+        "PREFEITURA VITORIA S001BANCO DO BRASIL": ".001",
     },
 }
 
