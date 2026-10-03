@@ -94,12 +94,10 @@ LISTA_MUNICIPIOS = {
     r"\NIS": {
         "PREF MUN NISIA FLORE001BANCO DO BRASIL": ".001",
         "PMDENISIAFLORESTA   104CAIXA": ".104",
-        # "NISIA FLORESTA 756SICOOB": ".756",
     },
     r"\NCR": {
         "PMNC ARRECADACAO    001BANCO DO BRASIL": ".001",
         "PM DE NOVA CRUZ/RN  104CAIXA ECON. FEDERAL": ".904",
-        # "PM DE NOVA CRUZ - RN237BANCO BRADESCO": ".237",
     },
     r"\OUB": {
         "PREF MUN DE OURO BRA001BANCO DO BRASIL": ".001",
@@ -139,7 +137,6 @@ LISTA_MUNICIPIOS = {
         "PMRIODOFOGO         104CAIXA ECON. FEDERAL": ".104",
     },
     r"\SBN": {
-        # "SAO BENTO DO NORTE PREFEITURA C ECON FEDERAL": ".104",
         "MUNICIPIO DE SAO BENTO DO NORTBANCO DO BRASIL": ".901",
         "TRIBUTO SAO BENTO NO001BANCO DO BRASIL": ".001",
     },
@@ -162,10 +159,7 @@ LISTA_MUNICIPIOS = {
         "MUNICIPIO DE SAO MIGUEL DO GOS001BANCO DO BRASIL": ".002",
     },
     r"\SNN": {
-        # 'MUNICIPIO DE SERRA NEGRA DO NOBANCO DO BRASIL': '.001',
-        # '272639000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.002',
         "PM S NEGRA DO NORTE 104CAIXA": ".104",
-        # '570168000000MUNICIPIO DE SERRA NEGRA DO NO001BANCO DO BRASIL': '.004',
         "SERRA NEGRA NORTE TR001BANCO DO BRASIL  S/A": ".005",
     },
     r"\STM": {
@@ -194,6 +188,20 @@ DESTINO_SUFIXO = r"\ARRECADA"
 
 DIRETORIO_DO_LOG = r"D:\Prefeituras\Tratar Retornos\log"
 
+MUNICIPIOS_SEM_SIMPLES_NACIONAL = [
+    r"\CRE",
+    r"\ITJ",
+    r"\LDA",
+    r"\MAM",
+    r"\PEF",
+    r"\PVE",
+    r"\PEN",
+    r"\SBN",
+    r"\SEC",
+    r"\TDB",
+    r"\VFL",
+]
+
 # PARA TESTES LOCAIS (COMENTAR LINHAS PRA PRODUÇÃO)
 # ORIGEM_PREFIXO = r"C:\temp"
 # ORIGEM_SUFIXO = r""
@@ -203,6 +211,15 @@ DIRETORIO_DO_LOG = r"D:\Prefeituras\Tratar Retornos\log"
 
 # DIRETORIO_DO_LOG = r"C:\temp\log"
 
+# MUNICIPIO PRA TESTE
+# LISTA_MUNICIPIOS = {
+#     # A barra invertida antes da sigla é necessária, pois a string será usada pra integrar o caminho dos diretórios do servidor
+#     r"\LDA": {
+#         "PM DE LAGOA DANTA   104CAIXA ECON. FEDERAL": ".104",
+#         "ARRECADACAO LAGOA DA001BANCO DO BRASIL": ".001",
+#     },
+# }
+
 
 def renomear_retorno_generico(sigla, retorno_config):
 
@@ -211,10 +228,10 @@ def renomear_retorno_generico(sigla, retorno_config):
 
     # Variável para apurar quais retornos ficaram ausente no movimento diário
     retornos_bancarios_esperados = list(retorno_config.values())
-    # Remove exceções dos retornos para alguns municípios
 
-    # Adicionando Simples Nacional como padrão geral
-    retornos_bancarios_esperados.append(".999")
+    # Adicionando Simples Nacional como padrão geral, exceto se o município não recebe Simples Nacional
+    if sigla not in MUNICIPIOS_SEM_SIMPLES_NACIONAL:
+        retornos_bancarios_esperados.append(".999")
 
     diretorio_origem = ORIGEM_PREFIXO + sigla + ORIGEM_SUFIXO
     diretorio_destino = DESTINO_PREFIXO + sigla + DESTINO_SUFIXO
@@ -296,10 +313,13 @@ def renomear_retorno_generico(sigla, retorno_config):
             print(f"Erro ao tratar o arquivo retorno {arquivo}")
             print(e)
 
-    if retornos_bancarios_esperados:
+    # Não gera registro se não houver retorno ausente
+    if len(retornos_bancarios_esperados) > 0:
         # registros_do_arquivo_de_log += "Retornos ausentes: "
         for codigo in retornos_bancarios_esperados:
             registros_do_arquivo_de_log += f"{codigo} "
+    else:
+        registros_do_arquivo_de_log = ""
 
     return registros_do_arquivo_de_log
 
